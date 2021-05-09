@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<namespace id="transport" name="transport" xmlns="http://jessevdk.github.com/cldoc/1.0">
+  <class name="Bicycle" ref="transport::Bicycle#transport::Bicycle">
+    <brief>Standard bicycle class.</brief>
+  </class>
+</namespace>

@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+var inline = require('inline-source')
+  , fs = require('fs')
+  , path = require('path')
+  , htmlpath = path.resolve(process.argv[2]);
+
+inline(htmlpath, {
+  compress: true,
+  swallowErrors: false,
+  rootpath: path.dirname(htmlpath)
+}, function(err, html) {
+  if (err) {
+  	process.stderr.write("Error: " + err + "\n");
+  	process.exit(1);
+  } else {
+  	process.stdout.write(html);
+  }
+});

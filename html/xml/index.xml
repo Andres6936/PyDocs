@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<index xmlns="http://jessevdk.github.com/cldoc/1.0">
+  <namespace name="transport" ref="transport#transport">
+    <class name="Bicycle" ref="transport::Bicycle#transport::Bicycle">
+      <brief>Standard bicycle class.</brief>
+    </class>
+  </namespace>
+  <report name="Documentation generator" ref="report" />
+</index>

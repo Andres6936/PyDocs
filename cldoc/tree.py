@@ -81,7 +81,9 @@ except cindex.LibclangError as e:
 
 class Tree(documentmerger.DocumentMerger):
     def __init__(self, files: List[str], flags: str):
+        self.headers = {}
         self.processed = {}
+        self.index = cindex.Index.create()
         self.files, ok = self.expand_sources([os.path.realpath(f) for f in files])
 
         if not ok:
@@ -220,9 +222,6 @@ class Tree(documentmerger.DocumentMerger):
         process processes all the files with clang and extracts all relevant
         nodes from the generated AST
         """
-
-        self.index = cindex.Index.create()
-        self.headers = {}
 
         for f in self.files:
             if f in self.processed:

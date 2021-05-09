@@ -14,21 +14,26 @@ from __future__ import absolute_import
 
 import sys
 
+
 def run_inspect(args):
     from . import cmdinspect
     cmdinspect.run(args)
+
 
 def run_serve(args):
     from . import cmdserve
     cmdserve.run(args)
 
+
 def run_generate(args):
     from . import cmdgenerate
     cmdgenerate.run(args)
 
+
 def run_gir(args):
     from . import cmdgir
     cmdgir.run(args)
+
 
 def print_available_commands():
     sys.stderr.write('Available commands:\n')
@@ -39,6 +44,7 @@ def print_available_commands():
         sys.stderr.write('  ' + c + '\n')
 
     sys.stderr.write('\n')
+
 
 def run():
     if len(sys.argv) <= 1:
@@ -64,6 +70,7 @@ def run():
     else:
         sys.stderr.write('Unknown command `{0}\'\n'.format(cmd))
         sys.exit(1)
+
 
 if __name__ == '__main__':
     run()

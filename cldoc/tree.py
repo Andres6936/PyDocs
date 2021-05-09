@@ -166,8 +166,8 @@ class Tree(documentmerger.DocumentMerger):
         :return: Tuple, the first value content the list of path to sources
          files and the second value determine if the operation is successful.
         """
-        ret = []
-        ok = True
+        ret: List[str] = []
+        successful: bool = True
 
         for source in sources:
             if not filter is None and not filter(source):
@@ -178,16 +178,16 @@ class Tree(documentmerger.DocumentMerger):
                                                     self.filter_source)
 
                 if not okdir:
-                    ok = False
+                    successful = False
 
                 ret += retdir
             elif not os.path.exists(source):
                 sys.stderr.write("The specified source `" + source + "` could not be found\n")
-                ok = False
+                successful = False
             else:
                 ret.append(source)
 
-        return (ret, ok)
+        return ret, successful
 
     def is_header(self, filename):
         return filename.endswith('.hh') or filename.endswith('.hpp') or filename.endswith('.h')

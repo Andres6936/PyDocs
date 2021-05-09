@@ -11,7 +11,7 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # -*- coding: utf-8 -*-
-from typing import List
+from typing import List, Callable, Optional, Tuple
 
 from .clang import cindex
 import tempfile
@@ -166,11 +166,13 @@ class Tree(documentmerger.DocumentMerger):
         return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or \
                path.endswith('.cc') or path.endswith('.hh') or path.endswith('.hpp')
 
-    def expand_sources(self, sources : List[str], filter=None):
+    def expand_sources(self, sources : List[str], filter: Optional[Callable[[str], bool]]=None) -> Tuple[List[str], bool]:
         """
         :param sources: List with the paths to sources files, if the path
-        is a directory, the content of this directory will be returned.
-        :param filter: The filter.
+         is a directory, the content of this directory will be returned.
+        :param filter: The callback that will be used for filter final
+         files of list of sources, if the callback return True, the path
+         to file that is passed to callback will be included in the final list.
         :return: Tuple, the first value content the list of path to sources
          files and the second value determine if the operation is successful.
         """

@@ -16,6 +16,7 @@ from .ctype import Type
 from ..clang import cindex
 from ..cmp import cmp
 
+
 class TemplateTypeParameter(Node):
     kind = cindex.CursorKind.TEMPLATE_TYPE_PARAMETER
 
@@ -47,6 +48,7 @@ class TemplateTypeParameter(Node):
 
     def compare_same(self, other):
         return cmp(self.sort_index, other.sort_index)
+
 
 class TemplateNonTypeParameter(Node):
     kind = cindex.CursorKind.TEMPLATE_NON_TYPE_PARAMETER

@@ -7,6 +7,7 @@ import sys, re
 from . import fs
 from . import utf8
 
+
 class DocumentMerger:
     reinclude = re.compile('#<cldoc:include[(]([^)]*)[)]>')
 

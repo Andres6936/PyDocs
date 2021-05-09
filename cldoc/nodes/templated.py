@@ -18,6 +18,7 @@ from ..comment import Parser
 
 import re
 
+
 class Templated(Node):
     def __init__(self, cursor, comment):
         super(Templated, self).__init__(cursor, comment)
@@ -37,7 +38,7 @@ class Templated(Node):
 
     def append(self, child):
         if isinstance(child, TemplateTypeParameter) or \
-           isinstance(child, TemplateNonTypeParameter):
+                isinstance(child, TemplateNonTypeParameter):
             self._template_types[child.name] = child
 
             if child.name in self._template_type_comments:

@@ -15,8 +15,10 @@ from __future__ import absolute_import
 import subprocess, threading, time, sys, argparse, os
 import SimpleHTTPServer, SocketServer
 
+
 class Server(SocketServer.TCPServer):
     allow_reuse_address = True
+
 
 def handler_bind(directory):
     class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -39,6 +41,7 @@ def handler_bind(directory):
 
     return Handler
 
+
 class SocketThread(threading.Thread):
     def __init__(self, directory, host):
         threading.Thread.__init__(self)
@@ -58,6 +61,7 @@ class SocketThread(threading.Thread):
 
     def run(self):
         self.httpd.serve_forever()
+
 
 def run(args):
     parser = argparse.ArgumentParser(description='clang based documentation generator.',

@@ -21,6 +21,7 @@ from ..cmp import cmp
 
 import re
 
+
 class Node(object):
     class SortId:
         CATEGORY = 0

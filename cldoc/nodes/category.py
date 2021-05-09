@@ -12,6 +12,7 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 from .node import Node
 
+
 class Category(Node):
     def __init__(self, name):
         Node.__init__(self, None, None)

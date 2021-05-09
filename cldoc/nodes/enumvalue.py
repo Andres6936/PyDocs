@@ -15,6 +15,7 @@ from .node import Node
 from ..clang import cindex
 from ..cmp import cmp
 
+
 class EnumValue(Node):
     kind = cindex.CursorKind.ENUM_CONSTANT_DECL
 

@@ -17,6 +17,7 @@ import sys, os, argparse, tempfile, subprocess, shutil
 from . import fs, staticsite
 from . import log
 
+
 def run_generate(t, opts):
     if opts.type != 'html' and opts.type != 'xml':
         return
@@ -39,6 +40,7 @@ def run_generate(t, opts):
         if opts.static:
             staticsite.generate(baseout, opts)
 
+
 def run(args):
     try:
         sep = args.index('--')
@@ -59,34 +61,34 @@ def run(args):
                         help='specify the logevel (error, warning, info)')
 
     parser.add_argument('--report', default=False,
-                          action='store_const', const=True, help='report documentation coverage and errors')
+                        action='store_const', const=True, help='report documentation coverage and errors')
 
     parser.add_argument('--output', default=None, metavar='DIR',
-                          help='specify the output directory')
+                        help='specify the output directory')
 
     parser.add_argument('--language', default='c++', metavar='LANGUAGE',
-                          help='specify the default parse language (c++, c or objc)')
+                        help='specify the default parse language (c++, c or objc)')
 
     parser.add_argument('--type', default='html', metavar='TYPE',
-                          help='specify the type of output (html or xml, default html)')
+                        help='specify the type of output (html or xml, default html)')
 
     parser.add_argument('--merge', default=[], metavar='FILES', action='append',
-                          help='specify additional description files to merge into the documentation')
+                        help='specify additional description files to merge into the documentation')
 
     parser.add_argument('--merge-filter', default=None, metavar='FILTER',
-                          help='specify program to pass merged description files through')
+                        help='specify program to pass merged description files through')
 
     parser.add_argument('--basedir', default=None, metavar='DIR',
-                          help='the project base directory')
+                        help='the project base directory')
 
     parser.add_argument('--static', default=False, action='store_const', const=True,
-                          help='generate a static website (only for when --output is html, requires globally installed cldoc-static via npm)')
+                        help='generate a static website (only for when --output is html, requires globally installed cldoc-static via npm)')
 
     parser.add_argument('--custom-js', default=[], metavar='FILES', action='append',
-                          help='specify additional javascript files to be merged into the html (only for when --output is html)')
+                        help='specify additional javascript files to be merged into the html (only for when --output is html)')
 
     parser.add_argument('--custom-css', default=[], metavar='FILES', action='append',
-                          help='specify additional css files to be merged into the html (only for when --output is html)')
+                        help='specify additional css files to be merged into the html (only for when --output is html)')
 
     parser.add_argument('files', nargs='+', help='files to parse')
 

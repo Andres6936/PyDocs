@@ -13,6 +13,7 @@
 from .node import Node
 from .category import Category
 
+
 class Root(Node):
     def __init__(self):
         Node.__init__(self, None, None)

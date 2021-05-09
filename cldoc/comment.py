@@ -18,6 +18,7 @@ from . import utf8
 
 import os, re, sys, bisect
 
+
 class Sorted(list):
     def __init__(self, key=None):
         if key is None:
@@ -59,6 +60,7 @@ class Sorted(list):
             return self[i]
         else:
             return None
+
 
 class Comment(object):
     class Example(str):
@@ -147,7 +149,8 @@ class Comment(object):
         self.__dict__[name] = val
 
     def __nonzero__(self):
-        return (bool(self.brief) and not (self.brief == u'*documentation missing...*')) or (bool(self.doc) and not (self.doc == u'*documentation missing...*'))
+        return (bool(self.brief) and not (self.brief == u'*documentation missing...*')) or (
+                    bool(self.doc) and not (self.doc == u'*documentation missing...*'))
 
     def redoccode_split(self, doc):
         # Split on C/C++ code
@@ -258,6 +261,7 @@ class Comment(object):
             else:
                 self.resolve_refs_for_doc(doc, resolver, root)
 
+
 class RangeMap(Sorted):
     Item = Struct.define('Item', obj=None, start=0, end=0)
 
@@ -295,6 +299,7 @@ class RangeMap(Sorted):
                 return o.obj
 
         return None
+
 
 class CommentsDatabase(object):
     cldoc_instrre = re.compile('^cldoc:([a-zA-Z_-]+)(\(([^\)]*)\))?')
@@ -350,14 +355,19 @@ class CommentsDatabase(object):
 
     def cldoc_instruction_end_category(self, token, args):
         if len(self.categories.stack) == 0:
-            sys.stderr.write('Failed to end cldoc category: no category to end (at {0})\n'.format(self.location_to_str(token.location)))
+            sys.stderr.write('Failed to end cldoc category: no category to end (at {0})\n'.format(
+                self.location_to_str(token.location)))
 
             sys.exit(1)
 
         last = self.categories.stack[-1]
 
         if len(args) == 1 and last.obj != args[0]:
-            sys.stderr.write('Failed to end cldoc category: current category is `{0}\', not `{1}\' (at {2})\n'.format(last.obj, args[0], self.location_to_str(token.location)))
+            sys.stderr.write(
+                'Failed to end cldoc category: current category is `{0}\', not `{1}\' (at {2})\n'.format(last.obj,
+                                                                                                         args[0],
+                                                                                                         self.location_to_str(
+                                                                                                             token.location)))
 
             sys.exit(1)
 
@@ -467,7 +477,9 @@ class CommentsDatabase(object):
         else:
             return comment
 
+
 from pyparsing import *
+
 
 class Parser:
     ParserElement.setDefaultWhitespaceChars(' \t\r')

@@ -14,6 +14,7 @@ from .struct import Struct
 
 from . import utf8
 
+
 class Example(list):
     Item = Struct.define('Item', text='', classes=None)
 

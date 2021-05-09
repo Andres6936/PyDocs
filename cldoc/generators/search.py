@@ -16,6 +16,7 @@ import bisect
 from ..clang import cindex
 from ..struct import Struct
 
+
 class Search:
     Record = Struct.define('Record', node=None, s='', id=0)
 

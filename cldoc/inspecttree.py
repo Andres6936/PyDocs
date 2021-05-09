@@ -15,6 +15,7 @@
 from .clang import cindex
 import os, sys
 
+
 def inspect_print_row(a, b, link=None):
     from xml.sax.saxutils import escape
 
@@ -24,6 +25,7 @@ def inspect_print_row(a, b, link=None):
         b = "<a href='#" + escape(link) + "'>" + b + "</a>"
 
     print("<tr><td>%s</td><td>%s</td></tr>" % (escape(str(a)), b))
+
 
 def inspect_print_subtype(name, tp, subtype, indent=1):
     if not subtype or tp == subtype or subtype.kind == cindex.TypeKind.INVALID:
@@ -49,6 +51,7 @@ def inspect_print_subtype(name, tp, subtype, indent=1):
     inspect_print_subtype('get_pointee', subtype, subtype.get_pointee(), indent + 1)
     inspect_print_subtype('get_result', subtype, subtype.get_result(), indent + 1)
 
+
 def inspect_cursor(tree, cursor, indent):
     from xml.sax.saxutils import escape
 
@@ -58,7 +61,8 @@ def inspect_cursor(tree, cursor, indent):
     if not str(cursor.location.file) in tree.files:
         return
 
-    print("<table id='" + escape(cursor.get_usr()) + "' class='cursor' style='margin-left: " + str(indent * 20) + "px;'>")
+    print(
+        "<table id='" + escape(cursor.get_usr()) + "' class='cursor' style='margin-left: " + str(indent * 20) + "px;'>")
 
     inspect_print_row('kind', cursor.kind)
     inspect_print_row('  → .is_declaration', cursor.kind.is_declaration())
@@ -74,7 +78,9 @@ def inspect_cursor(tree, cursor, indent):
     inspect_print_row('usr', cursor.get_usr())
     inspect_print_row('spelling', cursor.spelling)
     inspect_print_row('displayname', cursor.displayname)
-    inspect_print_row('location', "%s (%d:%d - %d:%d)" % (os.path.basename(str(cursor.location.file)), cursor.extent.start.line, cursor.extent.start.column, cursor.extent.end.line, cursor.extent.end.column))
+    inspect_print_row('location', "%s (%d:%d - %d:%d)" % (
+    os.path.basename(str(cursor.location.file)), cursor.extent.start.line, cursor.extent.start.column,
+    cursor.extent.end.line, cursor.extent.end.column))
     inspect_print_row('is_definition', cursor.is_definition())
     inspect_print_row('is_virtual_method', cursor.is_virtual_method())
     inspect_print_row('is_static_method', cursor.is_static_method())
@@ -95,12 +101,14 @@ def inspect_cursor(tree, cursor, indent):
 
     print("</table>")
 
+
 def inspect_cursors(tree, cursors, indent=0):
     for cursor in cursors:
         inspect_cursor(tree, cursor, indent)
 
         if (not cursor.location.file) or str(cursor.location.file) in tree.files:
             inspect_cursors(tree, cursor.get_children(), indent + 1)
+
 
 def inspect_tokens(tree, filename, tu):
     it = tu.get_tokens(extent=tu.get_extent(filename, (0, os.stat(filename).st_size)))
@@ -116,6 +124,7 @@ def inspect_tokens(tree, filename, tu):
         print("</tr>")
 
     print("</table>")
+
 
 def inspect(tree):
     index = cindex.Index.create()

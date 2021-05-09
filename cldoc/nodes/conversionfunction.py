@@ -14,6 +14,7 @@ from .method import Method
 
 from ..clang import cindex
 
+
 class ConversionFunction(Method):
     kind = cindex.CursorKind.CONVERSION_FUNCTION
 

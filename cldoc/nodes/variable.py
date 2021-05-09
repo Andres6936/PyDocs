@@ -15,6 +15,7 @@ from .ctype import Type
 
 from ..clang import cindex
 
+
 class Variable(Node):
     kind = cindex.CursorKind.VAR_DECL
 

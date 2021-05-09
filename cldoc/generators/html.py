@@ -19,6 +19,7 @@ from .search import Search
 
 from .. import fs
 
+
 class Html(Generator):
     def generate(self, output, isstatic, customjs=[], customcss=[]):
         # Write out json document for search

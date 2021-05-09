@@ -15,6 +15,7 @@ from .ctype import Type
 
 from ..clang import cindex
 
+
 class Field(Node):
     kind = cindex.CursorKind.FIELD_DECL
 

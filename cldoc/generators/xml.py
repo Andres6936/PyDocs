@@ -23,6 +23,7 @@ import sys, os
 
 from .. import fs
 
+
 class Xml(Generator):
     def generate(self, outdir):
         if not outdir:
@@ -525,7 +526,8 @@ class Xml(Generator):
 
     def templated_to_xml_ref(self, node, element):
         for child in node.sorted_children():
-            if not (isinstance(child, nodes.TemplateTypeParameter) or isinstance(child, nodes.TemplateNonTypeParameter)):
+            if not (isinstance(child, nodes.TemplateTypeParameter) or isinstance(child,
+                                                                                 nodes.TemplateNonTypeParameter)):
                 continue
 
             element.append(self.node_to_xml(child))

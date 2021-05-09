@@ -14,6 +14,7 @@ from .node import Node
 
 from ..clang import cindex
 
+
 class Type(Node):
     kindmap = {
         cindex.TypeKind.POINTER: '*',
@@ -120,7 +121,6 @@ class Type(Node):
             return decl.displayname
         else:
             return cursor_template.spelling
-
 
     def _full_typename(self, decl):
         parent = decl.semantic_parent

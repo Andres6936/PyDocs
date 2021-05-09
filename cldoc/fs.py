@@ -19,6 +19,7 @@ try:
 except ImportError:
     from io import StringIO
 
+
 class System:
     @staticmethod
     def open(*args):
@@ -43,6 +44,7 @@ class System:
     @staticmethod
     def rmtree(*args):
         shutil.rmtree(*args)
+
 
 class Virtual:
     class NeverCloseIO(StringIO):
@@ -116,6 +118,7 @@ class Virtual:
     @staticmethod
     def rmtree(*args):
         pass
+
 
 fs = System
 

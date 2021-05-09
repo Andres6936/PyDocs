@@ -12,6 +12,7 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 import copy
 
+
 class Struct(object):
     def __init__(self, **kwargs):
         for key in kwargs:

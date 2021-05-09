@@ -14,6 +14,7 @@ from .cclass import Class
 
 from ..clang import cindex
 
+
 class Struct(Class):
     kind = cindex.CursorKind.STRUCT_DECL
 

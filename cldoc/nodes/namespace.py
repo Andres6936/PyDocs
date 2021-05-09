@@ -15,6 +15,7 @@ from .root import Root
 
 from ..clang import cindex
 
+
 class Namespace(Node):
     kind = cindex.CursorKind.NAMESPACE
 

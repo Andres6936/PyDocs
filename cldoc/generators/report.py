@@ -22,6 +22,7 @@ from .. import nodes
 
 from xml.etree import ElementTree
 
+
 class Report:
     Coverage = Struct.define('Coverage', name='', documented=[], undocumented=[])
 

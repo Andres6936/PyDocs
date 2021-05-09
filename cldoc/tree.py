@@ -72,8 +72,11 @@ testconf = cindex.Config()
 try:
     testconf.get_cindex_library()
 except cindex.LibclangError as e:
-    sys.stderr.write("\nFatal: Failed to locate libclang library. cldoc depends on libclang for parsing sources, please make sure you have libclang installed.\n" + str(e) + "\n\n")
+    sys.stderr.write(
+        "\nFatal: Failed to locate libclang library. cldoc depends on libclang for parsing sources, please make sure you have libclang installed.\n" + str(
+            e) + "\n\n")
     sys.exit(1)
+
 
 class Tree(documentmerger.DocumentMerger):
     def __init__(self, files, flags):
@@ -151,7 +154,8 @@ class Tree(documentmerger.DocumentMerger):
         return self._lookup_node_from_cursor_despecialized(cursor)
 
     def filter_source(self, path):
-        return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or path.endswith('.cc') or path.endswith('.hh') or path.endswith('.hpp')
+        return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or path.endswith(
+            '.cc') or path.endswith('.hh') or path.endswith('.hpp')
 
     def expand_sources(self, sources, filter=None):
         ret = []
@@ -162,7 +166,8 @@ class Tree(documentmerger.DocumentMerger):
                 continue
 
             if os.path.isdir(source):
-                retdir, okdir = self.expand_sources([os.path.join(source, x) for x in os.listdir(source)], self.filter_source)
+                retdir, okdir = self.expand_sources([os.path.join(source, x) for x in os.listdir(source)],
+                                                    self.filter_source)
 
                 if not okdir:
                     ok = False
@@ -216,7 +221,7 @@ class Tree(documentmerger.DocumentMerger):
                     sys.stderr.write("\n")
 
                     if d.severity == cindex.Diagnostic.Fatal or \
-                       d.severity == cindex.Diagnostic.Error:
+                            d.severity == cindex.Diagnostic.Error:
                         fatal = True
 
                 if fatal:
@@ -341,8 +346,8 @@ class Tree(documentmerger.DocumentMerger):
                     elif cursor.kind == cindex.CursorKind.INCLUSION_DIRECTIVE and incstart is None:
                         incstart = cursor
                     elif (not incstart is None) and \
-                         token.kind == cindex.TokenKind.PUNCTUATION and \
-                         token.spelling == '>':
+                            token.kind == cindex.TokenKind.PUNCTUATION and \
+                            token.spelling == '>':
                         hl.append((incstart.extent.start.offset, end, 'preprocessor'))
                         incstart = None
 
@@ -396,8 +401,8 @@ class Tree(documentmerger.DocumentMerger):
         n = self.cursor_to_node[tp.decl]
 
         if isinstance(n, nodes.Struct) or \
-           isinstance(n, nodes.Typedef) or \
-           isinstance(n, nodes.Enum):
+                isinstance(n, nodes.Typedef) or \
+                isinstance(n, nodes.Enum):
             return n
 
         return None
@@ -407,14 +412,14 @@ class Tree(documentmerger.DocumentMerger):
 
         for hint in hints:
             if node.name.startswith(hint + "_") or \
-               node.name.endswith("_" + hint):
+                    node.name.endswith("_" + hint):
                 return True
 
         return False
 
     def node_on_c_struct(self, node):
         if isinstance(node, nodes.Method) or \
-           not isinstance(node, nodes.Function):
+                not isinstance(node, nodes.Function):
             return None
 
         decl = None

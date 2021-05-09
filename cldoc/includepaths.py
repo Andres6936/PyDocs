@@ -14,6 +14,7 @@ import os, subprocess, sys
 
 from . import utf8
 
+
 def flags(f):
     devnull = open(os.devnull)
 
@@ -23,7 +24,8 @@ def flags(f):
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
     except OSError as e:
-        sys.stderr.write("\nFatal: Failed to run clang++ to obtain system include headers, please install clang++ to use cldoc\n")
+        sys.stderr.write(
+            "\nFatal: Failed to run clang++ to obtain system include headers, please install clang++ to use cldoc\n")
 
         message = str(e)
 

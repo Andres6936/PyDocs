@@ -15,6 +15,7 @@ from .ctype import Type
 
 from ..clang import cindex
 
+
 class Typedef(Node):
     kind = cindex.CursorKind.TYPEDEF_DECL
 

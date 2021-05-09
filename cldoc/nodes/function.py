@@ -20,6 +20,7 @@ from ..comment import Parser
 
 import re
 
+
 class Argument:
     def __init__(self, func, cursor):
         self.cursor = cursor
@@ -81,6 +82,7 @@ class Argument:
     @property
     def is_unlabeled(self):
         return False
+
 
 class Function(Node):
     kind = cindex.CursorKind.FUNCTION_DECL

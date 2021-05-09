@@ -30,26 +30,32 @@ from . import example
 from . import documentmerger
 from . import utf8
 
+
 def nsgtk(s):
     return '{{{0}}}{1}'.format('http://www.gtk.org/introspection/core/1.0', s)
+
 
 def nsc(s):
     return '{{{0}}}{1}'.format('http://www.gtk.org/introspection/c/1.0', s)
 
+
 def nsglib(s):
     return '{{{0}}}{1}'.format('http://www.gtk.org/introspection/glib/1.0', s)
+
 
 def stripns(tag):
     try:
         pos = tag.index('}')
-        return tag[pos+1:]
+        return tag[pos + 1:]
     except:
         return tag
+
 
 class Interface(nodes.Class):
     @property
     def classname(self):
         return '{http://jessevdk.github.com/cldoc/gobject/1.0}interface'
+
 
 class Class(nodes.Class):
     def __init__(self, cursor, comment):
@@ -65,6 +71,7 @@ class Class(nodes.Class):
     @property
     def classname(self):
         return '{http://jessevdk.github.com/cldoc/gobject/1.0}class'
+
 
 class Property(nodes.Node):
     def __init__(self, cursor, comment):
@@ -96,6 +103,7 @@ class Property(nodes.Node):
 
         return ret
 
+
 class Boxed(nodes.Struct):
     def __init__(self, cursor, comment):
         nodes.Struct.__init__(self, cursor, comment)
@@ -108,6 +116,7 @@ class Boxed(nodes.Struct):
     def force_page(self):
         return True
 
+
 class GirComment(comment.Comment):
     hashref = re.compile('#([a-z_][a-z0-9_]*)', re.I)
     emph = re.compile('<emphasis>(.*?)</emphasis>', re.I)
@@ -115,7 +124,8 @@ class GirComment(comment.Comment):
     refsect2 = re.compile('(<refsect2 [^>]*>|</refsect2>)\n?', re.I)
     varref = re.compile('@([a-z][a-z0-9_]*)', re.I)
     constref = re.compile('%([a-z_][a-z0-9_]*)', re.I)
-    proglisting = re.compile('<informalexample>\s*<programlisting>\s*(.*?)\s*</programlisting>\s*</informalexample>', re.I | re.M)
+    proglisting = re.compile('<informalexample>\s*<programlisting>\s*(.*?)\s*</programlisting>\s*</informalexample>',
+                             re.I | re.M)
 
     def __init__(self, cursor):
         doc = cursor.node.find(nsgtk('doc'))
@@ -207,9 +217,11 @@ class GirComment(comment.Comment):
         text = GirComment.emph.sub(lambda x: '*{0}*'.format(x.group(1)), text)
         text = GirComment.title.sub(lambda x: '## {0}'.format(x.group(1)), text)
         text = GirComment.refsect2.sub(lambda x: '', text)
-        text = GirComment.proglisting.sub(lambda x: '    [code]\n    {0}\n'.format(x.group(1).replace('\n', '\n    ')), text)
+        text = GirComment.proglisting.sub(lambda x: '    [code]\n    {0}\n'.format(x.group(1).replace('\n', '\n    ')),
+                                          text)
 
         return text
+
 
 class GirType:
     builtins = [
@@ -330,6 +342,7 @@ class GirType:
                 else:
                     self.spelling = name
 
+
 class GirTypePointer(GirType):
     def __init__(self, tp):
         self.node = tp.node
@@ -343,6 +356,7 @@ class GirTypePointer(GirType):
 
     def get_declaration(self):
         return self.pointer_type.get_declaration()
+
 
 class GirCursor:
     kindmap = {
@@ -498,7 +512,7 @@ class GirCursor:
             cursor = GirCursor(child)
 
             if not self._virtual_param is None and \
-               cursor.typename == 'method' or cursor.typename == 'virtual-method':
+                    cursor.typename == 'method' or cursor.typename == 'virtual-method':
                 self._setup_first_param(cursor)
 
             cursor.parent = self
@@ -583,6 +597,7 @@ class GirCursor:
 
             for implements in self.node.iterfind(nsgtk('implements')):
                 self._add_implements(resolver(implements.attrib['name']))
+
 
 class GirTree(documentmerger.DocumentMerger):
     def __init__(self, category=None):
@@ -880,7 +895,6 @@ class GirTree(documentmerger.DocumentMerger):
 
             comps = node.comment.doc.components
 
-
             for i in range(len(comps)):
                 component = comps[i]
 
@@ -894,6 +908,7 @@ class GirTree(documentmerger.DocumentMerger):
 
                 comps[i] = ex
 
+
 def run(args):
     parser = argparse.ArgumentParser(description='clang based documentation generator.',
                                      usage='%(prog)s gir --output DIR [OPTIONS] GIRFILE')
@@ -902,31 +917,31 @@ def run(args):
                         help='be quiet about it')
 
     parser.add_argument('--report', default=False,
-                          action='store_const', const=True, help='report documentation coverage and errors')
+                        action='store_const', const=True, help='report documentation coverage and errors')
 
     parser.add_argument('--output', default=None, metavar='DIR',
-                          help='specify the output directory')
+                        help='specify the output directory')
 
     parser.add_argument('--type', default='html', metavar='TYPE',
-                          help='specify the type of output (html or xml, default html)')
+                        help='specify the type of output (html or xml, default html)')
 
     parser.add_argument('--merge', default=[], metavar='FILES', action='append',
-                          help='specify additional description files to merge into the documentation')
+                        help='specify additional description files to merge into the documentation')
 
     parser.add_argument('--merge-filter', default=None, metavar='FILTER',
-                          help='specify program to pass merged description files through')
+                        help='specify program to pass merged description files through')
 
     parser.add_argument('--static', default=False, action='store_const', const=True,
-                          help='generate a static website (only for when --output is html)')
+                        help='generate a static website (only for when --output is html)')
 
     parser.add_argument('--category', default=None, metavar='CATEGORY',
-                          help='category in which to place all symbols')
+                        help='category in which to place all symbols')
 
     parser.add_argument('--custom-js', default=[], metavar='FILES', action='append',
-                          help='specify additional javascript files to be merged into the html (only for when --output is html)')
+                        help='specify additional javascript files to be merged into the html (only for when --output is html)')
 
     parser.add_argument('--custom-css', default=[], metavar='FILES', action='append',
-                          help='specify additional css files to be merged into the html (only for when --output is html)')
+                        help='specify additional css files to be merged into the html (only for when --output is html)')
 
     parser.add_argument('files', nargs='+', help='gir files to parse')
 

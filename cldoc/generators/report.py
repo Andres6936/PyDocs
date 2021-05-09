@@ -14,7 +14,7 @@ from __future__ import absolute_import
 
 import inspect, os, shutil
 
-from ..struct import Struct
+from ..Struct import Struct
 from ..clang import cindex
 from ..comment import Comment
 

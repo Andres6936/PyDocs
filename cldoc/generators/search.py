@@ -14,7 +14,7 @@ from __future__ import absolute_import
 
 import bisect
 from ..clang import cindex
-from ..struct import Struct
+from ..Struct import Struct
 
 
 class Search:

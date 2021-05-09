@@ -13,7 +13,7 @@
 from .clang import cindex
 from .defdict import Defdict
 
-from .struct import Struct
+from .Struct import Struct
 from . import utf8
 
 import os, re, sys, bisect

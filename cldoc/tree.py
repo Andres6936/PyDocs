@@ -154,7 +154,8 @@ class Tree(documentmerger.DocumentMerger):
 
         return self._lookup_node_from_cursor_despecialized(cursor)
 
-    def filter_source(self, path):
+    @staticmethod
+    def filter_source(path : str) -> bool:
         return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or path.endswith(
             '.cc') or path.endswith('.hh') or path.endswith('.hpp')
 

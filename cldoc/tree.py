@@ -80,7 +80,7 @@ except cindex.LibclangError as e:
 
 
 class Tree(documentmerger.DocumentMerger):
-    def __init__(self, files: List[str], flags : str):
+    def __init__(self, files: List[str], flags: str):
         self.processed = {}
         self.files, ok = self.expand_sources([os.path.realpath(f) for f in files])
 
@@ -155,7 +155,7 @@ class Tree(documentmerger.DocumentMerger):
         return self._lookup_node_from_cursor_despecialized(cursor)
 
     @staticmethod
-    def filter_source(path : str) -> bool:
+    def filter_source(path: str) -> bool:
         """
         :param path: The path to source file.
         :return: True if the file is of type C++ (source or header).
@@ -166,7 +166,8 @@ class Tree(documentmerger.DocumentMerger):
         return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or \
                path.endswith('.cc') or path.endswith('.hh') or path.endswith('.hpp')
 
-    def expand_sources(self, sources : List[str], filter: Optional[Callable[[str], bool]]=None) -> Tuple[List[str], bool]:
+    def expand_sources(self, sources: List[str], filter: Optional[Callable[[str], bool]] = None) \
+            -> Tuple[List[str], bool]:
         """
         :param sources: List with the paths to sources files, if the path
          is a directory, the content of this directory will be returned.

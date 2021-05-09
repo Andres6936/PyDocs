@@ -181,7 +181,7 @@ class Tree(documentmerger.DocumentMerger):
         successful: bool = True
 
         for source in sources:
-            if not filter is None and not filter(source):
+            if filter is not None and not filter(source):
                 continue
 
             if os.path.isdir(source):

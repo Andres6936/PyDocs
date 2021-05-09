@@ -123,15 +123,15 @@ def run(args):
         cxxflags += '-x'
         cxxflags += opts.language
 
-    t = tree.Tree(opts.files, cxxflags)
+    tree = tree.Tree(opts.files, cxxflags)
 
-    t.process()
+    tree.process()
 
     if opts.merge:
-        t.merge(opts.merge_filter, opts.merge)
+        tree.merge(opts.merge_filter, opts.merge)
 
-    t.cross_ref()
+    tree.cross_ref()
 
-    run_generate(t, opts)
+    run_generate(tree, opts)
 
 # vi:ts=4:et

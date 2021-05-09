@@ -11,7 +11,9 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # -*- coding: utf-8 -*-
+
 from typing import List, Callable, Optional, Tuple
+from clang.cindex import TranslationUnit
 
 from .clang import cindex
 import tempfile
@@ -229,12 +231,12 @@ class Tree(documentmerger.DocumentMerger):
 
             print('Processing {0}'.format(os.path.basename(f)))
 
-            tu = self.index.parse(f, self.flags)
+            translation_unit: TranslationUnit = self.index.parse(f, self.flags)
 
-            if len(tu.diagnostics) != 0:
+            if len(translation_unit.diagnostics) != 0:
                 fatal = False
 
-                for d in tu.diagnostics:
+                for d in translation_unit.diagnostics:
                     sys.stderr.write(d.format())
                     sys.stderr.write("\n")
 
@@ -246,7 +248,7 @@ class Tree(documentmerger.DocumentMerger):
                     sys.stderr.write("\nCould not generate documentation due to parser errors\n")
                     sys.exit(1)
 
-            if not tu:
+            if not translation_unit:
                 sys.stderr.write("Could not parse file %s...\n" % (f,))
                 sys.exit(1)
 
@@ -254,7 +256,7 @@ class Tree(documentmerger.DocumentMerger):
             # supposed to inspect
             extractfiles = [f]
 
-            for inc in tu.get_includes():
+            for inc in translation_unit.get_includes():
                 filename = str(inc.include)
                 self.headers[filename] = True
 
@@ -264,12 +266,12 @@ class Tree(documentmerger.DocumentMerger):
                 extractfiles.append(filename)
 
             for e in extractfiles:
-                db = comment.CommentsDatabase(e, tu)
+                db = comment.CommentsDatabase(e, translation_unit)
 
                 self.add_categories(db.category_names)
                 self.commentsdbs[e] = db
 
-            self.visit(tu.cursor.get_children())
+            self.visit(translation_unit.cursor.get_children())
 
             for f in self.processing:
                 self.processed[f] = True

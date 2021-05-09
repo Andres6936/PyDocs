@@ -11,6 +11,7 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # -*- coding: utf-8 -*-
+from typing import List
 
 from .clang import cindex
 import tempfile
@@ -79,7 +80,7 @@ except cindex.LibclangError as e:
 
 
 class Tree(documentmerger.DocumentMerger):
-    def __init__(self, files, flags):
+    def __init__(self, files: List[str], flags : str):
         self.processed = {}
         self.files, ok = self.expand_sources([os.path.realpath(f) for f in files])
 
@@ -157,7 +158,14 @@ class Tree(documentmerger.DocumentMerger):
         return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or path.endswith(
             '.cc') or path.endswith('.hh') or path.endswith('.hpp')
 
-    def expand_sources(self, sources, filter=None):
+    def expand_sources(self, sources : List[str], filter=None):
+        """
+        :param sources: List with the paths to sources files, if the path
+        is a directory, the content of this directory will be returned.
+        :param filter: The filter.
+        :return: Tuple, the first value content the list of path to sources
+         files and the second value determine if the operation is successful.
+        """
         ret = []
         ok = True
 

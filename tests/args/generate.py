@@ -6,4 +6,4 @@ sys.path.insert(0, lcldoc)
 from cldoc import cmdgenerate
 
 if __name__ == '__main__':
-    cmdgenerate.run('--report --merge docs --output html --files transport/bicycle.cc transport/bicycle.hh')
+    cmdgenerate.run('-I../../example/transport -fPIC --')

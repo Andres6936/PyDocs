@@ -12,14 +12,18 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 import os, subprocess, sys
 
+from typing import List
+
 from . import utf8
 
 
 def flags(f):
     devnull = open(os.devnull)
 
+    command: List[str] = ['clang++', '-E', '-xc++', f, '-v', '-']
+
     try:
-        p = subprocess.Popen(['clang++', '-E', '-xc++'] + f + ['-v', '-'],
+        p = subprocess.Popen(command,
                              stdin=devnull,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
@@ -58,6 +62,6 @@ def flags(f):
 
             paths.append(p)
 
-    return ['-I{0}'.format(x) for x in paths] + f
+    return ['-I{0}'.format(x) for x in paths].append(f)
 
 # vi:ts=4:et

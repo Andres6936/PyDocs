@@ -57,13 +57,13 @@ def run(args):
     parser.add_argument('--quiet', default=False, action='store_const', const=True,
                         help='be quiet about it')
 
-    parser.add_argument('--loglevel', default='error', metavar='LEVEL',
+    parser.add_argument('--loglevel', default='error', type=str,
                         help='specify the logevel (error, warning, info)')
 
     parser.add_argument('--report', default=False,
                         action='store_const', const=True, help='report documentation coverage and errors')
 
-    parser.add_argument('--output', default=None, metavar='DIR',
+    parser.add_argument('--output', type=str, action='store',
                         help='specify the output directory')
 
     parser.add_argument('--language', default='c++', metavar='LANGUAGE',
@@ -90,12 +90,13 @@ def run(args):
     parser.add_argument('--custom-css', default=[], metavar='FILES', action='append',
                         help='specify additional css files to be merged into the html (only for when --output is html)')
 
-    parser.add_argument('files', nargs='+', help='files to parse')
+    parser.add_argument('--files', nargs='+',
+                        help='files to parse')
 
     restargs = args[sep + 1:]
     cxxflags = args[:sep]
 
-    opts = parser.parse_args(restargs)
+    opts = parser.parse_args()
 
     if opts.quiet:
         sys.stdout = open(os.devnull, 'w')
@@ -119,8 +120,8 @@ def run(args):
             haslang = True
 
     if not haslang:
-        cxxflags.append('-x')
-        cxxflags.append(opts.language)
+        cxxflags += '-x'
+        cxxflags += opts.language
 
     t = tree.Tree(opts.files, cxxflags)
 

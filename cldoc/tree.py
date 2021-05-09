@@ -156,8 +156,15 @@ class Tree(documentmerger.DocumentMerger):
 
     @staticmethod
     def filter_source(path : str) -> bool:
-        return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or path.endswith(
-            '.cc') or path.endswith('.hh') or path.endswith('.hpp')
+        """
+        :param path: The path to source file.
+        :return: True if the file is of type C++ (source or header).
+         For determine it, the extension of file is revised and if it
+         is .c or .cpp or .cc for the source and .h or .hh or .hpp for
+         the header return True, this method return False otherwise.
+        """
+        return path.endswith('.c') or path.endswith('.cpp') or path.endswith('.h') or \
+               path.endswith('.cc') or path.endswith('.hh') or path.endswith('.hpp')
 
     def expand_sources(self, sources : List[str], filter=None):
         """

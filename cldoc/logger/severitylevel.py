@@ -17,11 +17,19 @@ class SeverityLevel(IntEnum):
     entry will also be included when filtering for Notice, Info and Debug
     messages.
     """
+    # System is unusable
     EMERGENCY = 0
+    # Action must be taken immediately
     ALERT = 1
+    # Critical conditions
     CRITICAL = 2
+    # Error conditions
     ERROR = 3
+    # Warning conditions
     WARNING = 4
+    # Normal but significant conditions
     NOTICE = 5
+    # Informational messages
     INFORMATIONAL = 6
+    # Debug-level messages
     DEBUG = 7

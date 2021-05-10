@@ -33,3 +33,8 @@ class SeverityLevel(IntEnum):
     INFORMATIONAL = 6
     # Debug-level messages
     DEBUG = 7
+
+    @staticmethod
+    def abbreviation(severity_level):
+        abbreviation: str = severity_level.name[0]
+        return "[" + abbreviation + "]"

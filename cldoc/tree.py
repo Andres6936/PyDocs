@@ -111,15 +111,15 @@ class Tree(documentmerger.DocumentMerger):
         self.root = nodes.Root()
 
         self.all_nodes = []
-        self.cursor_to_node = Defdict()
-        self.usr_to_node = Defdict()
-        self.qid_to_node = Defdict()
+        self.cursor_to_node = dict()
+        self.usr_to_node = dict()
+        self.qid_to_node = dict()
 
         # Map from category name to the nodes.Category for that category
-        self.category_to_node = Defdict()
+        self.category_to_node = dict()
 
         # Map from filename to comment.CommentsDatabase
-        self.commentsdbs = Defdict()
+        self.commentsdbs = dict()
 
         self.qid_to_node[None] = self.root
         self.usr_to_node[None] = self.root

@@ -14,11 +14,12 @@ from __future__ import absolute_import
 
 import sys, os, argparse, tempfile, subprocess, shutil
 
+from tree import Tree
 from . import fs, staticsite
 from . import log
 
 
-def run_generate(t, opts):
+def run_generate(t: Tree, opts):
     if opts.type != 'html' and opts.type != 'xml':
         return
 

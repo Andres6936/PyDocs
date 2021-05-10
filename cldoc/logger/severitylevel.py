@@ -2,7 +2,7 @@ from enum import IntEnum, unique
 
 
 @unique
-class Level(IntEnum):
+class SeverityLevel(IntEnum):
     EMERGENCY = 0
     ALERT = 1
     CRITICAL = 2

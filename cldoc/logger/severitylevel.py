@@ -36,5 +36,14 @@ class SeverityLevel(IntEnum):
 
     @staticmethod
     def abbreviation(severity_level):
-        abbreviation: str = severity_level.name[0]
-        return "[" + abbreviation + "]"
+        """
+        :param severity_level: The severity level of message.
+        :return: The abbreviation of message, for example for the NOTICE
+        severity level is returned '[N]', for the CRITICAL is returned '[C]',
+        only exist one exception to this rule, for the case of EMERGENCY, the
+        abbreviation returned is [Y] for avoid confusion with the abbreviation
+        of ERROR severity level.
+        """
+        if severity_level.name == 'EMERGENCY':
+            return '[Y]'
+        return "[" + severity_level.name[0] + "]"

@@ -254,7 +254,7 @@ class Tree(documentmerger.DocumentMerger):
 
             # Extract comments from files and included files that we are
             # supposed to inspect
-            extractfiles = [f]
+            extractfiles: List[str] = [f]
 
             for inc in translation_unit.get_includes():
                 filename = str(inc.include)
@@ -265,11 +265,11 @@ class Tree(documentmerger.DocumentMerger):
 
                 extractfiles.append(filename)
 
-            for e in extractfiles:
-                db = comment.CommentsDatabase(e, translation_unit)
+            for extracted in extractfiles:
+                db = comment.CommentsDatabase(extracted, translation_unit)
 
                 self.add_categories(db.category_names)
-                self.commentsdbs[e] = db
+                self.commentsdbs[extracted] = db
 
             self.visit(translation_unit.cursor.get_children())
 

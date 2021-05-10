@@ -1,3 +1,4 @@
+import inspect
 import sys
 
 from logger.ilogger import ILogger
@@ -31,5 +32,5 @@ class ConsoleLogger(ILogger):
 
     @staticmethod
     def __message(severity_level: SeverityLevel, msg: str):
-        sys.stdout.write("{} - {}".format(
-            SeverityLevel.abbreviation(severity_level), msg))
+        sys.stdout.write("{} - F:{} - {}".format(
+            SeverityLevel.abbreviation(severity_level), inspect.stack()[2][3], msg))

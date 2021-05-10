@@ -12,7 +12,9 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 from __future__ import absolute_import
 
-import sys, os, argparse, tempfile, subprocess, shutil
+import argparse
+import os
+import sys
 
 from tree import Tree
 from . import fs, staticsite

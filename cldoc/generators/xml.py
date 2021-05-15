@@ -25,14 +25,16 @@ from .. import fs
 
 
 class Xml(Generator):
-    def generate(self, outdir):
-        if not outdir:
-            outdir = 'xml'
+    def generate(self, out_directory: str):
+        if not out_directory:
+            out_directory = 'xml'
+            self.logger.informational("Output directory empty, set to {}".format(out_directory))
 
         try:
-            fs.fs.makedirs(outdir)
-        except OSError:
-            pass
+            self.logger.informational("Creating the directory '{}'".format(out_directory))
+            os.mkdir(out_directory)
+        except FileExistsError:
+            self.logger.informational("The directory already exist")
 
         ElementTree.register_namespace('gobject', 'http://jessevdk.github.com/cldoc/gobject/1.0')
         ElementTree.register_namespace('cldoc', 'http://jessevdk.github.com/cldoc/1.0')
@@ -53,14 +55,14 @@ class Xml(Generator):
             if cm.doc:
                 self.index.append(self.doc_to_xml(self.tree.root, cm.doc))
 
-        Generator.generate(self, outdir)
+        Generator.generate(self, out_directory)
 
         if self.options.report:
             self.add_report()
 
         self.write_xml(self.index, 'index.xml')
 
-        print('Generated `{0}\''.format(outdir))
+        print('Generated `{0}\''.format(out_directory))
 
     def add_report(self):
         from .report import Report

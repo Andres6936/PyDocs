@@ -10,10 +10,16 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from logger.ilogger import ILogger
+from logger.consolelogger import ConsoleLogger
+
+
 class Generator(object):
     def __init__(self, tree=None, opts=None):
         self.tree = tree
         self.options = opts
+        self.logger: ILogger = ConsoleLogger()
 
     def generate(self, outdir):
         self.outdir = outdir

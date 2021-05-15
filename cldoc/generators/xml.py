@@ -104,7 +104,7 @@ class Xml(Generator):
 
     def write_xml(self, elem, file: str):
         self.written[file] = True
-        self.logger.informational("Generating XML in: {}".format(file))
+        self.logger.informational("Generating XML: {}".format(file))
 
         elem.attrib['xmlns'] = 'http://jessevdk.github.com/cldoc/1.0'
 

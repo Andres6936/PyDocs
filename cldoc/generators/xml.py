@@ -102,9 +102,9 @@ class Xml(Generator):
             if level and (not elem.tail or not elem.tail.strip()):
                 elem.tail = i
 
-    def write_xml(self, elem, file: str):
-        self.written[file] = True
-        self.logger.informational("Generating XML: {}".format(file))
+    def write_xml(self, elem, filename_out: str):
+        self.written[filename_out] = True
+        self.logger.informational("Generating XML: {}".format(filename_out))
 
         elem.attrib['xmlns'] = 'http://jessevdk.github.com/cldoc/1.0'
 
@@ -112,15 +112,15 @@ class Xml(Generator):
 
         self.indent(tree.getroot())
 
-        f = fs.fs.open(os.path.join(self.outdir, file), 'w')
+        file_object = open(os.path.join(self.outdir, filename_out), 'w')
 
         if sys.version_info[0] == 3:
-            tree.write(f, encoding='unicode', xml_declaration=True)
+            tree.write(file_object, encoding='unicode', xml_declaration=True)
         else:
-            tree.write(f, encoding='utf-8', xml_declaration=True)
+            tree.write(file_object, encoding='utf-8', xml_declaration=True)
 
-        f.write('\n')
-        f.close()
+        file_object.write('\n')
+        file_object.close()
 
     def is_page(self, node):
         if node.force_page:

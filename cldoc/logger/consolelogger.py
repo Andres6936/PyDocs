@@ -32,5 +32,5 @@ class ConsoleLogger(ILogger):
 
     @staticmethod
     def __message(severity_level: SeverityLevel, msg: str):
-        sys.stdout.write("{} - F:{} - {}".format(
+        sys.stdout.write("{} - F:{} - {}\n".format(
             SeverityLevel.abbreviation(severity_level), inspect.stack()[2][3], msg))

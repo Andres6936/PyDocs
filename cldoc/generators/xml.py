@@ -112,15 +112,13 @@ class Xml(Generator):
 
         self.indent(tree.getroot())
 
-        file_object = open(os.path.join(self.outdir, filename_out), 'w')
-
-        if sys.version_info[0] == 3:
-            tree.write(file_object, encoding='unicode', xml_declaration=True)
-        else:
-            tree.write(file_object, encoding='utf-8', xml_declaration=True)
-
-        file_object.write('\n')
-        file_object.close()
+        with open(os.path.join(self.outdir, filename_out), 'w') as file_object:
+            if sys.version_info[0] == 3:
+                tree.write(file_object, encoding='unicode', xml_declaration=True)
+            else:
+                tree.write(file_object, encoding='utf-8', xml_declaration=True)
+            file_object.write('\n')
+        assert file_object.closed
 
     def is_page(self, node):
         if node.force_page:

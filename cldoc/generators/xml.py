@@ -27,11 +27,8 @@ from .. import fs
 class Xml(Generator):
     def __init__(self, tree=None, opts=None):
         super().__init__(tree, opts)
-        self.indexmap = {
-            self.tree.root: self.index
-        }
-        self.written = {}
         self.index = ElementTree.Element('index')
+        self.written = {}
 
     def generate(self, out_directory: str):
         if not out_directory:
@@ -47,6 +44,9 @@ class Xml(Generator):
         ElementTree.register_namespace('gobject', 'http://jessevdk.github.com/cldoc/gobject/1.0')
         ElementTree.register_namespace('cldoc', 'http://jessevdk.github.com/cldoc/1.0')
 
+        self.indexmap = {
+            self.tree.root: self.index
+        }
         cm = self.tree.root.comment
 
         if cm:

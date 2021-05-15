@@ -14,23 +14,23 @@
 
 from typing import List, Callable, Optional, Tuple
 from clang.cindex import TranslationUnit
+from clang import cindex
 
-from .clang import cindex
 import tempfile
 import functools
 
-from .defdict import Defdict
+from cldoc.defdict import Defdict
 
-from . import comment
-from . import nodes
-from . import includepaths
-from . import documentmerger
+from cldoc import comment
+from cldoc import nodes
+from cldoc import includepaths
+from cldoc import documentmerger
 
-from . import example
-from . import utf8
-from . import log
+from cldoc import example
+from cldoc import utf8
+from cldoc import log
 
-from .cmp import cmp
+from cmp import cmp
 
 import os, sys, re, glob, platform
 
@@ -111,15 +111,15 @@ class Tree(documentmerger.DocumentMerger):
         self.root = nodes.Root()
 
         self.all_nodes = []
-        self.cursor_to_node = dict()
-        self.usr_to_node = dict()
-        self.qid_to_node = dict()
+        self.cursor_to_node = Defdict()
+        self.usr_to_node = Defdict()
+        self.qid_to_node = Defdict()
 
         # Map from category name to the nodes.Category for that category
-        self.category_to_node = dict()
+        self.category_to_node = Defdict()
 
         # Map from filename to comment.CommentsDatabase
-        self.commentsdbs = dict()
+        self.commentsdbs = Defdict()
 
         self.qid_to_node[None] = self.root
         self.usr_to_node[None] = self.root

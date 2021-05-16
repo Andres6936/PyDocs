@@ -28,6 +28,10 @@ def extract_include_paths(compilation_flags: str) -> str:
     return result
 
 
+def add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:
+    return ['-I' + path for path in paths_of_inclusion]
+
+
 def flags(f: str):
     logger: ILogger = ConsoleLogger()
     logger.informational("Entering the flag definition")
@@ -77,7 +81,6 @@ def flags(f: str):
                 p = p[:-len(suffix)]
 
             paths.append(p)
-
-    return ['-I{0}'.format(x) for x in paths].append(f)
+    return add_prefix_of_inclusion([path.decode('utf-8') for path in paths])
 
 # vi:ts=4:et

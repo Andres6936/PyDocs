@@ -33,8 +33,12 @@ def __extract_include_paths(compilation_flags: str) -> str:
     result: str = str()
     for argument in arguments:
         if argument.startswith('-I/'):
-            result += argument
-    return result
+            result += argument + ' '
+    # In this point, the string include a space to end of string, with this
+    # approximation. remove it space.
+    # If the space is present at end of string, CLang will not find the
+    # directory and will be ignore it.
+    return result[:-1]
 
 
 def __add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:

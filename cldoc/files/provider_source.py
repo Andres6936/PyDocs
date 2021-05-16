@@ -13,6 +13,12 @@ class ProviderSource:
         self.sources: List[str] = []
         self.provider_sources(directory)
 
+    def __iter__(self):
+        """
+        :return: Return a iterator object over the source files stored.
+        """
+        return self.sources.__iter__()
+
     def __len__(self) -> int:
         """
         Assert: The number always will be 0 or greater to 0.

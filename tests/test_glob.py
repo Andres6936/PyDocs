@@ -1,4 +1,3 @@
-import glob
 import unittest
 
 from files.provider_source import ProviderSource
@@ -13,6 +12,9 @@ class MyTestCase(unittest.TestCase):
 
         self.files = ProviderSource()
         self.assertTrue(len(self.files) == 0)
+
+        for source in self.sources:
+            print(source)
 
 
 if __name__ == '__main__':

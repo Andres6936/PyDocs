@@ -17,7 +17,6 @@ from typing import List
 
 from logger.consolelogger import ConsoleLogger
 from logger.ilogger import ILogger
-from . import utf8
 
 
 def flags(f: str):
@@ -54,16 +53,14 @@ def flags(f: str):
     paths = []
 
     for line in lines:
-        line = utf8.utf8(line)
-
-        if line.startswith('#include <...>'):
+        if line.startswith(b'#include <...>'):
             init = True
-        elif line.startswith('End of search list.'):
+        elif line.startswith(b'End of search list.'):
             init = False
         elif init:
             p = line.strip()
 
-            suffix = ' (framework directory)'
+            suffix = b' (framework directory)'
 
             if p.endswith(suffix):
                 p = p[:-len(suffix)]

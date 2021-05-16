@@ -219,12 +219,12 @@ class Tree(documentmerger.DocumentMerger):
         process processes all the files with clang and extracts all relevant
         nodes from the generated AST
         """
+        self.logger.informational("Starting processing with CLang")
 
         for f in self.provider_source:
+            self.logger.informational("Processing the file: {}".format(os.path.basename(f)))
             if f in self.processed:
-                continue
-
-            print('Processing {0}'.format(os.path.basename(f)))
+                self.logger.informational("The file '{}' has already been processed".format(os.path.basename(f)))
 
             translation_unit: TranslationUnit = self.index.parse(f, self.flags)
 

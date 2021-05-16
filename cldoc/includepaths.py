@@ -19,12 +19,23 @@ from logger.consolelogger import ConsoleLogger
 from logger.ilogger import ILogger
 
 
+def extract_include_paths(compilation_flags: str) -> str:
+    arguments: List[str] = compilation_flags.split(' ')
+    result: str = str()
+    for argument in arguments:
+        if argument.startswith('-I/'):
+            result += argument
+    return result
+
+
 def flags(f: str):
     logger: ILogger = ConsoleLogger()
     logger.informational("Entering the flag definition")
     logger.informational("The flags defined has been: {}".format(f))
     logger.informational("Opening the devnull device ({})".format(os.devnull))
     devnull = open(os.devnull)
+
+    f = extract_include_paths(f)
 
     command: List[str] = ['clang++', '-E', '-xc++', f, '-v', '-']
     logger.informational("The command to execute is: {}".format(command))

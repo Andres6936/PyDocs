@@ -13,6 +13,13 @@ class ProviderSource:
         self.sources: List[str] = []
         self.provider_sources(directory)
 
+    def __len__(self) -> int:
+        """
+        Assert: The number always will be 0 or greater to 0.
+        :return: Returns the number of source files and headers stored.
+        """
+        return len(self.sources)
+
     def provider_sources(self, directory: str) -> None:
         """
         Populate a list with the sources and headers found in the directories.

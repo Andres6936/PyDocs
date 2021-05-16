@@ -53,7 +53,7 @@ class ProviderSource:
         The files of source type will be the first in the list.
         :return: None.
         """
-        self.sort_first_by(self.TYPE_SOURCES)
+        self.__sort_first_by(self.TYPE_SOURCES)
 
     def sort_first_by_headers(self) -> None:
         """
@@ -61,9 +61,9 @@ class ProviderSource:
         The files of header type will be the first in the list.
         :return:
         """
-        self.sort_first_by(self.TYPE_HEADERS)
+        self.__sort_first_by(self.TYPE_HEADERS)
 
-    def sort_first_by(self, type_extension: List[str]) -> None:
+    def __sort_first_by(self, type_extension: List[str]) -> None:
         """
         Sort the files stored based in the type extension.
         :param type_extension: List of extensions for sort the files stored,

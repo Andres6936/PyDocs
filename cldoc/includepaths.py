@@ -10,17 +10,25 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 import os, subprocess, sys
 
 from typing import List
 
+from logger.consolelogger import ConsoleLogger
+from logger.ilogger import ILogger
 from . import utf8
 
 
-def flags(f):
+def flags(f: str):
+    logger: ILogger = ConsoleLogger()
+    logger.informational("Entering the flag definition")
+    logger.informational("The flags defined has been: {}".format(f))
+    logger.informational("Opening the devnull device ({})".format(os.devnull))
     devnull = open(os.devnull)
 
     command: List[str] = ['clang++', '-E', '-xc++', f, '-v', '-']
+    logger.informational("The command to execute is: {}".format(command))
 
     try:
         p = subprocess.Popen(command,

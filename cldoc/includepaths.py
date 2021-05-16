@@ -20,6 +20,15 @@ from logger.ilogger import ILogger
 
 
 def __extract_include_paths(compilation_flags: str) -> str:
+    """
+    Generally the compilation flags come with flags that are not used for our
+    goal, that is extract all the include path that are used when compiling
+    the program. These paths are easily identifiable because they begin
+    with '-I/'
+    :param compilation_flags: The compilation flags used for compiling the
+    program.
+    :return: The path of inclusion separated for a space
+    """
     arguments: List[str] = compilation_flags.split(' ')
     result: str = str()
     for argument in arguments:

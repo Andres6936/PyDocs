@@ -3,6 +3,7 @@ from typing import List
 
 
 class ProviderSource:
+    # Type of extension for default for C++ (sources and headers)
     TYPE_EXTENSION = ["hpp", "hh", "h", "cpp", "cc", "c"]
 
     def __init__(self, directory: str = ""):

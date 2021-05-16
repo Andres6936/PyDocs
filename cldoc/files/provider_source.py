@@ -4,8 +4,8 @@ from typing import List
 
 class ProviderSource:
     """
-    Provide all the sources files and headers of C++ directory (glob or path
-    string). If the directory is empty string, none source is stored.
+    Store all the sources files and headers of C++ directory (glob or path
+    string). If the directory or glob string is empty, none source is stored.
     """
 
     # Type of extension for default for C++ (sources and headers)

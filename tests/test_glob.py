@@ -11,9 +11,8 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(len(self.headers) == 89)
         self.assertTrue(len(self.sources) == 64)
 
-        self.provider_source = ProviderSource("input/Include/Doryen/**")
-        for path in self.provider_source.sources:
-            print(path)
+        self.files = ProviderSource().sources
+        self.assertTrue(len(self.files) == 0)
 
 
 if __name__ == '__main__':

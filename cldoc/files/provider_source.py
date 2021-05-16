@@ -1,4 +1,4 @@
-import glob
+import os, glob
 from typing import List
 
 
@@ -45,7 +45,7 @@ class ProviderSource:
         """
         for path in glob.iglob(directory, recursive=True):
             if path.endswith(tuple(self.TYPE_EXTENSION)):
-                self.__sources.append(path)
+                self.__sources.append(os.path.realpath(path))
 
     def sort_first_by_sources(self) -> None:
         """

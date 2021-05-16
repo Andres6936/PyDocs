@@ -3,6 +3,11 @@ from typing import List
 
 
 class ProviderSource:
+    """
+    Provide all the sources files and headers of C++ directory (glob or path
+    string).
+    """
+
     # Type of extension for default for C++ (sources and headers)
     TYPE_EXTENSION = ["hpp", "hh", "h", "cpp", "cc", "c"]
 

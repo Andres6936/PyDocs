@@ -19,7 +19,7 @@ from logger.consolelogger import ConsoleLogger
 from logger.ilogger import ILogger
 
 
-def __extract_include_paths(compilation_flags: str) -> str:
+def _extract_include_paths(compilation_flags: str) -> str:
     """
     Generally the compilation flags come with flags that are not used for our
     goal, that is extract all the include path that are used when compiling
@@ -52,7 +52,7 @@ def flags(f: str) -> List[str]:
     logger.informational("Opening the devnull device ({})".format(os.devnull))
     devnull = open(os.devnull)
 
-    f = __extract_include_paths(f)
+    f = _extract_include_paths(f)
 
     command: List[str] = ['clang++', '-E', '-xc++', f, '-v', '-']
     logger.informational("The command to execute is: {}".format(command))

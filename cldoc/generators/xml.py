@@ -11,6 +11,9 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 from __future__ import absolute_import
+
+from xml.etree.ElementTree import Element
+
 from ..clang import cindex
 
 from .generator import Generator
@@ -27,8 +30,9 @@ from .. import fs
 class Xml(Generator):
     def __init__(self, tree=None, opts=None):
         super().__init__(tree, opts)
-        self.index = ElementTree.Element('index')
+        self.index: Element = ElementTree.Element('index')
         self.written = {}
+        self.index_map = {self.tree.root: self.index}
 
     def generate(self, out_directory: str):
         if not out_directory:
@@ -44,9 +48,6 @@ class Xml(Generator):
         ElementTree.register_namespace('gobject', 'http://jessevdk.github.com/cldoc/gobject/1.0')
         ElementTree.register_namespace('cldoc', 'http://jessevdk.github.com/cldoc/1.0')
 
-        self.indexmap = {
-            self.tree.root: self.index
-        }
         cm = self.tree.root.comment
 
         if cm:
@@ -562,8 +563,8 @@ class Xml(Generator):
         if self.is_page(node):
             elem = self.node_to_xml_ref(node)
 
-            self.indexmap[node.parent].append(elem)
-            self.indexmap[node] = elem
+            self.index_map[node.parent].append(elem)
+            self.index_map[node] = elem
 
             self.generate_page(node)
         elif self.is_top(node):

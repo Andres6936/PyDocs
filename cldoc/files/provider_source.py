@@ -47,3 +47,29 @@ class ProviderSource:
             if path.endswith(tuple(self.TYPE_EXTENSION)):
                 self.sources.append(path)
 
+    def sort_first_by_sources(self) -> None:
+        """
+        Sort the files stored based on whether it is of type source type.
+        The files of source type will be the first in the list.
+        :return: None.
+        """
+        self.sort_first_by(self.TYPE_SOURCES)
+
+    def sort_first_by_headers(self) -> None:
+        """
+        Sort the files stored based on whether it is of type header type.
+        The files of header type will be the first in the list.
+        :return:
+        """
+        self.sort_first_by(self.TYPE_HEADERS)
+
+    def sort_first_by(self, type_extension: List[str]) -> None:
+        """
+        Sort the files stored based in the type extension.
+        :param type_extension: List of extensions for sort the files stored,
+        if the file match with the type of extension it will be placed above
+        files whose extension is not of the specified type.
+        :return: None.
+        """
+        self.sources.sort(key=lambda file: not file.endswith(tuple(type_extension)))
+

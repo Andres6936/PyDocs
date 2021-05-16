@@ -34,7 +34,7 @@ def run_generate(t: Tree, opts):
     else:
         baseout = opts.output
 
-    xmlout = os.path.join(baseout, 'xml')
+    xmlout: str = os.path.join(baseout, 'xml')
     generator.generate(xmlout)
 
     if opts.type == 'html':

@@ -387,8 +387,8 @@ class Xml(Generator):
     def field_to_xml(self, node, elem):
         elem.append(self.type_to_xml(node.type, node.parent))
 
-    def doc_to_xml(self, parent, doc, tagname='doc'):
-        doce = ElementTree.Element(tagname)
+    def doc_to_xml(self, parent, doc, tagname='doc') -> Element:
+        doce: Element = ElementTree.Element(tagname)
 
         s = ''
         last = None

@@ -1,5 +1,7 @@
 import os, subprocess
 
+from logger.consolelogger import ConsoleLogger
+from logger.ilogger import ILogger
 from . import comment
 from . import nodes
 import sys, re
@@ -9,6 +11,9 @@ from . import utf8
 
 
 class DocumentMerger:
+    def __init__(self):
+        self.logger: ILogger = ConsoleLogger()
+
     reinclude = re.compile('#<cldoc:include[(]([^)]*)[)]>')
 
     def merge(self, mfilter, files):

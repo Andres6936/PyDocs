@@ -85,6 +85,7 @@ except cindex.LibclangError as e:
 
 class Tree(documentmerger.DocumentMerger):
     def __init__(self, provider_source: ProviderSource, flags: str):
+        super().__init__()
         self.headers = {}
         self.processed = {}
         self.index = cindex.Index.create()

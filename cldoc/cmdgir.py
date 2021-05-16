@@ -601,6 +601,7 @@ class GirCursor:
 
 class GirTree(documentmerger.DocumentMerger):
     def __init__(self, category=None):
+        super().__init__()
         self.mapping = {
             'function': self.parse_function,
             'class': self.parse_class,

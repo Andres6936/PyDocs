@@ -8,8 +8,14 @@ class ProviderSource:
     string). If the directory or glob string is empty, none source is stored.
     """
 
+    # Type of extension for C++ headers.
+    TYPE_HEADERS = [".hpp", ".hh", ".h"]
+
+    # Type of extension for C++ sources.
+    TYPE_SOURCES = [".cpp", ".cc", ".c"]
+
     # Type of extension for default for C++ (sources and headers)
-    TYPE_EXTENSION = ["hpp", "hh", "h", "cpp", "cc", "c"]
+    TYPE_EXTENSION = TYPE_HEADERS + TYPE_SOURCES
 
     def __init__(self, directory: str = ""):
         """

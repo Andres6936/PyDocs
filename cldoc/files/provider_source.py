@@ -14,7 +14,7 @@ class ProviderSource:
 
     def provider_sources(self, directory: str) -> None:
         """
-        Populate a list with the sources and headers find in the directories.
+        Populate a list with the sources and headers found in the directories.
         :param directory:  A glob object or directory.
         :return: None.
         """

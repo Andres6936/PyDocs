@@ -32,7 +32,7 @@ def add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:
     return ['-I' + path for path in paths_of_inclusion]
 
 
-def flags(f: str):
+def flags(f: str) -> List[str]:
     logger: ILogger = ConsoleLogger()
     logger.informational("Entering the flag definition")
     logger.informational("The flags defined has been: {}".format(f))

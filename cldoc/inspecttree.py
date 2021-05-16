@@ -58,7 +58,7 @@ def inspect_cursor(tree, cursor, indent):
     if not cursor.location.file:
         return
 
-    if not str(cursor.location.file) in tree.files:
+    if not str(cursor.location.file) in tree.provider_source:
         return
 
     print(
@@ -106,7 +106,7 @@ def inspect_cursors(tree, cursors, indent=0):
     for cursor in cursors:
         inspect_cursor(tree, cursor, indent)
 
-        if (not cursor.location.file) or str(cursor.location.file) in tree.files:
+        if (not cursor.location.file) or str(cursor.location.file) in tree.provider_source:
             inspect_cursors(tree, cursor.get_children(), indent + 1)
 
 
@@ -157,7 +157,7 @@ vertical-align: top;
 </head>
 <body>""")
 
-    for f in tree.files:
+    for f in tree.provider_source:
         tu = index.parse(f, tree.flags)
 
         if not tu:

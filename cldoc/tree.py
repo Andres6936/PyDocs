@@ -36,6 +36,8 @@ import os, sys, re, glob, platform
 
 from ctypes.util import find_library
 
+from files.provider_source import ProviderSource
+
 if platform.system() == 'Darwin':
     libclangs = [
         '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib',
@@ -82,20 +84,12 @@ except cindex.LibclangError as e:
 
 
 class Tree(documentmerger.DocumentMerger):
-    def __init__(self, files: List[str], flags: str):
+    def __init__(self, provider_source: ProviderSource, flags: str):
         self.headers = {}
         self.processed = {}
         self.index = cindex.Index.create()
-        self.files, ok = self.expand_sources([os.path.realpath(f) for f in files])
-
-        if not ok:
-            sys.exit(1)
-
         self.flags = includepaths.flags(flags)
-
-        # Sort files on sources, then headers
-        self.files.sort(key=functools.cmp_to_key(lambda a, b: cmp(self.is_header(a), self.is_header(b))))
-
+        self.provider_source: ProviderSource = provider_source
         self.processing = {}
         self.kindmap = {}
 
@@ -225,7 +219,7 @@ class Tree(documentmerger.DocumentMerger):
         nodes from the generated AST
         """
 
-        for f in self.files:
+        for f in self.provider_source:
             if f in self.processed:
                 continue
 
@@ -260,7 +254,7 @@ class Tree(documentmerger.DocumentMerger):
                 filename = str(inc.include)
                 self.headers[filename] = True
 
-                if filename in self.processed or (not filename in self.files) or filename in extractfiles:
+                if filename in self.processed or (not filename in self.provider_source) or filename in extractfiles:
                     continue
 
                 extractfiles.append(filename)
@@ -538,7 +532,7 @@ class Tree(documentmerger.DocumentMerger):
                 continue
 
             # Ignore files other than the ones we are scanning for
-            if not str(item.location.file) in self.files:
+            if not str(item.location.file) in self.provider_source:
                 continue
 
             # Ignore unexposed things

@@ -16,6 +16,7 @@ import argparse
 import os
 import sys
 
+from files.provider_source import ProviderSource
 from tree import Tree
 from . import fs, staticsite
 from . import log
@@ -126,7 +127,13 @@ def run(args):
         cxxflags += '-x'
         cxxflags += opts.language
 
-    tree = tree.Tree(opts.files, cxxflags)
+    provider_source = ProviderSource()
+    for directory in opts.files:
+        provider_source.provider_sources(directory)
+    # Sort the files first in sources then in headers
+    provider_source.sort_first_by_sources()
+
+    tree = tree.Tree(provider_source, cxxflags)
 
     tree.process()
 

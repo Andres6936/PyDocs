@@ -19,7 +19,7 @@ from logger.consolelogger import ConsoleLogger
 from logger.ilogger import ILogger
 
 
-def extract_include_paths(compilation_flags: str) -> str:
+def __extract_include_paths(compilation_flags: str) -> str:
     arguments: List[str] = compilation_flags.split(' ')
     result: str = str()
     for argument in arguments:
@@ -28,7 +28,7 @@ def extract_include_paths(compilation_flags: str) -> str:
     return result
 
 
-def add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:
+def __add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:
     return ['-I' + path for path in paths_of_inclusion]
 
 
@@ -39,7 +39,7 @@ def flags(f: str) -> List[str]:
     logger.informational("Opening the devnull device ({})".format(os.devnull))
     devnull = open(os.devnull)
 
-    f = extract_include_paths(f)
+    f = __extract_include_paths(f)
 
     command: List[str] = ['clang++', '-E', '-xc++', f, '-v', '-']
     logger.informational("The command to execute is: {}".format(command))
@@ -81,6 +81,6 @@ def flags(f: str) -> List[str]:
                 p = p[:-len(suffix)]
 
             paths.append(p)
-    return add_prefix_of_inclusion([path.decode('utf-8') for path in paths])
+    return __add_prefix_of_inclusion([path.decode('utf-8') for path in paths])
 
 # vi:ts=4:et

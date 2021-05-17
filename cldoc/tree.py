@@ -12,30 +12,20 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # -*- coding: utf-8 -*-
 
-from typing import List, Callable, Optional, Tuple
-from clang.cindex import TranslationUnit
-from clang import cindex
-
-import tempfile
-import functools
-
-from cldoc.defdict import Defdict
-
-from cldoc import comment
-from cldoc import nodes
-from cldoc import includepaths
-from cldoc import documentmerger
-
-from cldoc import example
-from cldoc import utf8
-from cldoc import log
-
-from cmp import cmp
-
-import os, sys, re, glob, platform
-
+import os
+import platform
+import sys
 from ctypes.util import find_library
+from tempfile import NamedTemporaryFile
+from typing import List, Callable, Optional, Tuple
 
+import documentmerger
+import includepaths
+import nodes
+
+from clang.cindex import TranslationUnit, Config, LibclangError, Index, CursorKind, Diagnostic, TokenKind
+from cldoc.defdict import Defdict
+from comment import CommentsDatabase, Comment
 from files.provider_source import ProviderSource
 
 if platform.system() == 'Darwin':
@@ -48,7 +38,7 @@ if platform.system() == 'Darwin':
 
     for libclang in libclangs:
         if os.path.exists(libclang):
-            cindex.Config.set_library_path(os.path.dirname(libclang))
+            Config.set_library_path(os.path.dirname(libclang))
             found = True
             break
 
@@ -56,7 +46,7 @@ if platform.system() == 'Darwin':
         lname = find_library("clang")
 
         if not lname is None:
-            cindex.Config.set_library_file(lname)
+            Config.set_library_file(lname)
 else:
     versions = [None, '7.0', '6.0', '5.0', '4.0', '3.9', '3.8', '3.7', '3.6', '3.5', '3.4', '3.3', '3.2']
 
@@ -69,14 +59,14 @@ else:
         lname = find_library(name)
 
         if not lname is None:
-            cindex.Config.set_library_file(lname)
+            Config.set_library_file(lname)
             break
 
-testconf = cindex.Config()
+testconf = Config()
 
 try:
     testconf.get_cindex_library()
-except cindex.LibclangError as e:
+except LibclangError as e:
     sys.stderr.write(
         "\nFatal: Failed to locate libclang library. cldoc depends on libclang for parsing sources, please make sure you have libclang installed.\n" + str(
             e) + "\n\n")
@@ -88,14 +78,14 @@ class Tree(documentmerger.DocumentMerger):
         super().__init__()
         self.headers = {}
         self.processed = {}
-        self.index = cindex.Index.create()
+        self.index = Index.create()
         self.flags = includepaths.flags(flags)
         self.provider_source: ProviderSource = provider_source
         self.processing = {}
         self.kindmap = {}
 
         # Things to skip
-        self.kindmap[cindex.CursorKind.USING_DIRECTIVE] = None
+        self.kindmap[CursorKind.USING_DIRECTIVE] = None
 
         # Create a map from CursorKind to classes representing those cursor
         # kinds.
@@ -234,7 +224,7 @@ class Tree(documentmerger.DocumentMerger):
                 fatal = False
 
                 for d in translation_unit.diagnostics:
-                    if d.severity == cindex.Diagnostic.Fatal or d.severity == cindex.Diagnostic.Error:
+                    if d.severity == Diagnostic.Fatal or d.severity == Diagnostic.Error:
                         fatal = True
                         self.logger.critical(d.format())
                     else:
@@ -262,7 +252,7 @@ class Tree(documentmerger.DocumentMerger):
                 extractfiles.append(filename)
 
             for extracted in extractfiles:
-                db = comment.CommentsDatabase(extracted, translation_unit)
+                db = CommentsDatabase(extracted, translation_unit)
 
                 self.add_categories(db.category_names)
                 self.commentsdbs[extracted] = db
@@ -328,12 +318,12 @@ class Tree(documentmerger.DocumentMerger):
             for i in range(len(comps)):
                 component = comps[i]
 
-                if not isinstance(component, comment.Comment.Example):
+                if not isinstance(component, Comment.Example):
                     continue
 
                 text = str(component)
 
-                tmpfile = tempfile.NamedTemporaryFile(delete=False)
+                tmpfile = NamedTemporaryFile(delete=False)
                 tmpfile.write(text)
                 filename = tmpfile.name
                 tmpfile.close()
@@ -349,20 +339,20 @@ class Tree(documentmerger.DocumentMerger):
                     start = token.extent.start.offset
                     end = token.extent.end.offset
 
-                    if token.kind == cindex.TokenKind.KEYWORD:
+                    if token.kind == TokenKind.KEYWORD:
                         hl.append((start, end, 'keyword'))
                         continue
-                    elif token.kind == cindex.TokenKind.COMMENT:
+                    elif token.kind == TokenKind.COMMENT:
                         hl.append((start, end, 'comment'))
 
                     cursor = token.cursor
 
-                    if cursor.kind == cindex.CursorKind.PREPROCESSING_DIRECTIVE:
+                    if cursor.kind == CursorKind.PREPROCESSING_DIRECTIVE:
                         hl.append((start, end, 'preprocessor'))
-                    elif cursor.kind == cindex.CursorKind.INCLUSION_DIRECTIVE and incstart is None:
+                    elif cursor.kind == CursorKind.INCLUSION_DIRECTIVE and incstart is None:
                         incstart = cursor
                     elif (not incstart is None) and \
-                            token.kind == cindex.TokenKind.PUNCTUATION and \
+                            token.kind == TokenKind.PUNCTUATION and \
                             token.spelling == '>':
                         hl.append((incstart.extent.start.offset, end, 'preprocessor'))
                         incstart = None
@@ -538,7 +528,7 @@ class Tree(documentmerger.DocumentMerger):
                 continue
 
             # Ignore unexposed things
-            if item.kind == cindex.CursorKind.UNEXPOSED_DECL:
+            if item.kind == CursorKind.UNEXPOSED_DECL:
                 self.visit(item.get_children(), parent)
                 continue
 
@@ -586,9 +576,9 @@ class Tree(documentmerger.DocumentMerger):
                         for node in ret:
                             self.register_node(node, par)
 
-                ignoretop = [cindex.CursorKind.TYPE_REF, cindex.CursorKind.PARM_DECL]
+                ignoretop = [CursorKind.TYPE_REF, CursorKind.PARM_DECL]
 
                 if (not par or ret is None) and not item.kind in ignoretop:
-                    log.warning("Unhandled cursor: %s", item.kind)
+                    self.logger.warning("Unhandled cursor: {}".format(item.kind))
 
 # vi:ts=4:et

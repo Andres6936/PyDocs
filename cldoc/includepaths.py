@@ -42,6 +42,12 @@ def _extract_include_paths(compilation_flags: str) -> str:
 
 
 def _add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:
+    """
+    Added the prefix of inclusion to each path for use in compilation flags.
+    :param paths_of_inclusion: List of paths.
+    :return: List of paths with the prefix of inclusion -I at begin of each
+    path.
+    """
     return ['-I' + path for path in paths_of_inclusion]
 
 

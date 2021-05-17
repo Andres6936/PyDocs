@@ -18,7 +18,7 @@ from cldoc.Struct import Struct
 from cldoc.clang import cindex
 from cldoc.comment import Comment
 
-from cldocimport nodes
+from cldoc import nodes
 
 from xml.etree import ElementTree
 

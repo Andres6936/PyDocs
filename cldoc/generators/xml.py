@@ -12,19 +12,16 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 from __future__ import absolute_import
 
+import os
+import sys
+from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
+from cldoc import example
+from cldoc import nodes
+from cldoc import utf8
 from cldoc.clang import cindex
-
-from .generator import Generator
-from cldocimport nodes
-from cldocimport example
-from cldocimport utf8
-
-from xml.etree import ElementTree
-import sys, os
-
-from cldocimport fs
+from generators.generator import Generator
 
 
 class Xml(Generator):

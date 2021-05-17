@@ -12,12 +12,12 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 from __future__ import absolute_import
 
-import inspect, os, shutil, json
+import json
+import os
 
-from .generator import Generator
-from .search import Search
-
-from cldocimport fs
+from cldoc import fs
+from generators.generator import Generator
+from generators.search import Search
 
 
 class Html(Generator):

@@ -13,8 +13,8 @@
 from __future__ import absolute_import
 
 import bisect
-from ..clang import cindex
-from ..Struct import Struct
+from cldoc.clang import cindex
+from cldoc.Struct import Struct
 
 
 class Search:

@@ -13,7 +13,7 @@
 from .node import Node
 from .ctype import Type
 
-from ..clang import cindex
+from cldoc.clang import cindex
 
 
 class Typedef(Node):

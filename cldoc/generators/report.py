@@ -14,11 +14,11 @@ from __future__ import absolute_import
 
 import inspect, os, shutil
 
-from ..Struct import Struct
-from ..clang import cindex
-from ..comment import Comment
+from cldoc.Struct import Struct
+from cldoc.clang import cindex
+from cldoc.comment import Comment
 
-from .. import nodes
+from cldocimport nodes
 
 from xml.etree import ElementTree
 

@@ -14,17 +14,17 @@ from __future__ import absolute_import
 
 from xml.etree.ElementTree import Element
 
-from ..clang import cindex
+from cldoc.clang import cindex
 
 from .generator import Generator
-from .. import nodes
-from .. import example
-from .. import utf8
+from cldocimport nodes
+from cldocimport example
+from cldocimport utf8
 
 from xml.etree import ElementTree
 import sys, os
 
-from .. import fs
+from cldocimport fs
 
 
 class Xml(Generator):

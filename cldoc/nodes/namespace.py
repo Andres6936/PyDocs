@@ -13,7 +13,7 @@
 from .node import Node
 from .root import Root
 
-from ..clang import cindex
+from cldoc.clang import cindex
 
 
 class Namespace(Node):

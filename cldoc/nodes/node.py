@@ -12,12 +12,12 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 import functools
 
-from ..clang import cindex
-from ..comment import Comment
-from ..comment import Parser
+from cldoc.clang import cindex
+from cldoc.comment import Comment
+from cldoc.comment import Parser
 
-from .. import utf8
-from ..cmp import cmp
+from cldoc import utf8
+from cldoc.cmp import cmp
 
 import re
 

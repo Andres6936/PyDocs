@@ -14,9 +14,9 @@ from .node import Node
 from .namespace import Namespace
 from .ctype import Type
 
-from ..clang import cindex
-from ..comment import Comment
-from ..comment import Parser
+from cldoc.clang import cindex
+from cldoc.comment import Comment
+from cldoc.comment import Parser
 
 import re
 

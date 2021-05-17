@@ -17,7 +17,7 @@ import inspect, os, shutil, json
 from .generator import Generator
 from .search import Search
 
-from .. import fs
+from cldocimport fs
 
 
 class Html(Generator):

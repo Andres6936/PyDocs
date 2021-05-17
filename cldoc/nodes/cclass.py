@@ -14,7 +14,7 @@ from .node import Node
 from .method import Method
 from .ctype import Type
 
-from ..clang import cindex
+from cldoc.clang import cindex
 
 
 class Class(Node):

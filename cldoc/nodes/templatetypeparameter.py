@@ -13,8 +13,8 @@
 from .node import Node
 from .ctype import Type
 
-from ..clang import cindex
-from ..cmp import cmp
+from cldoc.clang import cindex
+from cldoc.cmp import cmp
 
 
 class TemplateTypeParameter(Node):

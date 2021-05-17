@@ -10,26 +10,26 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-from .category import *
-from .cclass import *
-from .classtemplate import *
-from .constructor import *
-from .conversionfunction import *
-from .cstruct import *
-from .ctype import Type
-from .destructor import *
-from .enum import *
-from .enumvalue import *
-from .field import *
-from .function import *
-from .functiontemplate import *
-from .method import *
-from .namespace import *
-from .node import *
-from .root import *
-from .typedef import *
-from .union import *
-from .variable import *
-from .templatetypeparameter import *
+from nodes.category import *
+from nodes.cclass import *
+from nodes.classtemplate import *
+from nodes.constructor import *
+from nodes.conversionfunction import *
+from nodes.cstruct import *
+from nodes.ctype import Type
+from nodes.destructor import *
+from nodes.enum import *
+from nodes.enumvalue import *
+from nodes.field import *
+from nodes.function import *
+from nodes.functiontemplate import *
+from nodes.method import *
+from nodes.namespace import *
+from nodes.node import *
+from nodes.root import *
+from nodes.typedef import *
+from nodes.union import *
+from nodes.variable import *
+from nodes.templatetypeparameter import *
 
 # vi:ts=4:et

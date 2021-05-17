@@ -1,13 +1,14 @@
-import os, subprocess
+import os
+import re
+import subprocess
+import sys
 
+import comment
+import fs
+import nodes
+import utf8
 from logger.consolelogger import ConsoleLogger
 from logger.ilogger import ILogger
-from . import comment
-from . import nodes
-import sys, re
-
-from . import fs
-from . import utf8
 
 
 class DocumentMerger:

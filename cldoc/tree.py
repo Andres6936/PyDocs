@@ -27,6 +27,7 @@ from clang.cindex import TranslationUnit, Config, LibclangError, Index, CursorKi
 from cldoc.defdict import Defdict
 from comment import CommentsDatabase, Comment
 from files.provider_source import ProviderSource
+from nodes import Root
 
 if platform.system() == 'Darwin':
     libclangs = [
@@ -93,7 +94,7 @@ class Tree(documentmerger.DocumentMerger):
             if hasattr(cls, 'kind'):
                 self.kindmap[cls.kind] = cls
 
-        self.root = nodes.Root()
+        self.root: Root = Root()
 
         self.all_nodes = []
         self.cursor_to_node = Defdict()

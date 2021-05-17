@@ -10,13 +10,15 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-from clang import cindex
-from defdict import Defdict
+import bisect
+import os
+import re
+import sys
 
-from Struct import Struct
 import utf8
-
-import os, re, sys, bisect
+from Struct import Struct
+from clang import cindex
+from clang.cindex import TranslationUnit
 
 
 class Sorted(list):
@@ -301,11 +303,11 @@ class RangeMap(Sorted):
         return None
 
 
-class CommentsDatabase(object):
+class CommentsDatabase:
     cldoc_instrre = re.compile('^cldoc:([a-zA-Z_-]+)(\(([^\)]*)\))?')
 
-    def __init__(self, filename, tu):
-        self.filename = filename
+    def __init__(self, filename: str, tu: TranslationUnit):
+        self.filename: str = filename
 
         self.categories = RangeMap()
         self.comments = Sorted(key=lambda x: x.location.offset)
@@ -385,7 +387,7 @@ class CommentsDatabase(object):
 
         return self.comments.find(location.offset)
 
-    def extract(self, filename, tu):
+    def extract(self, filename: str, tu: TranslationUnit):
         """
         extract extracts comments from a translation unit for a given file by
         iterating over all the tokens in the TU, locating the COMMENT tokens and

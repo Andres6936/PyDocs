@@ -229,22 +229,23 @@ class Tree(documentmerger.DocumentMerger):
             translation_unit: TranslationUnit = self.index.parse(f, self.flags)
 
             if len(translation_unit.diagnostics) != 0:
+                self.logger.warning("Found {} diagnostics for the file: {}".format(
+                    len(translation_unit.diagnostics), os.path.basename(f)))
                 fatal = False
 
                 for d in translation_unit.diagnostics:
-                    sys.stderr.write(d.format())
-                    sys.stderr.write("\n")
-
-                    if d.severity == cindex.Diagnostic.Fatal or \
-                            d.severity == cindex.Diagnostic.Error:
+                    if d.severity == cindex.Diagnostic.Fatal or d.severity == cindex.Diagnostic.Error:
                         fatal = True
+                        self.logger.critical(d.format())
+                    else:
+                        self.logger.warning(d.format())
 
                 if fatal:
-                    sys.stderr.write("\nCould not generate documentation due to parser errors\n")
+                    self.logger.critical("Could not generate documentation due to parser errors")
                     sys.exit(1)
 
             if not translation_unit:
-                sys.stderr.write("Could not parse file %s...\n" % (f,))
+                self.logger.critical("Could not parse file {}...".format(os.path.basename(f)))
                 sys.exit(1)
 
             # Extract comments from files and included files that we are

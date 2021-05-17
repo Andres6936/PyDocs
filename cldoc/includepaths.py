@@ -41,7 +41,7 @@ def _extract_include_paths(compilation_flags: str) -> str:
     return result[:-1]
 
 
-def __add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:
+def _add_prefix_of_inclusion(paths_of_inclusion: List[str]) -> List[str]:
     return ['-I' + path for path in paths_of_inclusion]
 
 
@@ -94,6 +94,6 @@ def flags(f: str) -> List[str]:
                 p = p[:-len(suffix)]
 
             paths.append(p)
-    return __add_prefix_of_inclusion([path.decode('utf-8') for path in paths])
+    return _add_prefix_of_inclusion([path.decode('utf-8') for path in paths])
 
 # vi:ts=4:et

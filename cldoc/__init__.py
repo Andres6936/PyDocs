@@ -16,22 +16,22 @@ import sys
 
 
 def run_inspect(args):
-    from . import cmdinspect
+    from cldoc import cmdinspect
     cmdinspect.run(args)
 
 
 def run_serve(args):
-    from . import cmdserve
+    from cldoc import cmdserve
     cmdserve.run(args)
 
 
 def run_generate(args):
-    from . import cmdgenerate
+    from cldoc import cmdgenerate
     cmdgenerate.run(args)
 
 
 def run_gir(args):
-    from . import cmdgir
+    from cldoc import cmdgir
     cmdgir.run(args)
 
 

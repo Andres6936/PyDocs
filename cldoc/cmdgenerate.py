@@ -18,15 +18,15 @@ import sys
 
 from files.provider_source import ProviderSource
 from tree import Tree
-from . import fs, staticsite
-from . import log
+from cldoc import fs, staticsite
+from cldoc import log
 
 
 def run_generate(t: Tree, opts):
     if opts.type != 'html' and opts.type != 'xml':
         return
 
-    from . import generators
+    from cldoc import generators
 
     generator = generators.Xml(t, opts)
 
@@ -107,7 +107,7 @@ def run(args):
 
     log.setLevel(opts.loglevel)
 
-    from . import tree
+    from cldoc import tree
 
     if not opts.output:
         sys.stderr.write("Please specify the output directory\n")

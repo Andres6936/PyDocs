@@ -43,7 +43,7 @@ The major indexing objects are:
   TranslationUnit
 
     High-level object encapsulating the AST for a single translation unit. These
-    can be loaded from .ast files or parsed on the fly.
+    can be loaded from cldoc.ast files or parsed on the fly.
 
   Cursor
 
@@ -77,7 +77,7 @@ call is efficient.
 from ctypes import *
 import collections
 
-from . import enumerations
+import enumerations
 
 import sys
 

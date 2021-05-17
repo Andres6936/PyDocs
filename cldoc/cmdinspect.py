@@ -35,8 +35,8 @@ def run(args):
 
     opts = parser.parse_args(restargs)
 
-    from . import tree
-    from . import inspecttree
+    from cldoc import tree
+    from cldoc import inspecttree
 
     t = tree.Tree(opts.files, cxxflags)
     inspecttree.inspect(t)

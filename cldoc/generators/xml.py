@@ -62,7 +62,7 @@ class Xml(Generator):
         self.write_xml(self.index, 'index.xml')
 
     def add_report(self):
-        from .report import Report
+        from generators.report import Report
 
         reportname = 'report'
 

@@ -19,16 +19,16 @@ try:
 except:
     from xml.etree import ElementTree
 
-from .clang import cindex
+from cldoc.clang import cindex
 
-from . import defdict
+from cldoc import defdict
 
-from . import nodes
-from . import generators
-from . import comment
-from . import example
-from . import documentmerger
-from . import utf8
+from cldoc import nodes
+from cldoc import generators
+from cldoc import comment
+from cldoc import example
+from cldoc import documentmerger
+from cldoc import utf8
 
 
 def nsgtk(s):
@@ -961,7 +961,7 @@ def run(args):
 
     t.cross_ref()
 
-    from .cmdgenerate import run_generate
+    from cldoc.cmdgenerate import run_generate
 
     run_generate(t, opts)
 

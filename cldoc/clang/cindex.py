@@ -4218,7 +4218,7 @@ class Config:
 
 def register_enumerations():
     for name, value in TokenKinds.__members__.items():
-        TokenKind.register(value, name)
+        TokenKind.register(value.value, name)
 
 
 conf = Config()

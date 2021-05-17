@@ -309,8 +309,8 @@ class CommentsDatabase:
     def __init__(self, filename: str, tu: TranslationUnit):
         self.filename: str = filename
 
-        self.categories = RangeMap()
-        self.comments = Sorted(key=lambda x: x.location.offset)
+        self.categories: RangeMap = RangeMap()
+        self.comments: Sorted = Sorted(key=lambda x: x.location.offset)
 
         self.extract(filename, tu)
 

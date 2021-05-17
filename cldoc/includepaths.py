@@ -60,7 +60,7 @@ def flags(f: str) -> List[str]:
 
     f = _extract_include_paths(f)
 
-    command: List[str] = ['clang++', '-E', '-xc++', f, '-v', '-']
+    command: List[str] = ['clang++', '-E', '-xc++'] + f.split(' ') + ['-v', '-']
     logger.informational("The command to execute is: {}".format(command))
 
     try:

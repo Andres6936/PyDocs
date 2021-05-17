@@ -263,6 +263,9 @@ class Comment(object):
             else:
                 self.resolve_refs_for_doc(doc, resolver, root)
 
+    def __repr__(self) -> str:
+        return self.__dict__["text"]
+
 
 class RangeMap(Sorted):
     Item = Struct.define('Item', obj=None, start=0, end=0)
@@ -478,6 +481,9 @@ class CommentsDatabase:
             return "\n".join(retl)
         else:
             return comment
+
+    def __repr__(self) -> str:
+        return "Comments: {}".format(len(self.comments))
 
 
 from pyparsing import *

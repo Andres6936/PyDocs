@@ -723,7 +723,7 @@ class CursorKind(BaseEnumeration):
         return conf.lib.clang_isUnexposed(self)
 
     def __repr__(self):
-        return 'CursorKind.%s' % (self.name,)
+        return 'CursorKind.{}'.format(self.name)
 
 
 ###

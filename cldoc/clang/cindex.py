@@ -669,7 +669,7 @@ class BaseEnumeration(object):
         return cls._kinds[id]
 
     def __repr__(self):
-        return '%s.%s' % (self.__class__, self.name,)
+        return '{}.{}'.format(self.__class__, self.name)
 
 
 class CursorKind(BaseEnumeration):

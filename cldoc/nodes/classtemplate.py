@@ -10,10 +10,10 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-from .node import Node
-from .cclass import Class
-from .cstruct import Struct
-from .templated import Templated
+from nodes.node import Node
+from nodes.cclass import Class
+from nodes.cstruct import Struct
+from nodes.templated import Templated
 
 from cldoc.clang import cindex
 

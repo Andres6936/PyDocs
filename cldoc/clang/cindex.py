@@ -76,10 +76,9 @@ call is efficient.
 
 from ctypes import *
 import collections
-
-import enumerations
-
 import sys
+
+from clang.token_kinds import TokenKinds
 
 if sys.version_info[0] == 3:
     # Python 3 strings are unicode, translate them to/from utf8 for C-interop.
@@ -4218,7 +4217,7 @@ class Config:
 
 
 def register_enumerations():
-    for name, value in enumerations.TokenKinds:
+    for name, value in TokenKinds.__members__.items():
         TokenKind.register(value, name)
 
 

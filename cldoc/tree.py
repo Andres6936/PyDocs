@@ -373,7 +373,7 @@ class Tree(documentmerger.DocumentMerger):
                 comps[i] = ex
 
     def match_ref(self, child, name):
-        if isinstance(name, utf8.string):
+        if isinstance(name, str):
             return name == child.name
         else:
             return name.match(child.name)

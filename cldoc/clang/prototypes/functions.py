@@ -1,5 +1,5 @@
 # Functions strictly alphabetical order.
-from ctypes import c_uint, POINTER, c_int, c_void_p, c_char_p
+from ctypes import c_uint, POINTER, c_int, c_void_p, c_char_p, c_longlong, c_ulonglong
 
 from clang.cindex import Type
 from clang.cursor import Cursor
@@ -8,6 +8,7 @@ from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.objects.code_completion_results import CodeCompletionResults
 from clang.objects.compilation_database import CompilationDatabase
 from clang.objects.file import File
+from clang.objects.index import Index
 from clang.objects.translation_unit import TranslationUnit
 from clang.token import Token
 from clang.utility.cx_string import _CXString

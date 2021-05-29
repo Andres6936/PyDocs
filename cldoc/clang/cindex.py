@@ -80,6 +80,7 @@ import sys
 from typing import Tuple
 
 from clang.decorators.cached_property import CachedProperty
+from clang.exceptions.lib_clang import LibclangError
 from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
 from clang.token_kinds import TokenKinds
 
@@ -4013,12 +4014,7 @@ functionList = [
 ]
 
 
-class LibclangError(Exception):
-    def __init__(self, message):
-        self.m = message
 
-    def __str__(self):
-        return self.m
 
 
 def register_function(lib, item, ignore_errors):

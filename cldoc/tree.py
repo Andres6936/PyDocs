@@ -24,7 +24,8 @@ import example
 import includepaths
 import nodes
 
-from clang.cindex import TranslationUnit, Config, LibclangError, Index, CursorKind, Diagnostic, TokenKind
+from clang.cindex import TranslationUnit, Config, Index, CursorKind, Diagnostic, TokenKind
+from clang.exceptions.lib_clang import LibclangError
 from cldoc.defdict import Defdict
 from comment import CommentsDatabase, Comment
 from files.provider_source import ProviderSource

@@ -20,6 +20,7 @@ from tempfile import NamedTemporaryFile
 from typing import List, Callable, Optional, Tuple
 
 import documentmerger
+import example
 import includepaths
 import nodes
 

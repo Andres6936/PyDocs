@@ -1,3 +1,4 @@
+from clang.exceptions.lib_clang import LibclangError
 from clang.prototypes.functions import functionList
 
 

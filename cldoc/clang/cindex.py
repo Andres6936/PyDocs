@@ -76,8 +76,6 @@ call is efficient.
 import os.path
 from ctypes import *
 import collections
-import sys
-from typing import Tuple
 
 from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.compilation_database import CompilationDatabaseError
@@ -89,74 +87,15 @@ from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
 from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
+from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.kinds.tls_kind import TLSKind
 from clang.objects.file_inclusion import FileInclusion
-from clang.prototypes.functions import c_object_p
+from clang.prototypes.functions import c_object_p, c_interop_string, b
 from clang.spelling_cache import SpellingCache
 from clang.storage_class import StorageClass
 from clang.token_kinds import TokenKinds
 from clang.utility.fix_it import FixIt
 from clang.utility.token_kind import TokenKind
-
-if sys.version_info[0] == 3:
-    # Python 3 strings are unicode, translate them to/from utf8 for C-interop.
-    class c_interop_string(c_char_p):
-
-        def __init__(self, p=None):
-            if p is None:
-                p = ""
-            if isinstance(p, str):
-                p = p.encode("utf8")
-            super(c_char_p, self).__init__(p)
-
-        def __str__(self):
-            return self.value
-
-        @property
-        def value(self):
-            if super(c_char_p, self).value is None:
-                return None
-            return super(c_char_p, self).value.decode("utf8")
-
-        @classmethod
-        def from_param(cls, param):
-            if isinstance(param, str):
-                return cls(param)
-            if isinstance(param, bytes):
-                return cls(param)
-            if param is None:
-                # Support passing null to C functions expecting char arrays
-                return None
-            raise TypeError("Cannot convert '{}' to '{}'".format(type(param).__name__, cls.__name__))
-
-        @staticmethod
-        def to_python_string(x, *args):
-            return x.value
-
-
-    def b(x):
-        if isinstance(x, bytes):
-            return x
-        return x.encode('utf8')
-
-
-    xrange = range
-
-elif sys.version_info[0] == 2:
-    # Python 2 strings are utf8 byte strings, no translation is needed for
-    # C-interop.
-    c_interop_string = c_char_p
-
-
-    def _to_python_string(x, *args):
-        return x
-
-
-    c_interop_string.to_python_string = staticmethod(_to_python_string)
-
-
-    def b(x):
-        return x
 
 callbacks = {}
 
@@ -507,7 +446,7 @@ class TokenGroup(object):
 
         token_group = TokenGroup(tu, tokens_memory, tokens_count)
 
-        for i in xrange(0, count):
+        for i in range(0, count):
             token = Token()
             token.int_data = tokens_array[i].int_data
             token.ptr_data = tokens_array[i].ptr_data
@@ -2792,7 +2731,7 @@ class CompileCommand(object):
         Invariant : the first argument is the compiler executable
         """
         length = conf.lib.clang_CompileCommand_getNumArgs(self.cmd)
-        for i in xrange(length):
+        for i in range(length):
             yield conf.lib.clang_CompileCommand_getArg(self.cmd, i)
 
 

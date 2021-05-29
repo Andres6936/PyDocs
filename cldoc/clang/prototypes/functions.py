@@ -7,6 +7,7 @@ from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.objects.ccr_structure import CCRStructure
 from clang.objects.code_completion_results import CodeCompletionResults
 from clang.objects.compilation_database import CompilationDatabase
+from clang.objects.compile_commands import CompileCommands
 from clang.objects.file import File
 from clang.objects.index import Index
 from clang.objects.translation_unit import TranslationUnit

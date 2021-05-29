@@ -88,6 +88,7 @@ from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
 from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
+from clang.objects.file_inclusion import FileInclusion
 from clang.spelling_cache import SpellingCache
 from clang.storage_class import StorageClass
 from clang.token_kinds import TokenKinds
@@ -2764,27 +2765,6 @@ class File(ClangObject):
         # Copy a reference to the TranslationUnit to prevent premature GC.
         res._tu = args[0]._tu
         return res
-
-
-class FileInclusion(object):
-    """
-    The FileInclusion class represents the inclusion of one source file by
-    another via a '#include' directive or as the input file for the translation
-    unit. This class provides information about the included file, the including
-    file, the location of the '#include' directive and the depth of the included
-    file in the stack. Note that the input file has depth 0.
-    """
-
-    def __init__(self, src, tgt, loc, depth):
-        self.source = src
-        self.include = tgt
-        self.location = loc
-        self.depth = depth
-
-    @property
-    def is_input_file(self):
-        """True if the included file is the input file."""
-        return self.depth == 0
 
 
 class CompilationDatabaseError(Exception):

@@ -1,6 +1,3 @@
-from clang.cindex import conf
-
-
 class TokenGroup(object):
     """Helper class to facilitate token management.
 

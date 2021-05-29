@@ -97,3 +97,6 @@ class Config:
             return False
 
         return True
+
+
+conf = Config()

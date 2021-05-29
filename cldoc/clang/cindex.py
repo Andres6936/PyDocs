@@ -82,6 +82,7 @@ from typing import Tuple
 from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.lib_clang import LibclangError
 from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
+from clang.kinds.access_specifier import AccessSpecifier
 from clang.kinds.availability_kind import AvailabilityKind
 from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
@@ -1715,35 +1716,6 @@ class Cursor(Structure):
 
         res._tu = args[0]._tu
         return res
-
-
-
-
-
-### C++ access specifiers ###
-
-class AccessSpecifier(BaseEnumeration):
-    """
-    Describes the access of a C++ class member
-    """
-
-    # The unique kind objects, index by id.
-    _kinds = []
-    _name_map = None
-
-    def from_param(self):
-        return self.value
-
-    def __repr__(self):
-        return 'AccessSpecifier.%s' % (self.name,)
-
-
-AccessSpecifier.INVALID = AccessSpecifier(0)
-AccessSpecifier.PUBLIC = AccessSpecifier(1)
-AccessSpecifier.PROTECTED = AccessSpecifier(2)
-AccessSpecifier.PRIVATE = AccessSpecifier(3)
-AccessSpecifier.NONE = AccessSpecifier(4)
-
 
 ### Type Kinds ###
 

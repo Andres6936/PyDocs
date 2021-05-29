@@ -1,6 +1,20 @@
 # Functions strictly alphabetical order.
 from ctypes import c_uint, POINTER, c_int
 
+from clang.cindex import Type
+from clang.cursor import Cursor
+from clang.kinds.cursor_kind import CursorKind
+from clang.kinds.template_argument_kind import TemplateArgumentKind
+from clang.objects.code_completion_results import CodeCompletionResults
+from clang.objects.compilation_database import CompilationDatabase
+from clang.objects.file import File
+from clang.objects.translation_unit import TranslationUnit
+from clang.token import Token
+from clang.utility.cx_string import _CXString
+from clang.utility.diagnostic import Diagnostic
+from clang.utility.source_location import SourceLocation
+from clang.utility.source_range import SourceRange
+
 functionList = [
     ("clang_annotateTokens",
      [TranslationUnit, POINTER(Token), c_uint, POINTER(Cursor)]),

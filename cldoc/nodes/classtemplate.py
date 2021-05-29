@@ -10,6 +10,8 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.utility.token_kind import TokenKind
 from nodes.node import Node
 from nodes.cclass import Class
 from nodes.cstruct import Struct
@@ -41,9 +43,9 @@ class ClassTemplatePlexer(Node):
         l = list(cursor.get_tokens())
 
         for i in range(len(l)):
-            if l[i].kind == cindex.TokenKind.PUNCTUATION and l[i].spelling == '>':
+            if l[i].kind == TokenKind.PUNCTUATION and l[i].spelling == '>':
                 if i < len(l) - 2:
-                    if l[i + 1].kind == cindex.TokenKind.KEYWORD and \
+                    if l[i + 1].kind == TokenKind.KEYWORD and \
                             l[i + 1].spelling == 'struct':
                         return StructTemplate(cursor, comment)
                 break

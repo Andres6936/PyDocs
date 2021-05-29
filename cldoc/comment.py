@@ -19,6 +19,7 @@ import utf8
 from Struct import Struct
 from clang import cindex
 from clang.cindex import TranslationUnit
+from clang.utility.token_kind import TokenKind
 
 
 class Sorted(list):
@@ -419,7 +420,7 @@ class CommentsDatabase:
         token = next(iter)
 
         # Skip until comment found
-        while token.kind != cindex.TokenKind.COMMENT:
+        while token.kind != TokenKind.COMMENT:
             token = next(iter)
 
         comments = []
@@ -427,7 +428,7 @@ class CommentsDatabase:
 
         # Concatenate individual comments together, but only if they are strictly
         # adjacent
-        while token.kind == cindex.TokenKind.COMMENT:
+        while token.kind == TokenKind.COMMENT:
             cleaned = self.clean(token)
 
             # Process instructions directly, now

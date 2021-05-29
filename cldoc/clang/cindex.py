@@ -83,6 +83,7 @@ from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.lib_clang import LibclangError
 from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
 from clang.token_kinds import TokenKinds
+from clang.utility.fix_it import FixIt
 
 if sys.version_info[0] == 3:
     # Python 3 strings are unicode, translate them to/from utf8 for C-interop.
@@ -450,21 +451,6 @@ class Diagnostic(object):
 
     def from_param(self):
         return self.ptr
-
-
-class FixIt(object):
-    """
-    A FixIt represents a transformation to be applied to the source to
-    "fix-it". The fix-it shouldbe applied by replacing the given source range
-    with the given value.
-    """
-
-    def __init__(self, range, value):
-        self.range = range
-        self.value = value
-
-    def __repr__(self):
-        return "<FixIt range %r, value %r>" % (self.range, self.value)
 
 
 class TokenGroup(object):

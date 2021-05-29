@@ -1,7 +1,6 @@
 # Functions strictly alphabetical order.
 from ctypes import c_uint, POINTER, c_int, c_void_p, c_char_p, c_longlong, c_ulonglong, py_object
 
-from clang.cindex import Type
 from clang.cursor import Cursor
 from clang.kinds.cursor_kind import CursorKind
 from clang.kinds.template_argument_kind import TemplateArgumentKind
@@ -12,6 +11,7 @@ from clang.objects.file import File
 from clang.objects.index import Index
 from clang.objects.translation_unit import TranslationUnit
 from clang.token import Token
+from clang.type import Type
 from clang.utility.cx_string import _CXString
 from clang.utility.diagnostic import Diagnostic
 from clang.utility.source_location import SourceLocation

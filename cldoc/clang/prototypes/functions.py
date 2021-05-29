@@ -1,5 +1,5 @@
 # Functions strictly alphabetical order.
-from ctypes import c_uint, POINTER, c_int
+from ctypes import c_uint, POINTER, c_int, c_void_p
 
 from clang.cindex import Type
 from clang.cursor import Cursor
@@ -14,6 +14,12 @@ from clang.utility.cx_string import _CXString
 from clang.utility.diagnostic import Diagnostic
 from clang.utility.source_location import SourceLocation
 from clang.utility.source_range import SourceRange
+
+# ctypes doesn't implicitly convert c_void_p to the appropriate wrapper
+# object. This is a problem, because it means that from_parameter will see an
+# integer and pass the wrong value on platforms where int != void*. Work around
+# this by marshalling object arguments as void**.
+c_object_p = POINTER(c_void_p)
 
 functionList = [
     ("clang_annotateTokens",

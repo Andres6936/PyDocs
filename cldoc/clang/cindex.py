@@ -91,6 +91,7 @@ from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.kinds.tls_kind import TLSKind
 from clang.objects.file_inclusion import FileInclusion
+from clang.prototypes.functions import c_object_p
 from clang.spelling_cache import SpellingCache
 from clang.storage_class import StorageClass
 from clang.token_kinds import TokenKinds
@@ -156,12 +157,6 @@ elif sys.version_info[0] == 2:
 
     def b(x):
         return x
-
-# ctypes doesn't implicitly convert c_void_p to the appropriate wrapper
-# object. This is a problem, because it means that from_parameter will see an
-# integer and pass the wrong value on platforms where int != void*. Work around
-# this by marshalling object arguments as void**.
-c_object_p = POINTER(c_void_p)
 
 callbacks = {}
 

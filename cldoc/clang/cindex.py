@@ -77,6 +77,7 @@ call is efficient.
 from ctypes import *
 import collections
 import sys
+from typing import Tuple
 
 from clang.token_kinds import TokenKinds
 
@@ -2920,7 +2921,7 @@ class TranslationUnit(ClangObject):
 
         return iter(includes)
 
-    def get_file(self, filename):
+    def get_file(self, filename : str):
         """Obtain a File from this translation unit."""
 
         return File.from_name(self, filename)
@@ -2941,7 +2942,7 @@ class TranslationUnit(ClangObject):
 
         return SourceLocation.from_position(self, f, position[0], position[1])
 
-    def get_extent(self, filename, locations):
+    def get_extent(self, filename: str, locations):
         """Obtain a SourceRange from this translation unit.
 
         The bounds of the SourceRange must ultimately be defined by a start and
@@ -3119,7 +3120,7 @@ class File(ClangObject):
     """
 
     @staticmethod
-    def from_name(translation_unit, file_name):
+    def from_name(translation_unit, file_name : str):
         """Retrieve a file handle within the given translation unit."""
         return File(conf.lib.clang_getFile(translation_unit, file_name))
 
@@ -3137,7 +3138,7 @@ class File(ClangObject):
         return self.name
 
     def __repr__(self):
-        return "<File: %s>" % (self.name)
+        return "<File: {}>".format(self.name)
 
     @staticmethod
     def from_cursor_result(res, fn, args):

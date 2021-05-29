@@ -396,7 +396,10 @@ class CommentsDatabase:
         iterating over all the tokens in the TU, locating the COMMENT tokens and
         finding out to which cursors the comments semantically belong.
         """
-        it = tu.get_tokens(extent=tu.get_extent(filename, (0, int(os.stat(filename).st_size))))
+        # The variable st_size is: Size of the file in bytes, if it is a
+        # regular file or a symbolic link. The size of a symbolic link is the
+        # length of the pathname it contains, without a terminating null byte.
+        it = tu.get_tokens(extent=tu.get_extent(filename, (0, os.stat(filename).st_size)))
 
         while True:
             try:

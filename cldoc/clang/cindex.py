@@ -86,6 +86,7 @@ from clang.kinds.access_specifier import AccessSpecifier
 from clang.kinds.availability_kind import AvailabilityKind
 from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
+from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.storage_class import StorageClass
 from clang.token_kinds import TokenKinds
 from clang.utility.fix_it import FixIt
@@ -1832,23 +1833,7 @@ TypeKind.OCLQUEUE = TypeKind(159)
 TypeKind.OCLRESERVEID = TypeKind(160)
 
 
-class RefQualifierKind(BaseEnumeration):
-    """Describes a specific ref-qualifier of a type."""
 
-    # The unique kind objects, indexed by id.
-    _kinds = []
-    _name_map = None
-
-    def from_param(self):
-        return self.value
-
-    def __repr__(self):
-        return 'RefQualifierKind.%s' % (self.name,)
-
-
-RefQualifierKind.NONE = RefQualifierKind(0)
-RefQualifierKind.LVALUE = RefQualifierKind(1)
-RefQualifierKind.RVALUE = RefQualifierKind(2)
 
 
 class LinkageKind(BaseEnumeration):

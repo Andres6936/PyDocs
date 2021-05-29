@@ -83,6 +83,7 @@ from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.lib_clang import LibclangError
 from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
 from clang.kinds.base_enumeration import BaseEnumeration
+from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
 from clang.token_kinds import TokenKinds
 from clang.utility.fix_it import FixIt
 from clang.utility.token_kind import TokenKind
@@ -1223,32 +1224,6 @@ CursorKind.FRIEND_DECL = CursorKind(603)
 
 # A code completion overload candidate.
 CursorKind.OVERLOAD_CANDIDATE = CursorKind(700)
-
-
-### Exception Specification Kinds ###
-class ExceptionSpecificationKind(BaseEnumeration):
-    """
-    An ExceptionSpecificationKind describes the kind of exception specification
-    that a function has.
-    """
-
-    # The required BaseEnumeration declarations.
-    _kinds = []
-    _name_map = None
-
-    def __repr__(self):
-        return 'ExceptionSpecificationKind.{}'.format(self.name)
-
-
-ExceptionSpecificationKind.NONE = ExceptionSpecificationKind(0)
-ExceptionSpecificationKind.DYNAMIC_NONE = ExceptionSpecificationKind(1)
-ExceptionSpecificationKind.DYNAMIC = ExceptionSpecificationKind(2)
-ExceptionSpecificationKind.MS_ANY = ExceptionSpecificationKind(3)
-ExceptionSpecificationKind.BASIC_NOEXCEPT = ExceptionSpecificationKind(4)
-ExceptionSpecificationKind.COMPUTED_NOEXCEPT = ExceptionSpecificationKind(5)
-ExceptionSpecificationKind.UNEVALUATED = ExceptionSpecificationKind(6)
-ExceptionSpecificationKind.UNINSTANTIATED = ExceptionSpecificationKind(7)
-ExceptionSpecificationKind.UNPARSED = ExceptionSpecificationKind(8)
 
 
 ### Cursors ###

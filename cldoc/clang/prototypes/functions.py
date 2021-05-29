@@ -65,6 +65,8 @@ def b(x):
 # this by marshalling object arguments as void**.
 c_object_p = POINTER(c_void_p)
 
+callbacks = {}
+
 functionList = [
     ("clang_annotateTokens",
      [TranslationUnit, POINTER(Token), c_uint, POINTER(Cursor)]),

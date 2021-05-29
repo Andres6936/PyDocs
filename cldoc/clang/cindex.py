@@ -90,14 +90,13 @@ from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.kinds.tls_kind import TLSKind
 from clang.objects.file_inclusion import FileInclusion
-from clang.prototypes.functions import c_object_p, c_interop_string, b
+from clang.prototypes.functions import c_object_p, c_interop_string, b, callbacks
 from clang.spelling_cache import SpellingCache
 from clang.storage_class import StorageClass
 from clang.token_kinds import TokenKinds
 from clang.utility.fix_it import FixIt
 from clang.utility.token_kind import TokenKind
 
-callbacks = {}
 
 ### Structures and Utility Classes ###
 

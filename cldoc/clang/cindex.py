@@ -82,6 +82,7 @@ from typing import Tuple
 from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.lib_clang import LibclangError
 from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
+from clang.kinds.availability_kind import AvailabilityKind
 from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
 from clang.storage_class import StorageClass
@@ -1716,25 +1717,7 @@ class Cursor(Structure):
         return res
 
 
-### Availability Kinds ###
 
-class AvailabilityKind(BaseEnumeration):
-    """
-    Describes the availability of an entity.
-    """
-
-    # The unique kind objects, indexed by id.
-    _kinds = []
-    _name_map = None
-
-    def __repr__(self):
-        return 'AvailabilityKind.%s' % (self.name,)
-
-
-AvailabilityKind.AVAILABLE = AvailabilityKind(0)
-AvailabilityKind.DEPRECATED = AvailabilityKind(1)
-AvailabilityKind.NOT_AVAILABLE = AvailabilityKind(2)
-AvailabilityKind.NOT_ACCESSIBLE = AvailabilityKind(3)
 
 
 ### C++ access specifiers ###

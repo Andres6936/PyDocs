@@ -89,6 +89,7 @@ from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
 from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
+from clang.kinds.tls_kind import TLSKind
 from clang.objects.file_inclusion import FileInclusion
 from clang.spelling_cache import SpellingCache
 from clang.storage_class import StorageClass

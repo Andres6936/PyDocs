@@ -86,6 +86,7 @@ from clang.kinds.access_specifier import AccessSpecifier
 from clang.kinds.availability_kind import AvailabilityKind
 from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
+from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.storage_class import StorageClass
 from clang.token_kinds import TokenKinds
@@ -1836,25 +1837,7 @@ TypeKind.OCLRESERVEID = TypeKind(160)
 
 
 
-class LinkageKind(BaseEnumeration):
-    """Describes the kind of linkage of a cursor."""
 
-    # The unique kind objects, indexed by id.
-    _kinds = []
-    _name_map = None
-
-    def from_param(self):
-        return self.value
-
-    def __repr__(self):
-        return 'LinkageKind.%s' % (self.name,)
-
-
-LinkageKind.INVALID = LinkageKind(0)
-LinkageKind.NO_LINKAGE = LinkageKind(1)
-LinkageKind.INTERNAL = LinkageKind(2)
-LinkageKind.UNIQUE_EXTERNAL = LinkageKind(3)
-LinkageKind.EXTERNAL = LinkageKind(4)
 
 
 class TLSKind(BaseEnumeration):

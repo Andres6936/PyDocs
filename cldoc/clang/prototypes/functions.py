@@ -1,10 +1,11 @@
 # Functions strictly alphabetical order.
-from ctypes import c_uint, POINTER, c_int, c_void_p, c_char_p, c_longlong, c_ulonglong
+from ctypes import c_uint, POINTER, c_int, c_void_p, c_char_p, c_longlong, c_ulonglong, py_object
 
 from clang.cindex import Type
 from clang.cursor import Cursor
 from clang.kinds.cursor_kind import CursorKind
 from clang.kinds.template_argument_kind import TemplateArgumentKind
+from clang.objects.ccr_structure import CCRStructure
 from clang.objects.code_completion_results import CodeCompletionResults
 from clang.objects.compilation_database import CompilationDatabase
 from clang.objects.file import File

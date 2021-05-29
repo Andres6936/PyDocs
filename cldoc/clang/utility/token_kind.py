@@ -29,7 +29,8 @@ class TokenKind(object):
         package.
         """
         if value in TokenKind._value_map:
-            raise ValueError('TokenKind already registered: %d' % value)
+            pass
+            # raise ValueError('TokenKind already registered: %d' % value)
 
         kind = TokenKind(value, name)
         TokenKind._value_map[value] = kind

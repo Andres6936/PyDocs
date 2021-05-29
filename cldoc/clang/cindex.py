@@ -80,6 +80,7 @@ import sys
 from typing import Tuple
 
 from clang.decorators.cached_property import CachedProperty
+from clang.exceptions.translation_unit import TranslationUnitLoadError
 from clang.token_kinds import TokenKinds
 
 if sys.version_info[0] == 3:
@@ -152,17 +153,6 @@ callbacks = {}
 
 
 ### Exception Classes ###
-
-class TranslationUnitLoadError(Exception):
-    """Represents an error that occurred when loading a TranslationUnit.
-
-    This is raised in the case where a TranslationUnit could not be
-    instantiated due to failure in the libclang library.
-
-    FIXME: Make libclang expose additional error information in this scenario.
-    """
-    pass
-
 
 class TranslationUnitSaveError(Exception):
     """Represents an error that occurred when saving a TranslationUnit.

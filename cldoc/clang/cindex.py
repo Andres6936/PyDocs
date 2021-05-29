@@ -73,7 +73,7 @@ call is efficient.
 #   clearly, and hide from the external interface (i.e., help(cindex)).
 #
 # o implement additional SourceLocation, SourceRange, and File methods.
-
+import os.path
 from ctypes import *
 import collections
 import sys
@@ -303,8 +303,9 @@ class SourceLocation(Structure):
             filename = self.file.name
         else:
             filename = None
-        return "<SourceLocation file %r, line %r, column %r>" % (
-            filename, self.line, self.column)
+        return "File: {}, Line: {}, Column: {}".format(
+            os.path.basename(filename), self.line, self.column
+        )
 
 
 class SourceRange(Structure):
@@ -320,7 +321,7 @@ class SourceRange(Structure):
     # FIXME: Eliminate this and make normal constructor? Requires hiding ctypes
     # object.
     @staticmethod
-    def from_locations(start, end):
+    def from_locations(start: SourceLocation, end: SourceLocation):
         return conf.lib.clang_getRange(start, end)
 
     @property

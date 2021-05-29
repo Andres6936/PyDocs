@@ -1,9 +1,11 @@
 import collections
 from ctypes import c_void_p, c_int
 
+from clang.config import conf
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.kinds.type_kind import TypeKind
+from clang.prototypes.functions import callbacks
 
 
 class Type(Structure):

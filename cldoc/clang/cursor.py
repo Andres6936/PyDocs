@@ -1,3 +1,17 @@
+from ctypes import Structure, c_int, c_void_p
+
+from clang.config import conf
+from clang.kinds.access_specifier import AccessSpecifier
+from clang.kinds.availability_kind import AvailabilityKind
+from clang.kinds.cursor_kind import CursorKind
+from clang.kinds.linkage_kind import LinkageKind
+from clang.kinds.type_kind import TypeKind
+from clang.objects.translation_unit import TranslationUnit
+from clang.prototypes.functions import callbacks
+from clang.storage_class import StorageClass
+from clang.utility.token_group import TokenGroup
+
+
 class Cursor(Structure):
     """
     The Cursor class represents a reference to an element within the AST. It

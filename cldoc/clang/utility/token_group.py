@@ -1,3 +1,9 @@
+from ctypes import POINTER, c_uint, byref
+
+from clang.config import conf
+from clang.token import Token
+
+
 class TokenGroup(object):
     """Helper class to facilitate token management.
 
@@ -45,7 +51,7 @@ class TokenGroup(object):
 
         token_group = TokenGroup(tu, tokens_memory, tokens_count)
 
-        for i in xrange(0, count):
+        for i in range(0, count):
             token = Token()
             token.int_data = tokens_array[i].int_data
             token.ptr_data = tokens_array[i].ptr_data
@@ -53,4 +59,3 @@ class TokenGroup(object):
             token._group = token_group
 
             yield token
-

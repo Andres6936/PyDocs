@@ -1,3 +1,9 @@
+from ctypes import Structure, c_void_p, c_uint
+
+from clang.config import conf
+from clang.utility.source_location import SourceLocation
+
+
 class SourceRange(Structure):
     """
     A SourceRange describes a range of source locations within the source

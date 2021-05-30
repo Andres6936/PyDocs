@@ -1,6 +1,5 @@
 from clang.config import conf
 from clang.objects.clang_object import ClangObject
-from clang.objects.translation_unit import TranslationUnit
 
 
 class Index(ClangObject):
@@ -24,6 +23,7 @@ class Index(ClangObject):
 
     def read(self, path):
         """Load a TranslationUnit from the given AST file."""
+        from clang.objects.translation_unit import TranslationUnit
         return TranslationUnit.from_ast_file(path, self)
 
     def parse(self, path, args=None, unsaved_files=None, options=0):
@@ -39,5 +39,6 @@ class Index(ClangObject):
         If an error was encountered during parsing, a TranslationUnitLoadError
         will be raised.
         """
+        from clang.objects.translation_unit import TranslationUnit
         return TranslationUnit.from_source(path, args, unsaved_files, options,
                                            self)

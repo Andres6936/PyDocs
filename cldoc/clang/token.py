@@ -1,7 +1,6 @@
 from ctypes import Structure, c_uint, c_void_p, byref
 
 from clang.config import conf
-from clang.cursor import Cursor
 from clang.utility.token_kind import TokenKind
 
 
@@ -45,6 +44,8 @@ class Token(Structure):
     @property
     def cursor(self):
         """The Cursor this Token corresponds to."""
+        from clang.cursor import Cursor
+
         cursor = Cursor()
         cursor._tu = self._tu
 

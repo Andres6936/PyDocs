@@ -2,8 +2,6 @@ from ctypes import cdll
 
 from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.lib_clang import LibclangError
-from clang.prototypes.register_functions import register_functions
-
 
 class Config:
     library_path = None
@@ -55,6 +53,8 @@ class Config:
 
     @CachedProperty
     def lib(self):
+        from clang.prototypes.register_functions import register_functions
+
         lib = self.get_cindex_library()
         register_functions(lib, not Config.compatibility_check)
         Config.loaded = True

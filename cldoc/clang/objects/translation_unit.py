@@ -3,12 +3,9 @@ from ctypes import c_char_p
 from clang.config import conf
 from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
 from clang.objects.clang_object import ClangObject
-from clang.objects.code_completion_results import CodeCompletionResults
 from clang.objects.cx_unsaved_file import _CXUnsavedFile
 from clang.objects.file import File
-from clang.objects.file_inclusion import FileInclusion
 from clang.objects.index import Index
-from clang.prototypes.functions import callbacks, b
 from clang.utility.diagnostic import Diagnostic
 from clang.utility.source_location import SourceLocation
 from clang.utility.source_range import SourceRange
@@ -107,6 +104,7 @@ class TranslationUnit(ClangObject):
 
         args_array = None
         if len(args) > 0:
+            from clang.prototypes.functions import b
             args_array = (c_char_p * len(args))(*[b(x) for x in args])
 
         unsaved_array = None
@@ -186,10 +184,12 @@ class TranslationUnit(ClangObject):
         def visitor(fobj, lptr, depth, includes):
             if depth > 0:
                 loc = lptr.contents
+                from clang.objects.file_inclusion import FileInclusion
                 includes.append(FileInclusion(loc.file, File(fobj), loc, depth))
 
         # Automatically adapt CIndex/ctype pointers to python objects
         includes = []
+        from clang.prototypes.functions import callbacks
         conf.lib.clang_getInclusions(self,
                                      callbacks['translation_unit_includes'](visitor), includes)
 
@@ -364,12 +364,14 @@ class TranslationUnit(ClangObject):
                     print(value)
                 if not isinstance(value, str):
                     raise TypeError('Unexpected unsaved file contents.')
+                from clang.prototypes.functions import b
                 unsaved_files_array[i].name = b(name)
                 unsaved_files_array[i].contents = b(value)
                 unsaved_files_array[i].length = len(value)
         ptr = conf.lib.clang_codeCompleteAt(self, path, line, column,
                                             unsaved_files_array, len(unsaved_files), options)
         if ptr:
+            from clang.objects.code_completion_results import CodeCompletionResults
             return CodeCompletionResults(ptr)
         return None
 

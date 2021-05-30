@@ -200,4 +200,4 @@ class CommentsDatabase:
         Return the representation of object in the form of number of
         comments that have been foundt.
         """
-        return "Comments: {}".format(len(self.comments))
+        return "Comments: {}".format(len(self))

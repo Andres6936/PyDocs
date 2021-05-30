@@ -12,6 +12,7 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(len(translation_unit.diagnostics) == 0)
         database_comments = CommentsDatabase('../input/enum.hh', translation_unit)
         self.assertTrue(len(database_comments) == 3)
+        self.assertTrue(repr(database_comments) == "Comments: 3")
 
 
 if __name__ == '__main__':

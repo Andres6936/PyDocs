@@ -1,5 +1,5 @@
 # Functions strictly alphabetical order.
-from ctypes import c_uint, POINTER, c_int, c_void_p, c_char_p, c_longlong, c_ulonglong, py_object
+from ctypes import c_uint, POINTER, c_int, c_void_p, c_char_p, c_longlong, c_ulonglong, py_object, CFUNCTYPE
 
 from clang.cursor import Cursor
 from clang.kinds.cursor_kind import CursorKind
@@ -786,3 +786,11 @@ functionList = [
      [Type, callbacks['fields_visit'], py_object],
      c_uint),
 ]
+
+# Now comes the plumbing to hook up the C library.
+
+# Register callback types in common container.
+callbacks['translation_unit_includes'] = CFUNCTYPE(None, c_object_p,
+                                                   POINTER(SourceLocation), c_uint, py_object)
+callbacks['cursor_visit'] = CFUNCTYPE(c_int, Cursor, Cursor, py_object)
+callbacks['fields_visit'] = CFUNCTYPE(c_int, Cursor, py_object)

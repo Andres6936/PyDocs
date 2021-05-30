@@ -25,6 +25,9 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0],
+                         "A function of A.\n@a the argument.\n\nA longer description of f.\n\n@returns a number.")
+
     def test_parser_base(self):
         database_comments = self.get_comments_database("../input/base.hh")
         self.assertEqual(len(database_comments), 3, "The amount of comments in the database not is 3 (comments)")
@@ -39,10 +42,14 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0], "Constructor.\n\nThe constructor of A.\n")
+
     def test_parser_destructor(self):
         database_comments = self.get_comments_database("../input/destructor.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
+
+        self.assertEqual(database_comments[0], "Destructor.\n\nThe destructor of A.\n")
 
     def test_parser_enum(self):
         database_comments = self.get_comments_database("../input/enum.hh")
@@ -63,6 +70,9 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0],
+                         "A function of A.\n@a the argument.\n\nA longer description of f. Use <a> to pass <A>.\n\n@returns a number.")
+
     def test_parser_namespace(self):
         database_comments = self.get_comments_database("../input/namespace.hh")
         self.assertEqual(len(database_comments), 6, "The amount of comments in the database not is 6 (comments)")
@@ -80,6 +90,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0], " The struct A.\n\nA longer description of A.\n")
+
     def test_parser_template(self):
         database_comments = self.get_comments_database("../input/template.hh")
         self.assertEqual(len(database_comments), 2, "The amount of comments in the database not is 2 (comments)")
@@ -89,6 +101,8 @@ class MyTestCase(unittest.TestCase):
         database_comments = self.get_comments_database("../input/union.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
+
+        self.assertEqual(database_comments[0], "\nThe union A.\n\nA longer description of A.\n")
 
     def test_parser_union_struct(self):
         database_comments = self.get_comments_database("../input/unionanonstruct.hh")
@@ -100,10 +114,15 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0], "Copyright ©")
+
     def test_parser_virtual(self):
         database_comments = self.get_comments_database("../input/virtual.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
+
+        self.assertEqual(database_comments[0],
+                         "A function of A.\n@a the argument.\n\nA longer description of f.\n\n@returns a number.")
 
 
 if __name__ == '__main__':

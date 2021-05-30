@@ -22,10 +22,9 @@ try:
 except:
     from xml.etree import ElementTree
 
-from cldoc import defdict
+from util import defdict
 
 from cldoc import nodes
-from cldoc import generators
 from cldoc import comment
 from cldoc import example
 from cldoc import documentmerger

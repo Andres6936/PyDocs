@@ -1,3 +1,0 @@
-//
-
-#include "Renderer/OpenGl.hpp"

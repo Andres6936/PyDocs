@@ -33,7 +33,7 @@ class CommentsDatabase:
 
         while True:
             try:
-                self.extract_loop(it)
+                self.__extract_loop(it)
             except StopIteration:
                 break
 
@@ -118,7 +118,7 @@ class CommentsDatabase:
         comment = Comment(s, token.location)
         self.comments.insert(comment)
 
-    def extract_loop(self, iter):
+    def __extract_loop(self, iter):
         token = next(iter)
 
         # Skip until comment found

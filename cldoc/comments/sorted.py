@@ -10,6 +10,14 @@ import bisect
 
 class Sorted(list):
     def __init__(self, key=None):
+        """
+        key specifies a function of one argument that is used to extract a
+        comparison key from each list element (for example, key=str.lower).
+        The key corresponding to each item in the list is calculated once
+        and then used for the entire sorting process. The default value
+        of None means that list items are sorted directly without calculating
+        a separate key value.
+        """
         super().__init__()
         if key is None:
             key = lambda x: x

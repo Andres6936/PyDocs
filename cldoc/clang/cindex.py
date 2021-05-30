@@ -91,6 +91,7 @@ from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.kinds.tls_kind import TLSKind
+from clang.objects.code_completion_result import CodeCompletionResult
 from clang.objects.completion_string import CompletionString
 from clang.objects.file_inclusion import FileInclusion
 from clang.prototypes.functions import c_object_p, c_interop_string, b, callbacks
@@ -927,21 +928,6 @@ completionChunkKindMap = {
     18: CompletionChunk.Kind("Equal"),
     19: CompletionChunk.Kind("HorizontalSpace"),
     20: CompletionChunk.Kind("VerticalSpace")}
-
-
-class CodeCompletionResult(Structure):
-    _fields_ = [('cursorKind', c_int), ('completionString', c_object_p)]
-
-    def __repr__(self):
-        return str(CompletionString(self.completionString))
-
-    @property
-    def kind(self):
-        return CursorKind.from_id(self.cursorKind)
-
-    @property
-    def string(self):
-        return CompletionString(self.completionString)
 
 
 class CCRStructure(Structure):

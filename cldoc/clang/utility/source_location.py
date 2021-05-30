@@ -3,7 +3,7 @@ from ctypes import Structure, c_uint, byref, c_void_p
 
 from clang.config import conf
 from clang.objects.file import File
-from clang.prototypes.functions import c_object_p
+from clang.pointers import c_object_p
 
 
 class SourceLocation(Structure):

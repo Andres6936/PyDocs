@@ -1,6 +1,6 @@
 from ctypes import Structure, c_int
 
-from clang.prototypes.functions import c_object_p
+from clang.pointers import c_object_p
 
 
 class CodeCompletionResult(Structure):

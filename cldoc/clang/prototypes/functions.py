@@ -11,6 +11,7 @@ from clang.objects.compile_commands import CompileCommands
 from clang.objects.file import File
 from clang.objects.index import Index
 from clang.objects.translation_unit import TranslationUnit
+from clang.pointers import c_object_p
 from clang.token import Token
 from clang.type import Type
 from clang.utility.cx_string import _CXString
@@ -59,12 +60,6 @@ def b(x):
         return x
     return x.encode('utf8')
 
-
-# ctypes doesn't implicitly convert c_void_p to the appropriate wrapper
-# object. This is a problem, because it means that from_parameter will see an
-# integer and pass the wrong value on platforms where int != void*. Work around
-# this by marshalling object arguments as void**.
-c_object_p = POINTER(c_void_p)
 
 callbacks = {}
 

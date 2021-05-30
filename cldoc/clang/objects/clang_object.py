@@ -4,6 +4,9 @@
 # wrappers attached to some underlying object, which is exposed via CIndex as
 # a void*.
 
+from clang.pointers import c_object_p
+
+
 class ClangObject(object):
     """
     A helper for Clang objects. This class helps act as an intermediary for
@@ -11,8 +14,6 @@ class ClangObject(object):
     """
 
     def __init__(self, obj):
-        from clang.prototypes.functions import c_object_p
-
         assert isinstance(obj, c_object_p) and obj
         self.obj = self._as_parameter_ = obj
 

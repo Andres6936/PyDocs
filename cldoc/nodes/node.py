@@ -15,7 +15,7 @@ import functools
 from clang.kinds.access_specifier import AccessSpecifier
 
 from cldoc import utf8
-from cldoc.cmp import cmp
+from util.cmp import cmp
 
 import re
 

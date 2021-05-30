@@ -15,7 +15,7 @@ from clang.kinds.access_specifier import AccessSpecifier
 from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
 from nodes.ctype import Type
-from cldoc.cmp import cmp
+from util.cmp import cmp
 
 
 class TemplateTypeParameter(Node):

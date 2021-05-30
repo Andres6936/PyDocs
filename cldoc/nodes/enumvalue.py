@@ -13,7 +13,7 @@
 
 from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
-from cldoc.cmp import cmp
+from util.cmp import cmp
 
 
 class EnumValue(Node):

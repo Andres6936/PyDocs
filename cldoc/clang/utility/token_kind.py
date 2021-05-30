@@ -1,3 +1,6 @@
+from clang.token_kinds import TokenKinds
+
+
 class TokenKind(object):
     """Describes a specific type of a Token."""
 
@@ -35,3 +38,11 @@ class TokenKind(object):
         kind = TokenKind(value, name)
         TokenKind._value_map[value] = kind
         setattr(TokenKind, name, kind)
+
+
+def register_enumerations():
+    for name, value in TokenKinds.__members__.items():
+        TokenKind.register(value.value, name)
+
+
+register_enumerations()

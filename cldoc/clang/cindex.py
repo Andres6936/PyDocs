@@ -95,25 +95,12 @@ from clang.objects.file_inclusion import FileInclusion
 from clang.prototypes.functions import c_object_p, c_interop_string, b, callbacks
 from clang.spelling_cache import SpellingCache
 from clang.token_kinds import TokenKinds
+from clang.utility.cx_string import _CXString
 from clang.utility.fix_it import FixIt
 from clang.utility.token_kind import TokenKind
 
 
 ### Structures and Utility Classes ###
-
-
-class _CXString(Structure):
-    """Helper for transforming CXString results."""
-
-    _fields_ = [("spelling", c_char_p), ("free", c_int)]
-
-    def __del__(self):
-        conf.lib.clang_disposeString(self)
-
-    @staticmethod
-    def from_result(res, fn=None, args=None):
-        assert isinstance(res, _CXString)
-        return conf.lib.clang_getCString(res)
 
 
 class SourceLocation(Structure):

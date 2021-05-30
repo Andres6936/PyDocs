@@ -21,7 +21,7 @@ from typing import List, Callable, Optional, Tuple
 
 import documentmerger
 import example
-import includepaths
+from files import includepaths
 import nodes
 
 from clang.config import Config

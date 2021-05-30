@@ -10,6 +10,7 @@ import bisect
 
 class Sorted(list):
     def __init__(self, key=None):
+        super().__init__()
         if key is None:
             key = lambda x: x
 

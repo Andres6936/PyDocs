@@ -83,7 +83,6 @@ from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.compilation_database import CompilationDatabaseError
 from clang.exceptions.lib_clang import LibclangError
 from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
-from clang.kinds.access_specifier import AccessSpecifier
 from clang.kinds.availability_kind import AvailabilityKind
 from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.cursor_kind import CursorKind
@@ -95,7 +94,6 @@ from clang.kinds.tls_kind import TLSKind
 from clang.objects.file_inclusion import FileInclusion
 from clang.prototypes.functions import c_object_p, c_interop_string, b, callbacks
 from clang.spelling_cache import SpellingCache
-from clang.storage_class import StorageClass
 from clang.token_kinds import TokenKinds
 from clang.utility.fix_it import FixIt
 from clang.utility.token_kind import TokenKind

@@ -16,6 +16,45 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 3, "The amount of comments in the database not is 3 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 3", "The representation of object not is equal")
 
+    def test_parser_abstract(self):
+        pass
+
+    def test_parser_base(self):
+        pass
+
+    def test_parser_constructor(self):
+        pass
+
+    def test_parser_destructor(self):
+        pass
+
+    def test_parser_interface(self):
+        pass
+
+    def test_parser_method(self):
+        pass
+
+    def test_parser_namespace(self):
+        pass
+
+    def test_parser_struct(self):
+        pass
+
+    def test_parser_template(self):
+        pass
+
+    def test_parser_union(self):
+        pass
+
+    def test_parser_union_struct(self):
+        pass
+
+    def test_parser_utf8(self):
+        pass
+
+    def test_parser_virtual(self):
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

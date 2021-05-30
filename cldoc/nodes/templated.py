@@ -14,10 +14,6 @@ from nodes.node import Node
 from nodes.templatetypeparameter import TemplateTypeParameter, TemplateNonTypeParameter
 
 from cldoc.comment import Comment
-from cldoc.comment import Parser
-
-import re
-
 
 class Templated(Node):
     def __init__(self, cursor, comment):

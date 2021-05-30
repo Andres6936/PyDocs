@@ -13,13 +13,13 @@
 import functools
 
 from clang.kinds.access_specifier import AccessSpecifier
-from cldoc.comment import Comment
-from cldoc.comment import Parser
 
 from cldoc import utf8
 from cldoc.cmp import cmp
 
 import re
+
+from comments.parser import Parser
 
 
 class Node(object):

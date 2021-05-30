@@ -215,83 +215,6 @@ completionChunkKindMap = {
     20: CompletionChunk.Kind("VerticalSpace")}
 
 
-
-class Index(ClangObject):
-    """
-    The Index type provides the primary interface to the Clang CIndex library,
-    primarily by providing an interface for reading and parsing translation
-    units.
-    """
-
-    @staticmethod
-    def create(excludeDecls=False):
-        """
-        Create a new Index.
-        Parameters:
-        excludeDecls -- Exclude local declarations from translation units.
-        """
-        return Index(conf.lib.clang_createIndex(excludeDecls, 0))
-
-    def __del__(self):
-        conf.lib.clang_disposeIndex(self)
-
-    def read(self, path):
-        """Load a TranslationUnit from the given AST file."""
-        return TranslationUnit.from_ast_file(path, self)
-
-    def parse(self, path, args=None, unsaved_files=None, options=0):
-        """Load the translation unit from the given source code file by running
-        clang and generating the AST before loading. Additional command line
-        parameters can be passed to clang via the args parameter.
-
-        In-memory contents for files can be provided by passing a list of pairs
-        to as unsaved_files, the first item should be the filenames to be mapped
-        and the second should be the contents to be substituted for the
-        file. The contents may be passed as strings or file objects.
-
-        If an error was encountered during parsing, a TranslationUnitLoadError
-        will be raised.
-        """
-        return TranslationUnit.from_source(path, args, unsaved_files, options,
-                                           self)
-
-
-class File(ClangObject):
-    """
-    The File class represents a particular source file that is part of a
-    translation unit.
-    """
-
-    @staticmethod
-    def from_name(translation_unit, file_name : str):
-        """Retrieve a file handle within the given translation unit."""
-        return File(conf.lib.clang_getFile(translation_unit, file_name))
-
-    @property
-    def name(self):
-        """Return the complete file and path name of the file."""
-        return conf.lib.clang_getFileName(self)
-
-    @property
-    def time(self):
-        """Return the last modification time of the file."""
-        return conf.lib.clang_getFileTime(self)
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return "<File: {}>".format(self.name)
-
-    @staticmethod
-    def from_cursor_result(res, fn, args):
-        assert isinstance(res, File)
-
-        # Copy a reference to the TranslationUnit to prevent premature GC.
-        res._tu = args[0]._tu
-        return res
-
-
 # Now comes the plumbing to hook up the C library.
 
 # Register callback types in common container.
@@ -300,23 +223,3 @@ callbacks['translation_unit_includes'] = CFUNCTYPE(None, c_object_p,
 callbacks['cursor_visit'] = CFUNCTYPE(c_int, Cursor, Cursor, py_object)
 callbacks['fields_visit'] = CFUNCTYPE(c_int, Cursor, py_object)
 
-
-
-__all__ = [
-    'AvailabilityKind',
-    'CodeCompletionResults',
-    'CursorKind',
-    'Cursor',
-    'Diagnostic',
-    'File',
-    'FixIt',
-    'Index',
-    'LinkageKind',
-    'SourceLocation',
-    'TLSKind',
-    'Token',
-    'TranslationUnitLoadError',
-    'TranslationUnit',
-    'TypeKind',
-    'Type',
-]

@@ -24,10 +24,10 @@ import example
 import includepaths
 import nodes
 
-from clang.cindex import Index
 from clang.config import Config
 from clang.exceptions.lib_clang import LibclangError
 from clang.kinds.cursor_kind import CursorKind
+from clang.objects.index import Index
 from clang.objects.translation_unit import TranslationUnit
 from clang.utility.diagnostic import Diagnostic
 from clang.utility.token_kind import TokenKind

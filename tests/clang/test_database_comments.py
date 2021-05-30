@@ -20,11 +20,6 @@ class MyTestCase(unittest.TestCase):
                          "The amount of diagnostic in the translation unit not is zero")
         return CommentsDatabase(path_file, translation_unit)
 
-    def test_parser_enum(self):
-        database_comments = self.get_comments_database("../input/enum.hh")
-        self.assertEqual(len(database_comments), 3, "The amount of comments in the database not is 3 (comments)")
-        self.assertEqual(repr(database_comments), "Comments: 3", "The representation of object not is equal")
-
     def test_parser_abstract(self):
         database_comments = self.get_comments_database("../input/abstract.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
@@ -44,6 +39,11 @@ class MyTestCase(unittest.TestCase):
         database_comments = self.get_comments_database("../input/destructor.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 1", "The representation of object not is equal")
+
+    def test_parser_enum(self):
+        database_comments = self.get_comments_database("../input/enum.hh")
+        self.assertEqual(len(database_comments), 3, "The amount of comments in the database not is 3 (comments)")
+        self.assertEqual(repr(database_comments), "Comments: 3", "The representation of object not is equal")
 
     def test_parser_interface(self):
         database_comments = self.get_comments_database("../input/interface.hh")

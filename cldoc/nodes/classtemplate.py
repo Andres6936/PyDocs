@@ -11,13 +11,12 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from clang.kinds.cursor_kind import CursorKind
 from clang.utility.token_kind import TokenKind
 from nodes.node import Node
 from nodes.cclass import Class
 from nodes.cstruct import Struct
 from nodes.templated import Templated
-
-from cldoc.clang import cindex
 
 
 class StructTemplate(Struct, Templated):
@@ -35,7 +34,7 @@ class ClassTemplate(Class, Templated):
 
 
 class ClassTemplatePlexer(Node):
-    kind = cindex.CursorKind.CLASS_TEMPLATE
+    kind = CursorKind.CLASS_TEMPLATE
 
     def __new__(cls, cursor, comment):
         # Check manually if this is actually a struct, so that we instantiate

@@ -11,14 +11,13 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+from clang.kinds.cursor_kind import CursorKind
 from clang.utility.token_kind import TokenKind
 from nodes.node import Node
 
-from cldoc.clang import cindex
-
 
 class Enum(Node):
-    kind = cindex.CursorKind.ENUM_DECL
+    kind = CursorKind.ENUM_DECL
 
     def __init__(self, cursor, comment):
         Node.__init__(self, cursor, comment)

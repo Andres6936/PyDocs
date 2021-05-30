@@ -10,13 +10,12 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
 from nodes.method import Method
 from nodes.function import Function
-from nodes.ctype import Type
 from nodes.templated import Templated
-
-from cldoc.clang import cindex
 
 
 class FunctionTemplate(Templated, Function):
@@ -34,12 +33,12 @@ class MethodTemplate(Templated, Method):
 
 
 class FunctionTemplatePlexer(Node):
-    kind = cindex.CursorKind.FUNCTION_TEMPLATE
+    kind = CursorKind.FUNCTION_TEMPLATE
 
     def __new__(cls, cursor, comment):
-        if not cursor is None and (cursor.semantic_parent.kind == cindex.CursorKind.CLASS_DECL or \
-                                   cursor.semantic_parent.kind == cindex.CursorKind.CLASS_TEMPLATE or \
-                                   cursor.semantic_parent.kind == cindex.CursorKind.STRUCT_DECL):
+        if not cursor is None and (cursor.semantic_parent.kind == CursorKind.CLASS_DECL or \
+                                   cursor.semantic_parent.kind == CursorKind.CLASS_TEMPLATE or \
+                                   cursor.semantic_parent.kind == CursorKind.STRUCT_DECL):
             return MethodTemplate(cursor, comment)
         else:
             return FunctionTemplate(cursor, comment)

@@ -10,15 +10,10 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
-from nodes.namespace import Namespace
 from nodes.ctype import Type
-
-from cldoc.clang import cindex
-from cldoc.comment import Comment
-from cldoc.comment import Parser
-
-import re
 
 
 class Argument:
@@ -28,7 +23,7 @@ class Argument:
         self._type = None
 
         for child in cursor.get_children():
-            if child.kind == cindex.CursorKind.TYPE_REF:
+            if child.kind == CursorKind.TYPE_REF:
                 self._type = Type(self.cursor.type, cursor=child)
                 break
 
@@ -85,7 +80,7 @@ class Argument:
 
 
 class Function(Node):
-    kind = cindex.CursorKind.FUNCTION_DECL
+    kind = CursorKind.FUNCTION_DECL
 
     def __init__(self, cursor, comment):
         super(Function, self).__init__(cursor, comment)
@@ -94,7 +89,7 @@ class Function(Node):
         self._arguments = []
 
         for child in cursor.get_children():
-            if child.kind != cindex.CursorKind.PARM_DECL:
+            if child.kind != CursorKind.PARM_DECL:
                 continue
 
             self._arguments.append(Argument(self, child))

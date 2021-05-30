@@ -10,21 +10,21 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
 from nodes.ctype import Type
 
-from cldoc.clang import cindex
-
 
 class Typedef(Node):
-    kind = cindex.CursorKind.TYPEDEF_DECL
+    kind = CursorKind.TYPEDEF_DECL
 
     def __init__(self, cursor, comment):
         Node.__init__(self, cursor, comment)
 
         children = [child for child in cursor.get_children()]
 
-        if len(children) == 1 and children[0].kind == cindex.CursorKind.TYPE_REF:
+        if len(children) == 1 and children[0].kind == CursorKind.TYPE_REF:
             typecursor = children[0]
         else:
             self.process_children = True

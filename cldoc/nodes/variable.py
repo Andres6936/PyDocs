@@ -10,14 +10,14 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
 from nodes.ctype import Type
 
-from cldoc.clang import cindex
-
 
 class Variable(Node):
-    kind = cindex.CursorKind.VAR_DECL
+    kind = CursorKind.VAR_DECL
 
     def __init__(self, cursor, comment):
         Node.__init__(self, cursor, comment)

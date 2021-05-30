@@ -10,6 +10,8 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+from clang.kinds.cursor_kind import CursorKind
+from clang.kinds.type_kind import TypeKind
 from nodes.node import Node
 
 from cldoc.clang import cindex
@@ -17,34 +19,34 @@ from cldoc.clang import cindex
 
 class Type(Node):
     kindmap = {
-        cindex.TypeKind.POINTER: '*',
-        cindex.TypeKind.LVALUEREFERENCE: '&',
+        TypeKind.POINTER: '*',
+        TypeKind.LVALUEREFERENCE: '&',
     }
 
     namemap = {
-        cindex.TypeKind.VOID: 'void',
-        cindex.TypeKind.BOOL: 'bool',
-        cindex.TypeKind.CHAR_U: 'char',
-        cindex.TypeKind.UCHAR: 'unsigned char',
-        cindex.TypeKind.CHAR16: 'char16_t',
-        cindex.TypeKind.CHAR32: 'char32_t',
-        cindex.TypeKind.USHORT: 'unsigned short',
-        cindex.TypeKind.UINT: 'unsigned int',
-        cindex.TypeKind.ULONG: 'unsigned long',
-        cindex.TypeKind.ULONGLONG: 'unsigned long long',
-        cindex.TypeKind.UINT128: 'uint128_t',
-        cindex.TypeKind.CHAR_S: 'char',
-        cindex.TypeKind.SCHAR: 'signed char',
-        cindex.TypeKind.WCHAR: 'wchar_t',
-        cindex.TypeKind.SHORT: 'unsigned short',
-        cindex.TypeKind.INT: 'int',
-        cindex.TypeKind.LONG: 'long',
-        cindex.TypeKind.LONGLONG: 'long long',
-        cindex.TypeKind.INT128: 'int128_t',
-        cindex.TypeKind.FLOAT: 'float',
-        cindex.TypeKind.DOUBLE: 'double',
-        cindex.TypeKind.LONGDOUBLE: 'long double',
-        cindex.TypeKind.NULLPTR: 'float',
+        TypeKind.VOID: 'void',
+        TypeKind.BOOL: 'bool',
+        TypeKind.CHAR_U: 'char',
+        TypeKind.UCHAR: 'unsigned char',
+        TypeKind.CHAR16: 'char16_t',
+        TypeKind.CHAR32: 'char32_t',
+        TypeKind.USHORT: 'unsigned short',
+        TypeKind.UINT: 'unsigned int',
+        TypeKind.ULONG: 'unsigned long',
+        TypeKind.ULONGLONG: 'unsigned long long',
+        TypeKind.UINT128: 'uint128_t',
+        TypeKind.CHAR_S: 'char',
+        TypeKind.SCHAR: 'signed char',
+        TypeKind.WCHAR: 'wchar_t',
+        TypeKind.SHORT: 'unsigned short',
+        TypeKind.INT: 'int',
+        TypeKind.LONG: 'long',
+        TypeKind.LONGLONG: 'long long',
+        TypeKind.INT128: 'int128_t',
+        TypeKind.FLOAT: 'float',
+        TypeKind.DOUBLE: 'double',
+        TypeKind.LONGDOUBLE: 'long double',
+        TypeKind.NULLPTR: 'float',
     }
 
     def __init__(self, tp, cursor=None):
@@ -63,7 +65,7 @@ class Type(Node):
 
     @property
     def is_function(self):
-        return self._kind == cindex.TypeKind.FUNCTIONPROTO
+        return self._kind == TypeKind.FUNCTIONPROTO
 
     @property
     def function_arguments(self):
@@ -83,7 +85,7 @@ class Type(Node):
 
     @property
     def is_constant_array(self):
-        return self._kind == cindex.TypeKind.CONSTANTARRAY
+        return self._kind == TypeKind.CONSTANTARRAY
 
     @property
     def is_out(self):
@@ -125,14 +127,14 @@ class Type(Node):
     def _full_typename(self, decl):
         parent = decl.semantic_parent
 
-        if decl.kind == cindex.CursorKind.NAMESPACE and decl.displayname == '__1' and parent and parent.displayname == 'std':
+        if decl.kind == CursorKind.NAMESPACE and decl.displayname == '__1' and parent and parent.displayname == 'std':
             # Skip over special inline namespace. Ideally we can skip over inline namespaces
             # in general, but I can't find a way to determine whether a namespace is inline
             return self._full_typename(parent)
 
         meid = self._declaration_full_name(decl)
 
-        if not parent or parent.kind == cindex.CursorKind.TRANSLATION_UNIT:
+        if not parent or parent.kind == CursorKind.TRANSLATION_UNIT:
             return meid
 
         if not meid:
@@ -146,7 +148,7 @@ class Type(Node):
             return meid
 
     def _extract_constant_array_type(self, tp):
-        if tp.kind != cindex.TypeKind.CONSTANTARRAY:
+        if tp.kind != TypeKind.CONSTANTARRAY:
             return
 
         self._element_type = Type(tp.get_array_element_type())
@@ -154,7 +156,7 @@ class Type(Node):
 
     def _extract_template_argument_types(self, tp):
         # Ignore typedefs, we don't want to get any template arguments
-        if tp.get_declaration().kind == cindex.CursorKind.TYPEDEF_DECL:
+        if tp.get_declaration().kind == CursorKind.TYPEDEF_DECL:
             return
 
         num_template_arguments = tp.get_num_template_arguments()
@@ -194,10 +196,10 @@ class Type(Node):
         elif tp.kind in Type.namemap:
             self._typename = Type.namemap[tp.kind]
             self._builtin = True
-        elif tp.kind != cindex.TypeKind.CONSTANTARRAY and hasattr(tp, 'spelling'):
+        elif tp.kind != TypeKind.CONSTANTARRAY and hasattr(tp, 'spelling'):
             canon = tp.get_canonical()
 
-            if canon.kind == cindex.TypeKind.FUNCTIONPROTO:
+            if canon.kind == TypeKind.FUNCTIONPROTO:
                 self._kind = canon.kind
                 self._result = Type(canon.get_result())
                 self._arguments = [Type(arg) for arg in canon.argument_types()]

@@ -10,13 +10,12 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.cursor_kind import CursorKind
 from nodes.method import Method
 
-from cldoc.clang import cindex
-
-
 class ConversionFunction(Method):
-    kind = cindex.CursorKind.CONVERSION_FUNCTION
+    kind = CursorKind.CONVERSION_FUNCTION
 
     def __init__(self, cursor, comment):
         Method.__init__(self, cursor, comment)

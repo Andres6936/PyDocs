@@ -10,18 +10,19 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.access_specifier import AccessSpecifier
+from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
 from nodes.method import Method
 from nodes.ctype import Type
 
-from cldoc.clang import cindex
-
 
 class Class(Node):
-    kind = cindex.CursorKind.CLASS_DECL
+    kind = CursorKind.CLASS_DECL
 
     class Base:
-        def __init__(self, cursor, access=cindex.AccessSpecifier.PUBLIC):
+        def __init__(self, cursor, access=AccessSpecifier.PUBLIC):
             self.cursor = cursor
             self.access = access
             self.type = Type(cursor.type, cursor=cursor)
@@ -31,7 +32,7 @@ class Class(Node):
         super(Class, self).__init__(cursor, comment)
 
         self.process_children = True
-        self.current_access = cindex.AccessSpecifier.PRIVATE
+        self.current_access = AccessSpecifier.PRIVATE
         self.bases = []
         self.implements = []
         self.implemented_by = []
@@ -66,7 +67,7 @@ class Class(Node):
             yield child
 
         for base in self._all_bases():
-            if base.node and base.access != cindex.AccessSpecifier.PRIVATE:
+            if base.node and base.access != AccessSpecifier.PRIVATE:
                 yield base.node
 
                 for child in base.node.resolve_nodes:
@@ -85,10 +86,10 @@ class Class(Node):
                 yield child
 
     def visit(self, cursor, citer):
-        if cursor.kind == cindex.CursorKind.CXX_ACCESS_SPEC_DECL:
+        if cursor.kind == CursorKind.CXX_ACCESS_SPEC_DECL:
             self.current_access = cursor.access_specifier
             return []
-        elif cursor.kind == cindex.CursorKind.CXX_BASE_SPECIFIER:
+        elif cursor.kind == CursorKind.CXX_BASE_SPECIFIER:
             # Add base
             self.bases.append(Class.Base(cursor.type.get_declaration(), cursor.access_specifier))
             return []

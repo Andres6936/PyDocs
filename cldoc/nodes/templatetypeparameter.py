@@ -10,15 +10,16 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.access_specifier import AccessSpecifier
+from clang.kinds.cursor_kind import CursorKind
 from nodes.node import Node
 from nodes.ctype import Type
-
-from cldoc.clang import cindex
 from cldoc.cmp import cmp
 
 
 class TemplateTypeParameter(Node):
-    kind = cindex.CursorKind.TEMPLATE_TYPE_PARAMETER
+    kind = CursorKind.TEMPLATE_TYPE_PARAMETER
 
     def __init__(self, cursor, comment):
         Node.__init__(self, cursor, comment)
@@ -26,7 +27,7 @@ class TemplateTypeParameter(Node):
         self._default_type = None
 
         for child in self.cursor.get_children():
-            if child.kind == cindex.CursorKind.TYPE_REF:
+            if child.kind == CursorKind.TYPE_REF:
                 self._default_type = Type(child.type, cursor=child)
                 break
 
@@ -40,7 +41,7 @@ class TemplateTypeParameter(Node):
 
     @property
     def access(self):
-        return cindex.AccessSpecifier.PUBLIC
+        return AccessSpecifier.PUBLIC
 
     @access.setter
     def access(self, val):
@@ -51,7 +52,7 @@ class TemplateTypeParameter(Node):
 
 
 class TemplateNonTypeParameter(Node):
-    kind = cindex.CursorKind.TEMPLATE_NON_TYPE_PARAMETER
+    kind = CursorKind.TEMPLATE_NON_TYPE_PARAMETER
 
     def __init__(self, cursor, comment):
         super(TemplateNonTypeParameter, self).__init__(cursor, comment)
@@ -60,7 +61,7 @@ class TemplateNonTypeParameter(Node):
         self._default_value = None
 
         for child in self.cursor.get_children():
-            if child.kind == cindex.CursorKind.TYPE_REF:
+            if child.kind == CursorKind.TYPE_REF:
                 continue
 
             self._default_value = ''.join([t.spelling for t in child.get_tokens()][:-1])
@@ -72,7 +73,7 @@ class TemplateNonTypeParameter(Node):
 
     @property
     def access(self):
-        return cindex.AccessSpecifier.PUBLIC
+        return AccessSpecifier.PUBLIC
 
     @access.setter
     def access(self, val):

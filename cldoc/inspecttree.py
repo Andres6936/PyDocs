@@ -11,7 +11,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
+from clang.kinds.cursor_kind import CursorKind
 from cldoc.clang import cindex
 import os, sys
 
@@ -95,7 +95,7 @@ def inspect_cursor(tree, cursor, indent):
     if defi and defi != cursor:
         inspect_print_row('definition', defi.displayname, link=defi.get_usr())
 
-    if cursor.kind == cindex.CursorKind.CXX_METHOD:
+    if cursor.kind == CursorKind.CXX_METHOD:
         for t in cursor.type.argument_types():
             inspect_print_subtype('argument', None, t)
 

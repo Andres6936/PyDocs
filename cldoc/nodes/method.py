@@ -10,15 +10,15 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+from clang.kinds.cursor_kind import CursorKind
 from nodes.function import Function
 from nodes.node import Node
-
-from cldoc.clang import cindex
 from cldoc.comment import Comment
 
 
 class Method(Function):
-    kind = cindex.CursorKind.CXX_METHOD
+    kind = CursorKind.CXX_METHOD
 
     def __init__(self, cursor, comment):
         super(Method, self).__init__(cursor, comment)

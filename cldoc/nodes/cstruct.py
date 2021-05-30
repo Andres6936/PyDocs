@@ -10,19 +10,20 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-from nodes.cclass import Class
 
-from cldoc.clang import cindex
+from clang.kinds.access_specifier import AccessSpecifier
+from clang.kinds.cursor_kind import CursorKind
+from nodes.cclass import Class
 
 
 class Struct(Class):
-    kind = cindex.CursorKind.STRUCT_DECL
+    kind = CursorKind.STRUCT_DECL
 
     def __init__(self, cursor, comment):
         Class.__init__(self, cursor, comment)
 
         self.typedef = None
-        self.current_access = cindex.AccessSpecifier.PUBLIC
+        self.current_access = AccessSpecifier.PUBLIC
 
     @property
     def is_anonymous(self):

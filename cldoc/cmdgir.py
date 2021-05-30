@@ -14,6 +14,8 @@ from __future__ import absolute_import
 
 import sys, argparse, re, os
 
+from clang.kinds.cursor_kind import CursorKind
+
 try:
     from xml.etree import cElementTree as ElementTree
 except:
@@ -360,7 +362,7 @@ class GirTypePointer(GirType):
 
 class GirCursor:
     kindmap = {
-        'parameter': cindex.CursorKind.PARM_DECL
+        'parameter': CursorKind.PARM_DECL
     }
 
     global_gerror_param = None
@@ -395,7 +397,7 @@ class GirCursor:
         if self.typename in GirCursor.kindmap:
             return GirCursor.kindmap[self.typename]
         else:
-            return cindex.CursorKind.UNEXPOSED_DECL
+            return CursorKind.UNEXPOSED_DECL
 
     def _extract_type(self):
         if self.typename == 'type':

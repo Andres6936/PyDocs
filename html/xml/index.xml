@@ -1,9 +1,15 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <index xmlns="http://jessevdk.github.com/cldoc/1.0">
-  <namespace name="transport" ref="transport#transport">
-    <class name="Bicycle" ref="transport::Bicycle#transport::Bicycle">
+  <namespace ref="transport#transport" name="transport">
+    <class ref="transport::Bicycle#transport::Bicycle" name="Bicycle">
       <brief>Standard bicycle class.</brief>
     </class>
+    <class ref="transport::MountainBike#transport::MountainBike" name="MountainBike">
+      <brief>Mountain bike implementation of a <ref ref="transport::Bicycle#transport::Bicycle">transport::Bicycle</ref>.
+      </brief>
+    </class>
+    <class ref="transport::RacingBike#transport::RacingBike" name="RacingBike">
+      <brief>Racing bike class.</brief>
+    </class>
   </namespace>
-  <report name="Documentation generator" ref="report" />
 </index>

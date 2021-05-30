@@ -65,6 +65,11 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 4, "The amount of comments in the database not is 4 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 4", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0], "\nThe class A.\n\nA longer description of A.\n")
+        self.assertEqual(database_comments[1], "An abstract a.\n\nA longer description of abstract a.\n")
+        self.assertEqual(database_comments[2], "\nThe Impl class.\n\nThe implementation class.\n")
+        self.assertEqual(database_comments[3], "@inherit")
+
     def test_parser_method(self):
         database_comments = self.get_comments_database("../input/method.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")

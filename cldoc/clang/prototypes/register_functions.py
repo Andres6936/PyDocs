@@ -1,6 +1,4 @@
 from clang.exceptions.lib_clang import LibclangError
-from clang.prototypes.functions import functionList
-
 
 def register_functions(lib, ignore_errors):
     """Register function prototypes with a libclang library instance.
@@ -11,6 +9,8 @@ def register_functions(lib, ignore_errors):
 
     def register(item):
         return register_function(lib, item, ignore_errors)
+
+    from clang.prototypes.functions import functionList
 
     for f in functionList:
         register(f)

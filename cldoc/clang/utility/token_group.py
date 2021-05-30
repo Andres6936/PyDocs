@@ -70,3 +70,10 @@ class TokenGroup(object):
             token._group = token_group
 
             yield token
+
+    def __repr__(self):
+        """
+        Return the representation of object in the form of number of
+        tokens that have been parsed.
+        """
+        return "{} Tokens".format(self._count.value)

@@ -93,6 +93,7 @@ from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.kinds.tls_kind import TLSKind
 from clang.objects.ccr_structure import CCRStructure
 from clang.objects.code_completion_result import CodeCompletionResult
+from clang.objects.code_completion_results import CodeCompletionResults
 from clang.objects.completion_string import CompletionString
 from clang.objects.file_inclusion import FileInclusion
 from clang.prototypes.functions import c_object_p, c_interop_string, b, callbacks
@@ -930,36 +931,6 @@ completionChunkKindMap = {
     19: CompletionChunk.Kind("HorizontalSpace"),
     20: CompletionChunk.Kind("VerticalSpace")}
 
-
-class CodeCompletionResults(ClangObject):
-    def __init__(self, ptr):
-        assert isinstance(ptr, POINTER(CCRStructure)) and ptr
-        self.ptr = self._as_parameter_ = ptr
-
-    def from_param(self):
-        return self._as_parameter_
-
-    def __del__(self):
-        conf.lib.clang_disposeCodeCompleteResults(self)
-
-    @property
-    def results(self):
-        return self.ptr.contents
-
-    @property
-    def diagnostics(self):
-        class DiagnosticsItr:
-            def __init__(self, ccr):
-                self.ccr = ccr
-
-            def __len__(self):
-                return int( \
-                    conf.lib.clang_codeCompleteGetNumDiagnostics(self.ccr))
-
-            def __getitem__(self, key):
-                return conf.lib.clang_codeCompleteGetDiagnostic(self.ccr, key)
-
-        return DiagnosticsItr(self)
 
 
 class Index(ClangObject):

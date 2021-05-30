@@ -191,11 +191,13 @@ class CommentsDatabase:
     def __len__(self) -> int:
         """
         Return the amount comment found in file.
+        The length of object always will be greater or equal than 0.
         """
         return len(self.comments)
 
     def __repr__(self) -> str:
         """
-        Return the representation of object.
+        Return the representation of object in the form of number of
+        comments that have been foundt.
         """
         return "Comments: {}".format(len(self.comments))

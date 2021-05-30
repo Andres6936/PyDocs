@@ -1,3 +1,8 @@
+from ctypes import Structure, c_char_p, c_int
+
+from clang.config import conf
+
+
 class _CXString(Structure):
     """Helper for transforming CXString results."""
 

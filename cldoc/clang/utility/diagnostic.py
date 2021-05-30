@@ -1,3 +1,11 @@
+from ctypes import byref
+
+from clang.config import conf
+from clang.utility.cx_string import _CXString
+from clang.utility.fix_it import FixIt
+from clang.utility.source_range import SourceRange
+
+
 class Diagnostic(object):
     """
     A Diagnostic is a single instance of a Clang diagnostic. It includes the

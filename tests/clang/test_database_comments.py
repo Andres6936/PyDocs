@@ -109,6 +109,12 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 5, "The amount of comments in the database not is 5 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 5", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0], "\nThe union A.\n\nA longer description of A.\n")
+        self.assertEqual(database_comments[1], "The a field.")
+        self.assertEqual(database_comments[2], "The b field.")
+        self.assertEqual(database_comments[3], "The x field.")
+        self.assertEqual(database_comments[4], "The y field.")
+
     def test_parser_utf8(self):
         database_comments = self.get_comments_database("../input/utf8.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")

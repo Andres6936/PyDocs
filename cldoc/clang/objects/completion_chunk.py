@@ -1,6 +1,5 @@
 from clang.config import conf
 from clang.decorators.cached_property import CachedProperty
-from clang.objects.completion_string import CompletionString
 from clang.spelling_cache import SpellingCache
 
 
@@ -49,6 +48,7 @@ class CompletionChunk:
                                                                 self.key)
 
         if (res):
+            from clang.objects.completion_string import CompletionString
             return CompletionString(res)
         else:
             None

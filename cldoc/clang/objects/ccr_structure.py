@@ -2,7 +2,6 @@ from ctypes import Structure, POINTER, c_int
 
 from clang.objects.code_completion_result import CodeCompletionResult
 
-
 class CCRStructure(Structure):
     _fields_ = [('results', POINTER(CodeCompletionResult)),
                 ('numResults', c_int)]

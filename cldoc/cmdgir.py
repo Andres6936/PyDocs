@@ -15,6 +15,7 @@ from __future__ import absolute_import
 import sys, argparse, re, os
 
 from clang.kinds.cursor_kind import CursorKind
+from clang.kinds.type_kind import TypeKind
 
 try:
     from xml.etree import cElementTree as ElementTree
@@ -249,7 +250,7 @@ class GirType:
 
     def __init__(self, node):
         self.node = node
-        self.kind = cindex.TypeKind.UNEXPOSED
+        self.kind = TypeKind.UNEXPOSED
         self.const_qualified = False
 
         self.is_out = False
@@ -295,7 +296,7 @@ class GirType:
             return
 
         if self.spelling.endswith('*'):
-            self.kind = cindex.TypeKind.POINTER
+            self.kind = TypeKind.POINTER
             return
 
         for k in nodes.Type.namemap:
@@ -334,7 +335,7 @@ class GirType:
 
                 if self.declaration.typename in ['record', 'class', 'interface']:
                     self.spelling += ' *'
-                    self.kind = cindex.TypeKind.POINTER
+                    self.kind = TypeKind.POINTER
 
             elif self.spelling == '' and name in GirType.builtins:
                 if name == 'utf8':
@@ -350,7 +351,7 @@ class GirTypePointer(GirType):
         self.node = tp.node
         self.pointer_type = tp
         self.spelling = tp.spelling[:-1]
-        self.kind = cindex.TypeKind.UNEXPOSED
+        self.kind = TypeKind.UNEXPOSED
         self.const_qualified = False
 
         self._extract_const()

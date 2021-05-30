@@ -11,8 +11,10 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 from clang.kinds.cursor_kind import CursorKind
-from cldoc.clang import cindex
+from clang.kinds.type_kind import TypeKind
+from clang.objects.index import Index
 import os, sys
 
 
@@ -28,14 +30,14 @@ def inspect_print_row(a, b, link=None):
 
 
 def inspect_print_subtype(name, tp, subtype, indent=1):
-    if not subtype or tp == subtype or subtype.kind == cindex.TypeKind.INVALID:
+    if not subtype or tp == subtype or subtype.kind == TypeKind.INVALID:
         return
 
     inspect_print_row('  ' * indent + '→ .' + name + '.kind', subtype.kind)
     inspect_print_row('  ' * indent + '→ .' + name + '.spelling', subtype.kind.spelling)
     inspect_print_row('  ' * indent + '→ .' + name + '.is_const_qualified', subtype.is_const_qualified())
 
-    if subtype.kind == cindex.TypeKind.CONSTANTARRAY:
+    if subtype.kind == TypeKind.CONSTANTARRAY:
         etype = subtype.get_array_element_type()
         num = subtype.get_array_size()
 
@@ -127,7 +129,7 @@ def inspect_tokens(tree, filename, tu):
 
 
 def inspect(tree):
-    index = cindex.Index.create()
+    index = Index.create()
 
     print("""<html>
 <head>

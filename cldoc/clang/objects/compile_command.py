@@ -1,3 +1,6 @@
+from clang.config import conf
+
+
 class CompileCommand(object):
     """Represents the compile command used to build a file"""
 

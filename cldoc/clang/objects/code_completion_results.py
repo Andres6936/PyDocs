@@ -1,8 +1,13 @@
+from ctypes import POINTER
+
+from clang.config import conf
+from clang.objects.ccr_structure import CCRStructure
 from clang.objects.clang_object import ClangObject
 
 
 class CodeCompletionResults(ClangObject):
-    def __init__(self, ptr):
+    def __init__(self, ptr, obj):
+        super().__init__(obj)
         assert isinstance(ptr, POINTER(CCRStructure)) and ptr
         self.ptr = self._as_parameter_ = ptr
 
@@ -23,7 +28,7 @@ class CodeCompletionResults(ClangObject):
                 self.ccr = ccr
 
             def __len__(self):
-                return int( \
+                return int(
                     conf.lib.clang_codeCompleteGetNumDiagnostics(self.ccr))
 
             def __getitem__(self, key):

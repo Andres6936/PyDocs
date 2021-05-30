@@ -1,5 +1,8 @@
+from ctypes import Structure, c_int
+
 from clang.kinds.cursor_kind import CursorKind
 from clang.objects.completion_string import CompletionString
+from clang.prototypes.functions import c_object_p
 
 
 class CodeCompletionResult(Structure):

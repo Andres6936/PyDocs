@@ -1,3 +1,4 @@
+from clang.config import conf
 from clang.objects.clang_object import ClangObject
 
 

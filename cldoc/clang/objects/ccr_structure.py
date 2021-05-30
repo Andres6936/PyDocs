@@ -1,3 +1,5 @@
+from ctypes import Structure, POINTER, c_int
+
 from clang.objects.code_completion_result import CodeCompletionResult
 
 

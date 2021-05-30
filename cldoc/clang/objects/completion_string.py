@@ -1,3 +1,4 @@
+from clang.config import conf
 from clang.decorators.cached_property import CachedProperty
 from clang.objects.clang_object import ClangObject
 from clang.objects.completion_chunk import CompletionChunk

@@ -1,3 +1,4 @@
+from clang.config import conf
 from clang.objects.compile_command import CompileCommand
 
 

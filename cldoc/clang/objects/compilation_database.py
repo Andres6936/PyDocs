@@ -1,3 +1,6 @@
+from ctypes import c_uint, byref
+
+from clang.config import conf
 from clang.exceptions.compilation_database import CompilationDatabaseError
 from clang.objects.clang_object import ClangObject
 

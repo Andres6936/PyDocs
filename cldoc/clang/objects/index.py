@@ -1,4 +1,6 @@
+from clang.config import conf
 from clang.objects.clang_object import ClangObject
+from clang.objects.translation_unit import TranslationUnit
 
 
 class Index(ClangObject):

@@ -9,7 +9,8 @@ class MyTestCase(unittest.TestCase):
     def test_parser_enum(self):
         index: Index = Index.create()
         translation_unit: TranslationUnit = index.parse('../input/enum.hh')
-        self.assertTrue(len(translation_unit.diagnostics) == 0)
+        self.assertEqual(len(translation_unit.diagnostics), 0,
+                         "The amount of diagnostic in the translation unit not is zero")
         database_comments = CommentsDatabase('../input/enum.hh', translation_unit)
         self.assertEqual(len(database_comments), 3, "The amount of comments in the database not is 3 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 3", "The representation of object not is equal")

@@ -253,7 +253,14 @@ class Type(Structure):
 
     @property
     def spelling(self):
-        """Retrieve the spelling of this Type."""
+        """
+        Retrieve the spelling of this Type.
+
+        Pretty-print the underlying type using the rules of the language of the
+        translation unit from which it came.
+
+        If the type is invalid, an empty string is returned.
+        """
         return conf.lib.clang_getTypeSpelling(self)
 
     def __eq__(self, other):

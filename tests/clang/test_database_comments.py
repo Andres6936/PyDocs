@@ -60,6 +60,13 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 6, "The amount of comments in the database not is 6 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 6", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0], " The namespace A.\n\nLonger description of namespace A.\n")
+        self.assertEqual(database_comments[1], "Class B.\n\nClass B in namespace A.\n")
+        self.assertEqual(database_comments[2], "Function b.\n\nFunction b in namespace A.\n")
+        self.assertEqual(database_comments[3], "Enum E.\n\nEnum E in namespace A.\n")
+        self.assertEqual(database_comments[4], "E_1 value.")
+        self.assertEqual(database_comments[5], "E_2 value.")
+
     def test_parser_struct(self):
         database_comments = self.get_comments_database("../input/struct.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")

@@ -199,6 +199,12 @@ class CommentsDatabase:
         """
         return len(self.comments)
 
+    def __getitem__(self, item: int) -> str:
+        """
+        Get the text comment in base to index.
+        """
+        return self.comments[item].text
+
     def __repr__(self) -> str:
         """
         Return the representation of object in the form of number of

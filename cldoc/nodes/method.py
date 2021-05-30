@@ -14,7 +14,7 @@
 from clang.kinds.cursor_kind import CursorKind
 from nodes.function import Function
 from nodes.node import Node
-from cldoc.comment import Comment
+from comments.comment import Comment
 
 
 class Method(Function):

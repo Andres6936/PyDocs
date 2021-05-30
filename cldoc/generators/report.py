@@ -16,7 +16,7 @@ import os
 
 from clang.kinds.access_specifier import AccessSpecifier
 from util.Struct import Struct
-from cldoc.comment import Comment
+from comments.comment import Comment
 
 from cldoc import nodes
 

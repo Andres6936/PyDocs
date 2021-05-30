@@ -3,7 +3,7 @@ import re
 import subprocess
 import sys
 
-import comment
+from comments import comment
 import fs
 import nodes
 import utf8

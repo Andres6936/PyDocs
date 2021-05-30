@@ -25,7 +25,7 @@ except:
 from util import defdict
 
 from cldoc import nodes
-from cldoc import comment
+from comments import comment
 from cldoc import example
 from cldoc import documentmerger
 from cldoc import utf8

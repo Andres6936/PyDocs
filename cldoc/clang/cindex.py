@@ -91,6 +91,7 @@ from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.kinds.tls_kind import TLSKind
+from clang.objects.ccr_structure import CCRStructure
 from clang.objects.code_completion_result import CodeCompletionResult
 from clang.objects.completion_string import CompletionString
 from clang.objects.file_inclusion import FileInclusion
@@ -928,20 +929,6 @@ completionChunkKindMap = {
     18: CompletionChunk.Kind("Equal"),
     19: CompletionChunk.Kind("HorizontalSpace"),
     20: CompletionChunk.Kind("VerticalSpace")}
-
-
-class CCRStructure(Structure):
-    _fields_ = [('results', POINTER(CodeCompletionResult)),
-                ('numResults', c_int)]
-
-    def __len__(self):
-        return self.numResults
-
-    def __getitem__(self, key):
-        if len(self) <= key:
-            raise IndexError
-
-        return self.results[key]
 
 
 class CodeCompletionResults(ClangObject):

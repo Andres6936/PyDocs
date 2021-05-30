@@ -4,7 +4,8 @@ import sys
 
 from clang.objects.translation_unit import TranslationUnit
 from clang.utility.token_kind import TokenKind
-from comment import RangeMap, Comment
+from comment import Comment
+from comments.range_map import RangeMap
 from comments.sorted import Sorted
 
 

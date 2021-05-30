@@ -1,3 +1,6 @@
+from ctypes import Structure, c_uint, c_void_p, byref
+
+from clang.config import conf
 from clang.cursor import Cursor
 from clang.utility.token_kind import TokenKind
 

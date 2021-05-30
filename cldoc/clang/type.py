@@ -1,5 +1,5 @@
 import collections
-from ctypes import c_void_p, c_int
+from ctypes import c_void_p, c_int, Structure
 
 from clang.config import conf
 from clang.kinds.exception_specification_kind import ExceptionSpecificationKind

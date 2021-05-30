@@ -20,16 +20,20 @@ from clang.utility.source_location import SourceLocation
 from clang.utility.source_range import SourceRange
 
 
-
-
-
 def b(x):
     if isinstance(x, bytes):
         return x
     return x.encode('utf8')
 
 
-callbacks = {}
+callbacks = {'translation_unit_includes': CFUNCTYPE(None, c_object_p,
+                                                    POINTER(SourceLocation), c_uint, py_object),
+             'cursor_visit': CFUNCTYPE(c_int, Cursor, Cursor, py_object),
+             'fields_visit': CFUNCTYPE(c_int, Cursor, py_object)}
+
+# Now comes the plumbing to hook up the C library.
+
+# Register callback types in common container.
 
 functionList = [
     ("clang_annotateTokens",
@@ -749,11 +753,3 @@ functionList = [
      [Type, callbacks['fields_visit'], py_object],
      c_uint),
 ]
-
-# Now comes the plumbing to hook up the C library.
-
-# Register callback types in common container.
-callbacks['translation_unit_includes'] = CFUNCTYPE(None, c_object_p,
-                                                   POINTER(SourceLocation), c_uint, py_object)
-callbacks['cursor_visit'] = CFUNCTYPE(c_int, Cursor, Cursor, py_object)
-callbacks['fields_visit'] = CFUNCTYPE(c_int, Cursor, py_object)

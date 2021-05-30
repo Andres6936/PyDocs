@@ -157,15 +157,18 @@ class CommentsDatabase:
         prelen = token.extent.start.column - 1
         comment = token.spelling.strip()
 
+        # If is a line comment
         if comment.startswith('//'):
             if len(comment) > 2 and comment[2] == '-':
                 return None
 
             return comment[2:].strip()
+        # If is a block comment
         elif comment.startswith('/*') and comment.endswith('*/'):
             if comment[2] == '-':
                 return None
 
+            # The line: comment[2:-2] remove the '/*' of begin and the '*/' of end.
             lines = comment[2:-2].splitlines()
 
             if len(lines) == 1 and len(lines[0]) > 0 and lines[0][0] == ' ':

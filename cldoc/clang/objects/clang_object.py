@@ -3,8 +3,6 @@
 # CIndex objects (derived from ClangObject) are essentially lightweight
 # wrappers attached to some underlying object, which is exposed via CIndex as
 # a void*.
-from clang.prototypes.functions import c_object_p
-
 
 class ClangObject(object):
     """
@@ -13,6 +11,8 @@ class ClangObject(object):
     """
 
     def __init__(self, obj):
+        from clang.prototypes.functions import c_object_p
+
         assert isinstance(obj, c_object_p) and obj
         self.obj = self._as_parameter_ = obj
 

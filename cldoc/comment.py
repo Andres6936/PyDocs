@@ -11,12 +11,9 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import bisect
 import re
 
 import utf8
-from Struct import Struct
-from comments.sorted import Sorted
 
 
 class Comment(object):
@@ -220,46 +217,6 @@ class Comment(object):
 
     def __repr__(self) -> str:
         return self.__dict__["text"]
-
-
-class RangeMap(Sorted):
-    Item = Struct.define('Item', obj=None, start=0, end=0)
-
-    def __init__(self):
-        super(RangeMap, self).__init__(key=lambda x: x.start)
-
-        self.stack = []
-
-    def push(self, obj, start):
-        self.stack.append(RangeMap.Item(obj=obj, start=start, end=start))
-
-    def pop(self, end):
-        item = self.stack.pop()
-        item.end = end
-
-        self.insert(item)
-
-    def insert(self, item, start=None, end=None):
-        if not isinstance(item, RangeMap.Item):
-            item = RangeMap.Item(obj=item, start=start, end=end)
-
-        self.insert_right(item)
-
-    def find(self, i):
-        # Finds object for which i falls in the range of that object
-        idx = bisect.bisect_right(self.keys, i)
-
-        # Go back up until falls within end
-        while idx > 0:
-            idx -= 1
-
-            o = self[idx]
-
-            if i <= o.end:
-                return o.obj
-
-        return None
-
 
 
 # vi:ts=4:et

@@ -20,6 +20,23 @@ class CommentsDatabase:
 
         self.extract(filename, tu)
 
+    def extract(self, filename: str, tu: TranslationUnit):
+        """
+        extract extracts comments from a translation unit for a given file by
+        iterating over all the tokens in the TU, locating the COMMENT tokens and
+        finding out to which cursors the comments semantically belong.
+        """
+        # The variable st_size is: Size of the file in bytes, if it is a
+        # regular file or a symbolic link. The size of a symbolic link is the
+        # length of the pathname it contains, without a terminating null byte.
+        it = tu.get_tokens(extent=tu.get_extent(filename, (0, os.stat(filename).st_size)))
+
+        while True:
+            try:
+                self.extract_loop(it)
+            except StopIteration:
+                break
+
     def parse_cldoc_instruction(self, token, s):
         m = CommentsDatabase.cldoc_instrre.match(s)
 
@@ -92,23 +109,6 @@ class CommentsDatabase:
             return None
 
         return self.comments.find(location.offset)
-
-    def extract(self, filename: str, tu: TranslationUnit):
-        """
-        extract extracts comments from a translation unit for a given file by
-        iterating over all the tokens in the TU, locating the COMMENT tokens and
-        finding out to which cursors the comments semantically belong.
-        """
-        # The variable st_size is: Size of the file in bytes, if it is a
-        # regular file or a symbolic link. The size of a symbolic link is the
-        # length of the pathname it contains, without a terminating null byte.
-        it = tu.get_tokens(extent=tu.get_extent(filename, (0, os.stat(filename).st_size)))
-
-        while True:
-            try:
-                self.extract_loop(it)
-            except StopIteration:
-                break
 
     def extract_one(self, token, s):
         # Parse special cldoc:<instruction>() comments for instructions

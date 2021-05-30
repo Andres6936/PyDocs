@@ -12,10 +12,10 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 from __future__ import absolute_import
 
-import inspect, os, shutil
+import os
 
 from clang.kinds.access_specifier import AccessSpecifier
-from cldoc.Struct import Struct
+from util.Struct import Struct
 from cldoc.comment import Comment
 
 from cldoc import nodes

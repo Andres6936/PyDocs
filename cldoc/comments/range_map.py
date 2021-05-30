@@ -1,6 +1,6 @@
 import bisect
 
-from Struct import Struct
+from util.Struct import Struct
 from comments.sorted import Sorted
 
 

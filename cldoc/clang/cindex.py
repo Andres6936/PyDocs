@@ -73,33 +73,17 @@ call is efficient.
 #   clearly, and hide from the external interface (i.e., help(cindex)).
 #
 # o implement additional SourceLocation, SourceRange, and File methods.
-import os.path
+
 from ctypes import *
 
 from clang.config import conf
 from clang.cursor import Cursor
 from clang.decorators.cached_property import CachedProperty
-from clang.exceptions.compilation_database import CompilationDatabaseError
-from clang.exceptions.lib_clang import LibclangError
-from clang.exceptions.translation_unit import TranslationUnitLoadError
-from clang.kinds.availability_kind import AvailabilityKind
-from clang.kinds.cursor_kind import CursorKind
-from clang.kinds.linkage_kind import LinkageKind
-from clang.kinds.tls_kind import TLSKind
-from clang.kinds.type_kind import TypeKind
-from clang.objects.code_completion_results import CodeCompletionResults
 from clang.objects.completion_chunk import completionChunkKindMap
 from clang.objects.completion_string import CompletionString
-from clang.objects.translation_unit import TranslationUnit
-from clang.prototypes.functions import c_object_p, callbacks, functionList
+from clang.prototypes.functions import c_object_p, callbacks
 from clang.spelling_cache import SpellingCache
-from clang.token import Token
-from clang.token_kinds import TokenKinds
-from clang.type import Type
-from clang.utility.diagnostic import Diagnostic
-from clang.utility.fix_it import FixIt
 from clang.utility.source_location import SourceLocation
-from clang.utility.token_kind import TokenKind
 
 
 ## CIndex Objects ##

@@ -30,6 +30,10 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(database_comments), 3, "The amount of comments in the database not is 3 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 3", "The representation of object not is equal")
 
+        self.assertEqual(database_comments[0], "A b method.\n\nThe b method description.\n")
+        self.assertEqual(database_comments[1], "\nThe class A.\n\nA longer description of A.\n")
+        self.assertEqual(database_comments[2], "@inherit")
+
     def test_parser_constructor(self):
         database_comments = self.get_comments_database("../input/constructor.hh")
         self.assertEqual(len(database_comments), 1, "The amount of comments in the database not is 1 (comments)")
@@ -44,6 +48,10 @@ class MyTestCase(unittest.TestCase):
         database_comments = self.get_comments_database("../input/enum.hh")
         self.assertEqual(len(database_comments), 3, "The amount of comments in the database not is 3 (comments)")
         self.assertEqual(repr(database_comments), "Comments: 3", "The representation of object not is equal")
+
+        self.assertEqual(database_comments[0], " The enum A.\n\nThe enum A longer description.\n")
+        self.assertEqual(database_comments[1], "The A_1 value")
+        self.assertEqual(database_comments[2], "The A_2 value")
 
     def test_parser_interface(self):
         database_comments = self.get_comments_database("../input/interface.hh")

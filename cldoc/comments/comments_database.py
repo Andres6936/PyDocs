@@ -209,6 +209,6 @@ class CommentsDatabase:
     def __repr__(self) -> str:
         """
         Return the representation of object in the form of number of
-        comments that have been foundt.
+        comments that have been found.
         """
         return "Comments: {}".format(len(self))

@@ -91,6 +91,7 @@ from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.ref_qualifier_kind import RefQualifierKind
 from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.kinds.tls_kind import TLSKind
+from clang.kinds.type_kind import TypeKind
 from clang.objects.ccr_structure import CCRStructure
 from clang.objects.code_completion_result import CodeCompletionResult
 from clang.objects.code_completion_results import CodeCompletionResults

@@ -14,8 +14,6 @@ from clang.kinds.cursor_kind import CursorKind
 from clang.kinds.type_kind import TypeKind
 from nodes.node import Node
 
-from cldoc.clang import cindex
-
 
 class Type(Node):
     kindmap = {

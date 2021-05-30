@@ -22,8 +22,6 @@ try:
 except:
     from xml.etree import ElementTree
 
-from cldoc.clang import cindex
-
 from cldoc import defdict
 
 from cldoc import nodes

@@ -12,7 +12,7 @@
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 import functools
 
-from cldoc.clang import cindex
+from clang.kinds.access_specifier import AccessSpecifier
 from cldoc.comment import Comment
 from cldoc.comment import Parser
 
@@ -42,7 +42,7 @@ class Node(object):
         self._comment = comment
         self.children = []
         self.parent = None
-        self.access = cindex.AccessSpecifier.PUBLIC
+        self.access = AccessSpecifier.PUBLIC
         self._comment_locations = []
         self._refs = []
         self.sort_index = 0
@@ -264,9 +264,9 @@ class Node(object):
         if self.is_anonymous:
             ret['anonymous'] = 'yes'
 
-        if self.access == cindex.AccessSpecifier.PROTECTED:
+        if self.access == AccessSpecifier.PROTECTED:
             ret['access'] = 'protected'
-        elif self.access == cindex.AccessSpecifier.PRIVATE:
+        elif self.access == AccessSpecifier.PRIVATE:
             ret['access'] = 'private'
 
         return ret

@@ -14,8 +14,8 @@ from __future__ import absolute_import
 
 import inspect, os, shutil
 
+from clang.kinds.access_specifier import AccessSpecifier
 from cldoc.Struct import Struct
-from cldoc.clang import cindex
 from cldoc.comment import Comment
 
 from cldoc import nodes
@@ -70,7 +70,7 @@ class Report:
             if not isinstance(node, nodes.Function):
                 continue
 
-            if node.access == cindex.AccessSpecifier.PRIVATE:
+            if node.access == AccessSpecifier.PRIVATE:
                 continue
 
             if node.comment is None:
@@ -139,7 +139,7 @@ class Report:
         for node in self.tree.all_nodes:
             cname = node.__class__.__name__
 
-            if node.access == cindex.AccessSpecifier.PRIVATE:
+            if node.access == AccessSpecifier.PRIVATE:
                 continue
 
             if not cname in pertype:

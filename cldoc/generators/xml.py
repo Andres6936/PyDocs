@@ -17,10 +17,10 @@ import sys
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
+from clang.kinds.access_specifier import AccessSpecifier
 from cldoc import example
 from cldoc import nodes
 from cldoc import utf8
-from cldoc.clang import cindex
 from generators.generator import Generator
 
 
@@ -325,11 +325,11 @@ class Xml(Generator):
         elem.append(self.type_to_xml(node.type, node.parent))
 
     def set_access_attribute(self, node, elem):
-        if node.access == cindex.AccessSpecifier.PROTECTED:
+        if node.access == AccessSpecifier.PROTECTED:
             elem.set('access', 'protected')
-        elif node.access == cindex.AccessSpecifier.PRIVATE:
+        elif node.access == AccessSpecifier.PRIVATE:
             elem.set('access', 'private')
-        elif node.access == cindex.AccessSpecifier.PUBLIC:
+        elif node.access == AccessSpecifier.PUBLIC:
             elem.set('access', 'public')
 
     def process_bases(self, node, elem, bases, tagname):
@@ -507,7 +507,7 @@ class Xml(Generator):
         self.call_type_specific(node, elem, 'to_xml')
 
         for child in node.sorted_children():
-            if child.access == cindex.AccessSpecifier.PRIVATE:
+            if child.access == AccessSpecifier.PRIVATE:
                 continue
 
             self.refid(child)
@@ -552,7 +552,7 @@ class Xml(Generator):
 
     def generate_node(self, node):
         # Ignore private stuff
-        if node.access == cindex.AccessSpecifier.PRIVATE:
+        if node.access == AccessSpecifier.PRIVATE:
             return
 
         self.refid(node)

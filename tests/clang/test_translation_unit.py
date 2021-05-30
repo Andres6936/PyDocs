@@ -11,7 +11,7 @@ class MyTestCase(unittest.TestCase):
         translation_unit: TranslationUnit = index.parse('../input/enum.hh')
         self.assertTrue(len(translation_unit.diagnostics) == 0)
         database_comments = CommentsDatabase('../input/enum.hh', translation_unit)
-        pass
+        self.assertTrue(len(database_comments) == 3)
 
 
 if __name__ == '__main__':

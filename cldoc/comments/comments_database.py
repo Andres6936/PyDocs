@@ -131,7 +131,7 @@ class CommentsDatabase:
         # Concatenate individual comments together, but only if they are strictly
         # adjacent
         while token.kind == TokenKind.COMMENT:
-            cleaned = self.__clean(token)
+            cleaned = self.__cleanCommentAt(token)
 
             # Process instructions directly, now
             if (not cleaned is None) and (not CommentsDatabase.cldoc_instrre.match(cleaned) is None):
@@ -153,7 +153,7 @@ class CommentsDatabase:
             self.extract_one(token, "\n".join(comments))
 
     @staticmethod
-    def __clean(token):
+    def __cleanCommentAt(token):
         prelen = token.extent.start.column - 1
         comment = token.spelling.strip()
 

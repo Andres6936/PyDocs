@@ -1,3 +1,4 @@
+from clang.config import conf
 from clang.kinds.base_enumeration import BaseEnumeration
 
 

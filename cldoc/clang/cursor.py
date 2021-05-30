@@ -6,8 +6,6 @@ from clang.kinds.availability_kind import AvailabilityKind
 from clang.kinds.cursor_kind import CursorKind
 from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.type_kind import TypeKind
-from clang.objects.translation_unit import TranslationUnit
-from clang.prototypes.functions import callbacks
 from clang.storage_class import StorageClass
 from clang.utility.token_group import TokenGroup
 
@@ -405,6 +403,9 @@ class Cursor(Structure):
             return 1  # continue
 
         children = []
+
+        from clang.prototypes.functions import callbacks
+
         conf.lib.clang_visitChildren(self, callbacks['cursor_visit'](visitor),
                                      children)
         return iter(children)
@@ -476,6 +477,8 @@ class Cursor(Structure):
         # before the Cursor.
         tu = None
         for arg in args:
+            from clang.objects.translation_unit import TranslationUnit
+
             if isinstance(arg, TranslationUnit):
                 tu = arg
                 break

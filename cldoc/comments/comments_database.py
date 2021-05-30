@@ -202,6 +202,7 @@ class CommentsDatabase:
     def __getitem__(self, item: int) -> str:
         """
         Get the text comment in base to index.
+        :item The index, it should be integers.
         """
         return self.comments[item].text
 

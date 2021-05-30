@@ -75,35 +75,26 @@ call is efficient.
 # o implement additional SourceLocation, SourceRange, and File methods.
 import os.path
 from ctypes import *
-import collections
 
 from clang.config import conf
 from clang.cursor import Cursor
 from clang.decorators.cached_property import CachedProperty
 from clang.exceptions.compilation_database import CompilationDatabaseError
 from clang.exceptions.lib_clang import LibclangError
-from clang.exceptions.translation_unit import TranslationUnitLoadError, TranslationUnitSaveError
+from clang.exceptions.translation_unit import TranslationUnitLoadError
 from clang.kinds.availability_kind import AvailabilityKind
-from clang.kinds.base_enumeration import BaseEnumeration
 from clang.kinds.cursor_kind import CursorKind
-from clang.kinds.exception_specification_kind import ExceptionSpecificationKind
 from clang.kinds.linkage_kind import LinkageKind
-from clang.kinds.ref_qualifier_kind import RefQualifierKind
-from clang.kinds.template_argument_kind import TemplateArgumentKind
 from clang.kinds.tls_kind import TLSKind
 from clang.kinds.type_kind import TypeKind
-from clang.objects.ccr_structure import CCRStructure
-from clang.objects.code_completion_result import CodeCompletionResult
 from clang.objects.code_completion_results import CodeCompletionResults
 from clang.objects.completion_string import CompletionString
-from clang.objects.file_inclusion import FileInclusion
 from clang.objects.translation_unit import TranslationUnit
-from clang.prototypes.functions import c_object_p, c_interop_string, b, callbacks, functionList
+from clang.prototypes.functions import c_object_p, callbacks, functionList
 from clang.spelling_cache import SpellingCache
 from clang.token import Token
 from clang.token_kinds import TokenKinds
 from clang.type import Type
-from clang.utility.cx_string import _CXString
 from clang.utility.diagnostic import Diagnostic
 from clang.utility.fix_it import FixIt
 from clang.utility.token_kind import TokenKind

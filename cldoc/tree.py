@@ -32,7 +32,8 @@ from clang.objects.translation_unit import TranslationUnit
 from clang.utility.diagnostic import Diagnostic
 from clang.utility.token_kind import TokenKind
 from cldoc.defdict import Defdict
-from comment import CommentsDatabase, Comment
+from comment import Comment
+from comments.comments_database import CommentsDatabase
 from files.provider_source import ProviderSource
 from nodes import Root
 

@@ -17,8 +17,7 @@ import sys
 
 import utf8
 from Struct import Struct
-from clang import cindex
-from clang.cindex import TranslationUnit
+from clang.objects.translation_unit import TranslationUnit
 from clang.utility.token_kind import TokenKind
 
 

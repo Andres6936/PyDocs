@@ -1,4 +1,4 @@
-from ctypes import POINTER, c_uint, byref
+from ctypes import POINTER, c_uint, byref, cast
 
 from clang.config import conf
 from clang.token import Token

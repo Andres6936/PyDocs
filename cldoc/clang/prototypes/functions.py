@@ -11,7 +11,7 @@ from clang.objects.compile_commands import CompileCommands
 from clang.objects.file import File
 from clang.objects.index import Index
 from clang.objects.translation_unit import TranslationUnit
-from clang.pointers import c_object_p
+from clang.pointers import c_object_p, c_interop_string
 from clang.token import Token
 from clang.type import Type
 from clang.utility.cx_string import _CXString
@@ -20,39 +20,7 @@ from clang.utility.source_location import SourceLocation
 from clang.utility.source_range import SourceRange
 
 
-# Python 3 strings are unicode, translate them to/from utf8 for C-interop.
-class c_interop_string(c_char_p):
 
-    def __init__(self, p=None):
-        if p is None:
-            p = ""
-        if isinstance(p, str):
-            p = p.encode("utf8")
-        super(c_char_p, self).__init__(p)
-
-    def __str__(self):
-        return self.value
-
-    @property
-    def value(self):
-        if super(c_char_p, self).value is None:
-            return None
-        return super(c_char_p, self).value.decode("utf8")
-
-    @classmethod
-    def from_param(cls, param):
-        if isinstance(param, str):
-            return cls(param)
-        if isinstance(param, bytes):
-            return cls(param)
-        if param is None:
-            # Support passing null to C functions expecting char arrays
-            return None
-        raise TypeError("Cannot convert '{}' to '{}'".format(type(param).__name__, cls.__name__))
-
-    @staticmethod
-    def to_python_string(x, *args):
-        return x.value
 
 
 def b(x):

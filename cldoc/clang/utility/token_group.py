@@ -33,10 +33,21 @@ class TokenGroup(object):
 
         This functionality is needed multiple places in this module. We define
         it here because it seems like a logical place.
+
+        :tu (TranslationUnit) The translation unit whose text is being tokenized.
+        :extent (SourceRange) The source range in which text should be tokenized.
+            All of the tokens produced by tokenization will fall within this
+            source range,
         """
+        # This pointer will be set to point to the array of tokens that occur
+        # within the given source range. The returned pointer must be freed with
+        # clang_disposeTokens() before the translation unit is destroyed.
         tokens_memory = POINTER(Token)()
+        # Will be set to the number of tokens in the *Tokens array.
         tokens_count = c_uint()
 
+        # Tokenize the source code described by the given range into raw
+        # lexical tokens.
         conf.lib.clang_tokenize(tu, extent, byref(tokens_memory),
                                 byref(tokens_count))
 

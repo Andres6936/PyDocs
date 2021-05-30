@@ -88,6 +88,7 @@ from clang.kinds.linkage_kind import LinkageKind
 from clang.kinds.tls_kind import TLSKind
 from clang.kinds.type_kind import TypeKind
 from clang.objects.code_completion_results import CodeCompletionResults
+from clang.objects.completion_chunk import completionChunkKindMap
 from clang.objects.completion_string import CompletionString
 from clang.objects.translation_unit import TranslationUnit
 from clang.prototypes.functions import c_object_p, callbacks, functionList
@@ -190,29 +191,6 @@ class CompletionChunk:
     def isKindResultType(self):
         return self.__kindNumber == 15
 
-
-completionChunkKindMap = {
-    0: CompletionChunk.Kind("Optional"),
-    1: CompletionChunk.Kind("TypedText"),
-    2: CompletionChunk.Kind("Text"),
-    3: CompletionChunk.Kind("Placeholder"),
-    4: CompletionChunk.Kind("Informative"),
-    5: CompletionChunk.Kind("CurrentParameter"),
-    6: CompletionChunk.Kind("LeftParen"),
-    7: CompletionChunk.Kind("RightParen"),
-    8: CompletionChunk.Kind("LeftBracket"),
-    9: CompletionChunk.Kind("RightBracket"),
-    10: CompletionChunk.Kind("LeftBrace"),
-    11: CompletionChunk.Kind("RightBrace"),
-    12: CompletionChunk.Kind("LeftAngle"),
-    13: CompletionChunk.Kind("RightAngle"),
-    14: CompletionChunk.Kind("Comma"),
-    15: CompletionChunk.Kind("ResultType"),
-    16: CompletionChunk.Kind("Colon"),
-    17: CompletionChunk.Kind("SemiColon"),
-    18: CompletionChunk.Kind("Equal"),
-    19: CompletionChunk.Kind("HorizontalSpace"),
-    20: CompletionChunk.Kind("VerticalSpace")}
 
 
 # Now comes the plumbing to hook up the C library.

@@ -1,6 +1,6 @@
 import unittest
 
-from files.includepaths import _extract_include_paths, _add_prefix_of_inclusion
+from cldoc.files.includepaths import _extract_include_paths, _add_prefix_of_inclusion
 
 
 class MyTestCase(unittest.TestCase):

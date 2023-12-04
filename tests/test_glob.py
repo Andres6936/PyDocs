@@ -1,6 +1,6 @@
 import unittest
 
-from files.provider_source import ProviderSource
+from cldoc.files.provider_source import ProviderSource
 
 
 class MyTestCase(unittest.TestCase):

@@ -31,7 +31,7 @@ class Comment(object):
 
     class String(object):
         def __init__(self, s):
-            self.components = [s.decode('utf-8')]
+            self.components = [s.encode('utf-8')]
 
         def _utf8(self):
             return ''.join([component.decode('utf-8') for component in self.components])

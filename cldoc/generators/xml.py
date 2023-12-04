@@ -17,9 +17,8 @@ import sys
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
-from clang.kinds.access_specifier import AccessSpecifier
+from Clang.kinds.access_specifier import AccessSpecifier
 from cldoc import example
-from cldoc import nodes
 from cldoc import utf8
 from generators.generator import Generator
 
@@ -122,25 +121,25 @@ class Xml(Generator):
         if node.force_page:
             return True
 
-        if isinstance(node, nodes.Struct) and node.is_anonymous:
+        if isinstance(node, Nodes.Struct) and node.is_anonymous:
             return False
 
-        if isinstance(node, nodes.Class):
+        if isinstance(node, Nodes.Class):
             for child in node.children:
-                if not (isinstance(child, nodes.Field) or \
-                        isinstance(child, nodes.Variable) or \
-                        isinstance(child, nodes.TemplateTypeParameter)):
+                if not (isinstance(child, Nodes.Field) or \
+                        isinstance(child, Nodes.Variable) or \
+                        isinstance(child, Nodes.TemplateTypeParameter)):
                     return True
 
             return False
 
-        pagecls = [nodes.Namespace, nodes.Category, nodes.Root]
+        pagecls = [Nodes.Namespace, Nodes.Category, Nodes.Root]
 
         for cls in pagecls:
             if isinstance(node, cls):
                 return True
 
-        if isinstance(node, nodes.Typedef) and len(node.children) > 0:
+        if isinstance(node, Nodes.Typedef) and len(node.children) > 0:
             return True
 
         return False
@@ -162,7 +161,7 @@ class Xml(Generator):
 
         meid = node.qid
 
-        if not node.parent or (isinstance(node.parent, nodes.Root) and not self.is_page(node)):
+        if not node.parent or (isinstance(node.parent, Nodes.Root) and not self.is_page(node)):
             return 'index#' + meid
 
         # Find topmost parent
@@ -266,8 +265,8 @@ class Xml(Generator):
         elem.append(self.type_to_xml(node.type))
 
     def function_to_xml(self, node, elem):
-        if not (isinstance(node, nodes.Constructor) or
-                isinstance(node, nodes.Destructor)):
+        if not (isinstance(node, Nodes.Constructor) or
+                isinstance(node, Nodes.Destructor)):
             ret = ElementTree.Element('return')
 
             if not node.comment is None and hasattr(node.comment, 'returns') and node.comment.returns:
@@ -478,7 +477,7 @@ class Xml(Generator):
             cls = clss[0]
             clss = clss[1:]
 
-            if cls == nodes.Node:
+            if cls == Nodes.Node:
                 continue
 
             nm = cls.__name__.lower() + '_' + fn
@@ -487,7 +486,7 @@ class Xml(Generator):
                 getattr(self, nm)(node, elem)
                 break
 
-            if cls != nodes.Node:
+            if cls != Nodes.Node:
                 clss.extend(cls.__bases__)
 
     def node_to_xml(self, node):
@@ -523,8 +522,8 @@ class Xml(Generator):
 
     def templated_to_xml_ref(self, node, element):
         for child in node.sorted_children():
-            if not (isinstance(child, nodes.TemplateTypeParameter) or isinstance(child,
-                                                                                 nodes.TemplateNonTypeParameter)):
+            if not (isinstance(child, Nodes.TemplateTypeParameter) or isinstance(child,
+                                                                                 Nodes.TemplateNonTypeParameter)):
                 continue
 
             element.append(self.node_to_xml(child))
@@ -567,11 +566,11 @@ class Xml(Generator):
         elif self.is_top(node):
             self.index.append(self.node_to_xml(node))
 
-        if isinstance(node, nodes.Namespace) or isinstance(node, nodes.Category):
+        if isinstance(node, Nodes.Namespace) or isinstance(node, Nodes.Category):
             # Go deep for namespaces and categories
             Generator.generate_node(self, node)
-        elif isinstance(node, nodes.Class):
+        elif isinstance(node, Nodes.Class):
             # Go deep, but only for inner classes
-            Generator.generate_node(self, node, lambda x: isinstance(x, nodes.Class))
+            Generator.generate_node(self, node, lambda x: isinstance(x, Nodes.Class))
 
 # vi:ts=4:et

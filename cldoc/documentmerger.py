@@ -5,7 +5,7 @@ import sys
 
 from comments import comment
 import fs
-import nodes
+import Nodes
 import utf8
 from logger.consolelogger import ConsoleLogger
 from logger.ilogger import ILogger
@@ -149,13 +149,13 @@ class DocumentMerger:
                 fullname += part
 
                 for child in root.children:
-                    if isinstance(child, nodes.Category) and child.name == part:
+                    if isinstance(child, Nodes.Category) and child.name == part:
                         root = child
                         found = True
                         break
 
                 if not found:
-                    s = nodes.Category(part)
+                    s = Nodes.Category(part)
 
                     root.append(s)
                     root = s

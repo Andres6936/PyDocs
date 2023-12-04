@@ -13,8 +13,6 @@
 
 import re
 
-import utf8
-
 
 class Comment(object):
     class Example(str):
@@ -33,25 +31,20 @@ class Comment(object):
 
     class String(object):
         def __init__(self, s):
-            self.components = [utf8.utf8(s)]
+            self.components = [s.decode('utf-8')]
 
         def _utf8(self):
-            return utf8.utf8("").join([utf8.utf8(x) for x in self.components])
+            return ''.join([component.decode('utf-8') for component in self.components])
 
         def __str__(self):
             return str(self._utf8())
 
-        def __unicode__(self):
-            return unicode(self._utf8())
-
         def __bytes__(self):
-            return bytes(self._utf8())
+            return self._utf8().encode('utf-8')
 
         def __eq__(self, other):
             if isinstance(other, str):
                 return str(self) == other
-            elif isinstance(other, unicode):
-                return unicode(self) == other
             elif isinstance(other, bytes):
                 return bytes(self) == other
             else:

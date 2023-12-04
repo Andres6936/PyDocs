@@ -14,8 +14,8 @@ from __future__ import absolute_import
 
 import sys, argparse, re, os
 
-from clang.kinds.cursor_kind import CursorKind
-from clang.kinds.type_kind import TypeKind
+from cldoc.clang import CursorKind
+from Clang.kinds.type_kind import TypeKind
 
 try:
     from xml.etree import cElementTree as ElementTree
@@ -24,7 +24,6 @@ except:
 
 from util import defdict
 
-from cldoc import nodes
 from comments import comment
 from cldoc import example
 from cldoc import documentmerger
@@ -51,33 +50,33 @@ def stripns(tag):
         return tag
 
 
-class Interface(nodes.Class):
+class Interface(Nodes.Class):
     @property
     def classname(self):
         return '{http://jessevdk.github.com/cldoc/gobject/1.0}interface'
 
 
-class Class(nodes.Class):
+class Class(Nodes.Class):
     def __init__(self, cursor, comment):
-        nodes.Class.__init__(self, cursor, comment)
+        Nodes.Class.__init__(self, cursor, comment)
 
         # Extract bases
         for b in cursor.bases:
-            self.bases.append(nodes.Class.Base(b))
+            self.bases.append(Nodes.Class.Base(b))
 
         for i in cursor.implements:
-            self.implements.append(nodes.Class.Base(i))
+            self.implements.append(Nodes.Class.Base(i))
 
     @property
     def classname(self):
         return '{http://jessevdk.github.com/cldoc/gobject/1.0}class'
 
 
-class Property(nodes.Node):
+class Property(Nodes.Node):
     def __init__(self, cursor, comment):
-        nodes.Node.__init__(self, cursor, comment)
+        Nodes.Node.__init__(self, cursor, comment)
 
-        self.type = nodes.Type(cursor.type)
+        self.type = Nodes.Type(cursor.type)
 
     @property
     def classname(self):
@@ -85,7 +84,7 @@ class Property(nodes.Node):
 
     @property
     def props(self):
-        ret = nodes.Node.props.fget(self)
+        ret = Nodes.Node.props.fget(self)
 
         mode = []
 
@@ -104,9 +103,9 @@ class Property(nodes.Node):
         return ret
 
 
-class Boxed(nodes.Struct):
+class Boxed(Nodes.Struct):
     def __init__(self, cursor, comment):
-        nodes.Struct.__init__(self, cursor, comment)
+        Nodes.Struct.__init__(self, cursor, comment)
 
     @property
     def classname(self):
@@ -296,8 +295,8 @@ class GirType:
             self.kind = TypeKind.POINTER
             return
 
-        for k in nodes.Type.namemap:
-            if nodes.Type.namemap[k] == self.spelling:
+        for k in Nodes.Type.namemap:
+            if Nodes.Type.namemap[k] == self.spelling:
                 self.kind = k
                 break
 
@@ -623,7 +622,7 @@ class GirTree(documentmerger.DocumentMerger):
 
         self.category_to_node = defdict.Defdict()
 
-        self.root = nodes.Root()
+        self.root = Nodes.Root()
         self.namespaces = {}
         self.processed = {}
         self.map_id_to_cusor = {}
@@ -680,7 +679,7 @@ class GirTree(documentmerger.DocumentMerger):
         self.markup_code()
 
     def parse_function(self, cursor):
-        return nodes.Function(cursor, GirComment(cursor))
+        return Nodes.Function(cursor, GirComment(cursor))
 
     def parse_struct_children(self, ret):
         for child in ret.cursor.children:
@@ -692,7 +691,7 @@ class GirTree(documentmerger.DocumentMerger):
     def parse_class(self, cursor):
         ret = Class(cursor, GirComment(cursor))
 
-        ret.typedef = nodes.Typedef(cursor, None)
+        ret.typedef = Nodes.Typedef(cursor, None)
         self.parse_struct_children(ret)
 
         return ret
@@ -705,24 +704,24 @@ class GirTree(documentmerger.DocumentMerger):
         if 'private' in cursor.node.attrib and cursor.node.attrib['private'] == '1':
             return None
 
-        return nodes.Field(cursor, GirComment(cursor))
+        return Nodes.Field(cursor, GirComment(cursor))
 
     def parse_constructor(self, cursor):
-        return nodes.Function(cursor, GirComment(cursor))
+        return Nodes.Function(cursor, GirComment(cursor))
 
     def parse_virtual_method(self, node):
         # TODO
         return None
 
     def parse_method(self, cursor):
-        return nodes.Function(cursor, GirComment(cursor))
+        return Nodes.Function(cursor, GirComment(cursor))
 
     def parse_property(self, cursor):
         return Property(cursor, GirComment(cursor))
 
     def parse_boxed(self, cursor):
         ret = Boxed(cursor, GirComment(cursor))
-        ret.typedef = nodes.Typedef(cursor, None)
+        ret.typedef = Nodes.Typedef(cursor, None)
 
         self.parse_struct_children(ret)
         return ret
@@ -737,8 +736,8 @@ class GirTree(documentmerger.DocumentMerger):
         if nsglib('get-type') in cursor.node.attrib:
             return self.parse_boxed(cursor)
 
-        ret = nodes.Struct(cursor, GirComment(cursor))
-        ret.typedef = nodes.Typedef(cursor, None)
+        ret = Nodes.Struct(cursor, GirComment(cursor))
+        ret.typedef = Nodes.Typedef(cursor, None)
 
         self.parse_struct_children(ret)
 
@@ -751,13 +750,13 @@ class GirTree(documentmerger.DocumentMerger):
         return ret
 
     def parse_enumeration(self, cursor):
-        ret = nodes.Enum(cursor, GirComment(cursor))
+        ret = Nodes.Enum(cursor, GirComment(cursor))
 
         # All enums are typedefs
-        ret.typedef = nodes.Typedef(cursor, None)
+        ret.typedef = Nodes.Typedef(cursor, None)
 
         for member in cursor.children:
-            ret.append(nodes.EnumValue(member, GirComment(member)))
+            ret.append(Nodes.EnumValue(member, GirComment(member)))
 
         return ret
 

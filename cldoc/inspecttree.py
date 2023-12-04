@@ -12,9 +12,9 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-from clang.kinds.cursor_kind import CursorKind
-from clang.kinds.type_kind import TypeKind
-from clang.objects.index import Index
+from cldoc.clang import CursorKind
+from Clang.kinds.type_kind import TypeKind
+from cldoc.clang import Index
 import os, sys
 
 

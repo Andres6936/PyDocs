@@ -2,11 +2,11 @@ import os
 import re
 import sys
 
-from clang.objects.translation_unit import TranslationUnit
-from clang.utility.token_kind import TokenKind
-from comments.comment import Comment
-from comments.range_map import RangeMap
-from comments.sorted import Sorted
+from Clang.objects.translation_unit import TranslationUnit
+from Clang.utility.token_kind import TokenKind
+from cldoc.comments.comment import Comment
+from cldoc.comments.range_map import RangeMap
+from cldoc.comments.sorted import Sorted
 
 
 class CommentsDatabase:

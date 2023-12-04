@@ -1,7 +1,7 @@
 import bisect
 
-from util.Struct import Struct
-from comments.sorted import Sorted
+from cldoc.util.Struct import Struct
+from cldoc.comments.sorted import Sorted
 
 
 class RangeMap(Sorted):

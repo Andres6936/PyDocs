@@ -22,20 +22,20 @@ from typing import List, Callable, Optional, Tuple
 import documentmerger
 import example
 from files import includepaths
-import nodes
+import Nodes
 
-from clang.config import Config
-from clang.exceptions.lib_clang import LibclangError
-from clang.kinds.cursor_kind import CursorKind
-from clang.objects.index import Index
-from clang.objects.translation_unit import TranslationUnit
-from clang.utility.diagnostic import Diagnostic
-from clang.utility.token_kind import TokenKind
+from cldoc.clang import Config
+from cldoc.clang import LibclangError
+from cldoc.clang import CursorKind
+from cldoc.clang import Index
+from Clang.objects.translation_unit import TranslationUnit
+from cldoc.clang import Diagnostic
+from Clang.utility.token_kind import TokenKind
 from util.defdict import Defdict
 from comments.comment import Comment
 from comments.comments_database import CommentsDatabase
 from files.provider_source import ProviderSource
-from nodes import Root
+from Nodes import Root
 
 if platform.system() == 'Darwin':
     libclangs = [
@@ -98,7 +98,7 @@ class Tree(documentmerger.DocumentMerger):
 
         # Create a map from CursorKind to classes representing those cursor
         # kinds.
-        for cls in nodes.Node.subclasses():
+        for cls in Nodes.Node.subclasses():
             if hasattr(cls, 'kind'):
                 self.kindmap[cls.kind] = cls
 
@@ -307,7 +307,7 @@ class Tree(documentmerger.DocumentMerger):
             q = node.qid
             self.qid_to_node[q] = node
 
-            if isinstance(node, nodes.Class):
+            if isinstance(node, Nodes.Class):
                 classes[q] = node
 
         # Resolve bases and subclasses
@@ -415,9 +415,9 @@ class Tree(documentmerger.DocumentMerger):
     def decl_on_c_struct(self, node, tp):
         n = self.cursor_to_node[tp.decl]
 
-        if isinstance(n, nodes.Struct) or \
-                isinstance(n, nodes.Typedef) or \
-                isinstance(n, nodes.Enum):
+        if isinstance(n, Nodes.Struct) or \
+                isinstance(n, Nodes.Typedef) or \
+                isinstance(n, Nodes.Enum):
             return n
 
         return None
@@ -433,8 +433,8 @@ class Tree(documentmerger.DocumentMerger):
         return False
 
     def node_on_c_struct(self, node):
-        if isinstance(node, nodes.Method) or \
-                not isinstance(node, nodes.Function):
+        if isinstance(node, Nodes.Method) or \
+                not isinstance(node, Nodes.Function):
             return None
 
         decl = None
@@ -476,7 +476,7 @@ class Tree(documentmerger.DocumentMerger):
 
         # Typedefs in clang are not parents of typedefs, but we like it better
         # that way, explicitly set the parent directly here
-        if parent and isinstance(parent, nodes.Typedef):
+        if parent and isinstance(parent, Nodes.Typedef):
             parent.append(node)
 
         if parent and hasattr(parent, 'current_access'):
@@ -501,13 +501,13 @@ class Tree(documentmerger.DocumentMerger):
         if not node:
             return False
 
-        if not isinstance(node, nodes.Struct):
+        if not isinstance(node, Nodes.Struct):
             return False
 
         if not (node.is_anonymous or not node.name):
             return False
 
-        return not isinstance(parent, nodes.Typedef)
+        return not isinstance(parent, Nodes.Typedef)
 
     def visit(self, citer, parent=None):
         """
@@ -559,7 +559,7 @@ class Tree(documentmerger.DocumentMerger):
                         node = cls(item, None)
                         self.register_node(node, parent)
 
-                elif isinstance(parent, nodes.Typedef) and isinstance(node, nodes.Struct):
+                elif isinstance(parent, Nodes.Typedef) and isinstance(node, Nodes.Struct):
                     # Typedefs are handled a bit specially because what happens
                     # is that clang first exposes an unnamed struct/enum, and
                     # then exposes the typedef, with as a child again the

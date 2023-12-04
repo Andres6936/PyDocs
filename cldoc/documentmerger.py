@@ -3,12 +3,11 @@ import re
 import subprocess
 import sys
 
-from comments import comment
-import fs
+from cldoc.comments import comment
+from cldoc.fs import fs
 import Nodes
-import utf8
-from logger.consolelogger import ConsoleLogger
-from logger.ilogger import ILogger
+from cldoc.logger.consolelogger import ConsoleLogger
+from cldoc.logger.ilogger import ILogger
 
 
 class DocumentMerger:
@@ -99,9 +98,9 @@ class DocumentMerger:
 
     def _read_merge_file(self, mfilter, filename):
         if not mfilter is None:
-            contents = utf8.utf8(subprocess.check_output([mfilter, filename]))
+            contents = subprocess.check_output([mfilter, filename]).decode('utf-8')
         else:
-            contents = utf8.utf8(fs.fs.open(filename).read())
+            contents = fs.open(filename, 'r', encoding='utf-8').read()
 
         return self._process_includes(mfilter, filename, contents)
 

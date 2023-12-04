@@ -16,8 +16,8 @@ import argparse
 import os
 import sys
 
-from files.provider_source import ProviderSource
-from tree import Tree
+from cldoc.files.provider_source import ProviderSource
+from cldoc.tree import Tree
 from cldoc import fs, staticsite
 from cldoc import log
 

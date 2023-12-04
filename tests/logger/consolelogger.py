@@ -1,4 +1,4 @@
-from logger.consolelogger import ConsoleLogger
+from cldoc.logger.consolelogger import ConsoleLogger
 
 
 def test():

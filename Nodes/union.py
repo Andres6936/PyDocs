@@ -13,7 +13,7 @@
 
 from Clang.kinds.cursor_kind import CursorKind
 from Nodes.node import Node
-from util.cmp import cmp
+from cldoc.util.cmp import cmp
 
 
 class Union(Node):

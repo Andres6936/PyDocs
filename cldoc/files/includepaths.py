@@ -15,8 +15,8 @@ import os, subprocess, sys
 
 from typing import List
 
-from logger.consolelogger import ConsoleLogger
-from logger.ilogger import ILogger
+from cldoc.logger.consolelogger import ConsoleLogger
+from cldoc.logger.ilogger import ILogger
 
 
 def _extract_include_paths(compilation_flags: str) -> str:

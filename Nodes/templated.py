@@ -13,7 +13,7 @@
 from Nodes.node import Node
 from Nodes.templatetypeparameter import TemplateTypeParameter, TemplateNonTypeParameter
 
-from comments.comment import Comment
+from cldoc.comments.comment import Comment
 
 class Templated(Node):
     def __init__(self, cursor, comment):

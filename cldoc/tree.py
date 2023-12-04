@@ -19,9 +19,9 @@ from ctypes.util import find_library
 from tempfile import NamedTemporaryFile
 from typing import List, Callable, Optional, Tuple
 
-import documentmerger
 import example
-from files import includepaths
+from cldoc.documentmerger import DocumentMerger
+from cldoc.files import includepaths
 import Nodes
 
 from Clang.config import Config
@@ -31,10 +31,10 @@ from Clang.objects.index import Index
 from Clang.utility.diagnostic import Diagnostic
 from Clang.objects.translation_unit import TranslationUnit
 from Clang.utility.token_kind import TokenKind
-from util.defdict import Defdict
-from comments.comment import Comment
-from comments.comments_database import CommentsDatabase
-from files.provider_source import ProviderSource
+from cldoc.util.defdict import Defdict
+from cldoc.comments.comment import Comment
+from cldoc.comments.comments_database import CommentsDatabase
+from cldoc.files.provider_source import ProviderSource
 from Nodes import Root
 
 if platform.system() == 'Darwin':
@@ -82,7 +82,7 @@ except LibclangError as e:
     sys.exit(1)
 
 
-class Tree(documentmerger.DocumentMerger):
+class Tree(DocumentMerger):
     def __init__(self, provider_source: ProviderSource, flags: str):
         super().__init__()
         self.headers = {}

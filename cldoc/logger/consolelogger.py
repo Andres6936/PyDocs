@@ -1,8 +1,8 @@
 import inspect
 import sys
 
-from logger.ilogger import ILogger
-from logger.severitylevel import SeverityLevel
+from cldoc.logger.ilogger import ILogger
+from cldoc.logger.severitylevel import SeverityLevel
 
 
 class ConsoleLogger(ILogger):

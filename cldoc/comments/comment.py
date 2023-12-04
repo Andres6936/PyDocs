@@ -55,15 +55,15 @@ class Comment(object):
 
             return l > 0 and (l > 1 or len(self.components[0]) > 0)
 
-    class MarkdownCode(utf8.utf8):
+    class MarkdownCode(str):
         pass
 
-    class UnresolvedReference(utf8.utf8):
+    class UnresolvedReference(str):
         reescape = re.compile('[*_]', re.I)
 
         def __new__(cls, s):
             ns = Comment.UnresolvedReference.reescape.sub(lambda x: '\\' + x.group(0), s)
-            ret = utf8.utf8.__new__(cls, utf8.utf8('&lt;{0}&gt;').format(utf8.utf8(ns)))
+            ret = str.__new__(cls, '&lt;{0}&gt;'.format(ns))
 
             ret.orig = s
             return ret
@@ -152,7 +152,7 @@ class Comment(object):
         return ret
 
     def resolve_refs_for_doc(self, doc, resolver, root):
-        comps = self.redoc_split(utf8.utf8(doc))
+        comps = self.redoc_split(doc)
         components = []
 
         for pair in comps:
@@ -162,7 +162,7 @@ class Comment(object):
             if name is None:
                 continue
 
-            if isinstance(name, utf8.string):
+            if isinstance(name, str):
                 names = name.split('::')
             else:
                 names = [name]

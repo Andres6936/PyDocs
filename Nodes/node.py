@@ -15,11 +15,11 @@ import functools
 from Clang.kinds.access_specifier import AccessSpecifier
 
 from cldoc import utf8
-from util.cmp import cmp
+from cldoc.util.cmp import cmp
 
 import re
 
-from comments.parser import Parser
+from cldoc.comments.parser import Parser
 
 
 class Node(object):

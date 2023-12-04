@@ -24,12 +24,12 @@ import example
 from files import includepaths
 import Nodes
 
-from cldoc.clang import Config
-from cldoc.clang import LibclangError
-from cldoc.clang import CursorKind
-from cldoc.clang import Index
+from Clang.config import Config
+from Clang.exceptions.lib_clang import LibclangError
+from Clang.kinds.cursor_kind import CursorKind
+from Clang.objects.index import Index
+from Clang.utility.diagnostic import Diagnostic
 from Clang.objects.translation_unit import TranslationUnit
-from cldoc.clang import Diagnostic
 from Clang.utility.token_kind import TokenKind
 from util.defdict import Defdict
 from comments.comment import Comment

@@ -17,10 +17,11 @@ import sys
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
+import Nodes
 from Clang.kinds.access_specifier import AccessSpecifier
 from cldoc import example
 from cldoc import utf8
-from generators.generator import Generator
+from cldoc.generators.generator import Generator
 
 
 class Xml(Generator):

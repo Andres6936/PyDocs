@@ -14,9 +14,10 @@ from __future__ import absolute_import
 
 import os
 
+from Nodes import Function
 from Clang.kinds.access_specifier import AccessSpecifier
-from util.Struct import Struct
-from comments.comment import Comment
+from cldoc.util.Struct import Struct
+from cldoc.comments.comment import Comment
 
 from xml.etree import ElementTree
 
@@ -65,7 +66,7 @@ class Report:
         root.append(elem)
 
         for node in self.tree.all_nodes:
-            if not isinstance(node, Nodes.Function):
+            if not isinstance(node, Function):
                 continue
 
             if node.access == AccessSpecifier.PRIVATE:

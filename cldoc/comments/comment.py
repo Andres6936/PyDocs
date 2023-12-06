@@ -101,7 +101,7 @@ class Comment(object):
 
     def redoccode_split(self, doc):
         # Split on C/C++ code
-        components = Comment.redoccode.split(doc)
+        components = Comment.redoccode.split(str(doc))
         ret = []
 
         for i in range(0, len(components), 2):

@@ -55,8 +55,10 @@ def run(args):
         else:
             sep = -1
 
-    parser = argparse.ArgumentParser(description='clang based documentation generator.',
-                                     usage='%(prog)s generate [CXXFLAGS] -- [OPTIONS] [FILES]')
+    parser = argparse.ArgumentParser(
+        description='clang based documentation generator.',
+        usage='%(prog)s generate [CXXFLAGS] -- [OPTIONS] [FILES]',
+        exit_on_error=False)
 
     parser.add_argument('--quiet', default=False, action='store_const', const=True,
                         help='be quiet about it')
@@ -100,7 +102,7 @@ def run(args):
     restargs = args[sep + 1:]
     cxxflags = args[:sep]
 
-    opts = parser.parse_args()
+    opts = parser.parse_args(restargs)
 
     if opts.quiet:
         sys.stdout = open(os.devnull, 'w')
@@ -124,7 +126,7 @@ def run(args):
             haslang = True
 
     if not haslang:
-        cxxflags += '-x'
+        cxxflags += ' -x'
         cxxflags += opts.language
 
     provider_source = ProviderSource()
@@ -133,7 +135,7 @@ def run(args):
     # Sort the files first in sources then in headers
     provider_source.sort_first_by_sources()
 
-    tree = tree.Tree(provider_source, cxxflags)
+    tree = tree.Tree(provider_source, ''.join(cxxflags))
 
     tree.process()
 

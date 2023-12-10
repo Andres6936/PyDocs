@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -15,8 +15,8 @@ import os, subprocess, sys
 
 from typing import List
 
-from cldoc.logger.consolelogger import ConsoleLogger
-from cldoc.logger.ilogger import ILogger
+from Pydoc.logger.consolelogger import ConsoleLogger
+from Pydoc.logger.ilogger import ILogger
 
 
 def _extract_include_paths(compilation_flags: str) -> str:
@@ -70,7 +70,7 @@ def flags(f: str) -> List[str]:
                              stderr=subprocess.PIPE)
     except OSError as e:
         sys.stderr.write(
-            "\nFatal: Failed to run clang++ to obtain system include headers, please install clang++ to use cldoc\n")
+            "\nFatal: Failed to run clang++ to obtain system include headers, please install clang++ to use Pydoc\n")
 
         message = str(e)
 

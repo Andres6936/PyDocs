@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -15,9 +15,9 @@ from __future__ import absolute_import
 import json
 import os
 
-from cldoc import fs
-from generators.generator import Generator
-from generators.search import Search
+from Pydoc import fs
+from Pydoc.generators.generator import Generator
+from Pydoc.generators.search import Search
 
 
 class Html(Generator):

@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -11,9 +11,9 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-from cldoc.logger.ilogger import ILogger
-from cldoc.logger.consolelogger import ConsoleLogger
-from cldoc.tree import Tree
+from Pydoc.logger.ilogger import ILogger
+from Pydoc.logger.consolelogger import ConsoleLogger
+from Pydoc.tree import Tree
 
 
 class Generator(object):

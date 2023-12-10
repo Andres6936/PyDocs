@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -19,9 +19,9 @@ from xml.etree.ElementTree import Element
 
 import Nodes
 from Clang.kinds.access_specifier import AccessSpecifier
-from cldoc import example
-from cldoc import utf8
-from cldoc.generators.generator import Generator
+from Pydoc import example
+from Pydoc import utf8
+from Pydoc.generators.generator import Generator
 
 
 class Xml(Generator):
@@ -44,7 +44,7 @@ class Xml(Generator):
             self._logger.informational("The directory already exist")
 
         ElementTree.register_namespace('gobject', 'http://jessevdk.github.com/cldoc/gobject/1.0')
-        ElementTree.register_namespace('cldoc', 'http://jessevdk.github.com/cldoc/1.0')
+        ElementTree.register_namespace('Pydoc', 'http://jessevdk.github.com/cldoc/1.0')
 
         cm = self.tree.root.comment
 
@@ -63,7 +63,7 @@ class Xml(Generator):
         self.write_xml(self.index, 'index.xml')
 
     def add_report(self):
-        from cldoc.generators.report import Report
+        from Pydoc.generators.report import Report
 
         reportname = 'report'
 

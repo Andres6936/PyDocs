@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -20,7 +20,7 @@ def run(args):
         sep = args.index('--')
     except ValueError:
         if not '--help' in args:
-            sys.stderr.write('Please use: cldoc inspect [CXXFLAGS] -- [OPTIONS] [FILES]\n')
+            sys.stderr.write('Please use: Pydoc inspect [CXXFLAGS] -- [OPTIONS] [FILES]\n')
             sys.exit(1)
         else:
             sep = 0
@@ -35,8 +35,8 @@ def run(args):
 
     opts = parser.parse_args(restargs)
 
-    from cldoc import tree
-    from cldoc import inspecttree
+    from Pydoc import tree
+    from Pydoc import inspecttree
 
     t = tree.Tree(opts.files, cxxflags)
     inspecttree.inspect(t)

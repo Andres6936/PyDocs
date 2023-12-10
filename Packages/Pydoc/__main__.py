@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -16,22 +16,22 @@ import sys
 
 
 def run_inspect(args):
-    from cldoc import cmdinspect
+    from Pydoc import cmdinspect
     cmdinspect.run(args)
 
 
 def run_serve(args):
-    from cldoc import cmdserve
+    from Pydoc import cmdserve
     cmdserve.run(args)
 
 
 def run_generate(args):
-    from cldoc import cmdgenerate
+    from Pydoc import cmdgenerate
     cmdgenerate.run(args)
 
 
 def run_gir(args):
-    from cldoc import cmdgir
+    from Pydoc import cmdgir
     cmdgir.run(args)
 
 
@@ -48,7 +48,7 @@ def print_available_commands():
 
 def run():
     if len(sys.argv) <= 1:
-        sys.stderr.write('Please use: cldoc [command] [OPTIONS] [FILES...]\n\n')
+        sys.stderr.write('Please use: Pydoc [command] [OPTIONS] [FILES...]\n\n')
         print_available_commands()
         sys.exit(1)
 
@@ -64,7 +64,7 @@ def run():
     elif cmd == 'gir':
         run_gir(rest)
     elif cmd == '--help' or cmd == '-h':
-        sys.stderr.write('Please use: cldoc [command] --help\n\n')
+        sys.stderr.write('Please use: Pydoc [command] --help\n\n')
         print_available_commands()
         sys.exit(1)
     else:

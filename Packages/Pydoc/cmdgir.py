@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -14,7 +14,7 @@ from __future__ import absolute_import
 
 import sys, argparse, re, os
 
-from cldoc.clang import CursorKind
+from Clang.kinds.cursor_kind import CursorKind
 from Clang.kinds.type_kind import TypeKind
 
 try:
@@ -25,9 +25,9 @@ except:
 from util import defdict
 
 from comments import comment
-from cldoc import example
-from cldoc import documentmerger
-from cldoc import utf8
+from Pydoc import example
+from Pydoc import documentmerger
+from Pydoc import utf8
 
 
 def nsgtk(s):
@@ -960,7 +960,7 @@ def run(args):
 
     t.cross_ref()
 
-    from cldoc.cmdgenerate import run_generate
+    from Pydoc.cmdgenerate import run_generate
 
     run_generate(t, opts)
 

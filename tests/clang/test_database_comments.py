@@ -2,7 +2,7 @@ import unittest
 
 from Clang.objects import Index
 from Clang.objects import TranslationUnit
-from cldoc.comments.comments_database import CommentsDatabase
+from Pydoc.comments.comments_database import CommentsDatabase
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -14,7 +14,7 @@
 from Clang.kinds.cursor_kind import CursorKind
 from Nodes.function import Function
 from Nodes.node import Node
-from cldoc.comments.comment import Comment
+from Pydoc.comments.comment import Comment
 
 
 class Method(Function):

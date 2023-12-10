@@ -4,9 +4,9 @@ import sys
 
 from Clang.objects.translation_unit import TranslationUnit
 from Clang.utility.token_kind import TokenKind
-from cldoc.comments.comment import Comment
-from cldoc.comments.range_map import RangeMap
-from cldoc.comments.sorted import Sorted
+from Pydoc.comments.comment import Comment
+from Pydoc.comments.range_map import RangeMap
+from Pydoc.comments.sorted import Sorted
 
 
 class CommentsDatabase:
@@ -56,7 +56,7 @@ class CommentsDatabase:
         if hasattr(self, name):
             getattr(self, name)(token, args)
         else:
-            sys.stderr.write('Invalid cldoc instruction: {0}\n'.format(func))
+            sys.stderr.write('Invalid Pydoc instruction: {0}\n'.format(func))
             sys.exit(1)
 
         return True
@@ -80,7 +80,7 @@ class CommentsDatabase:
 
     def cldoc_instruction_end_category(self, token, args):
         if len(self.categories.stack) == 0:
-            sys.stderr.write('Failed to end cldoc category: no category to end (at {0})\n'.format(
+            sys.stderr.write('Failed to end Pydoc category: no category to end (at {0})\n'.format(
                 self.location_to_str(token.location)))
 
             sys.exit(1)
@@ -89,7 +89,7 @@ class CommentsDatabase:
 
         if len(args) == 1 and last.obj != args[0]:
             sys.stderr.write(
-                'Failed to end cldoc category: current category is `{0}\', not `{1}\' (at {2})\n'.format(last.obj,
+                'Failed to end Pydoc category: current category is `{0}\', not `{1}\' (at {2})\n'.format(last.obj,
                                                                                                          args[0],
                                                                                                          self.location_to_str(
                                                                                                              token.location)))
@@ -111,7 +111,7 @@ class CommentsDatabase:
         return self.comments.find(location.offset)
 
     def extract_one(self, token, s):
-        # Parse special cldoc:<instruction>() comments for instructions
+        # Parse special Pydoc:<instruction>() comments for instructions
         if self.parse_cldoc_instruction(token, s.strip()):
             return
 

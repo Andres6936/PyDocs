@@ -3,11 +3,11 @@ import re
 import subprocess
 import sys
 
-from cldoc.comments import comment
-from cldoc.fs import fs
+from Pydoc.comments import comment
+from Pydoc.fs import fs
 import Nodes
-from cldoc.logger.consolelogger import ConsoleLogger
-from cldoc.logger.ilogger import ILogger
+from Pydoc.logger.consolelogger import ConsoleLogger
+from Pydoc.logger.ilogger import ILogger
 
 
 class DocumentMerger:

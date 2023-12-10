@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -16,17 +16,17 @@ import argparse
 import os
 import sys
 
-from cldoc.files.provider_source import ProviderSource
-from cldoc.tree import Tree
-from cldoc import fs, staticsite
-from cldoc import log
+from Pydoc.files.provider_source import ProviderSource
+from Pydoc.tree import Tree
+from Pydoc import fs, staticsite
+from Pydoc import log
 
 
 def run_generate(t: Tree, opts):
     if opts.type != 'html' and opts.type != 'xml':
         return
 
-    from cldoc import generators
+    from Pydoc import generators
 
     generator = generators.Xml(t, opts)
 
@@ -50,7 +50,7 @@ def run(args):
         sep = args.index('--')
     except ValueError:
         if not '--help' in args:
-            sys.stderr.write('Please use: cldoc generate [CXXFLAGS] -- [OPTIONS] [FILES]\n')
+            sys.stderr.write('Please use: Pydoc generate [CXXFLAGS] -- [OPTIONS] [FILES]\n')
             sys.exit(1)
         else:
             sep = -1
@@ -88,7 +88,7 @@ def run(args):
                         help='the project base directory')
 
     parser.add_argument('--static', default=False, action='store_const', const=True,
-                        help='generate a static website (only for when --output is html, requires globally installed cldoc-static via npm)')
+                        help='generate a static website (only for when --output is html, requires globally installed Pydoc-static via npm)')
 
     parser.add_argument('--custom-js', default=[], metavar='FILES', action='append',
                         help='specify additional javascript files to be merged into the html (only for when --output is html)')
@@ -109,7 +109,7 @@ def run(args):
 
     log.setLevel(opts.loglevel)
 
-    from cldoc import tree
+    from Pydoc import tree
 
     if not opts.output:
         sys.stderr.write("Please specify the output directory\n")

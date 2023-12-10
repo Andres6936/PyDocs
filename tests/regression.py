@@ -6,12 +6,10 @@ lcldoc = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, lcldoc)
 
 import unittest
-from cldoc import cmdgenerate
+from Pydoc import cmdgenerate, fs
 
-from cldoc import fs
 import glob, os
 
-from xml import etree
 
 class Regression(unittest.TestCase):
     def setUp(self):

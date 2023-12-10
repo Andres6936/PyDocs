@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -10,8 +10,18 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-class Defdict(dict):
-    def __missing__(self, key):
-        return None
+from util.Struct import Struct
+
+from Pydoc import utf8
+
+
+class Example(list):
+    Item = Struct.define('Item', text='', classes=None)
+
+    def append(self, text, classes=None):
+        if isinstance(classes, utf8.string):
+            classes = [classes]
+
+        list.append(self, Example.Item(text=text, classes=classes))
 
 # vi:ts=4:et

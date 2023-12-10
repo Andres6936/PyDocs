@@ -25,9 +25,9 @@ def generate(baseout, opts):
     datadir = os.path.join(os.path.dirname(__file__), 'data')
 
     if 'CLDOC_DEV' in os.environ:
-        jsfile = os.path.join(os.path.dirname(__file__), '..', 'cldoc-static', 'lib', 'cldoc-static-run.js')
+        jsfile = os.path.join(os.path.dirname(__file__), '../..', 'Pydoc-static', 'lib', 'Pydoc-static-run.js')
     else:
-        jsfile = 'cldoc-static'
+        jsfile = 'Pydoc-static'
 
     print('Generating static website...')
 
@@ -55,6 +55,6 @@ def generate(baseout, opts):
     try:
         subprocess.call([jsfile, baseout, opts.output], stdout=stdout)
     except OSError as e:
-        sys.stderr.write("Failed to run " + jsfile + ", did you install cldoc-static using npm?\n")
+        sys.stderr.write("Failed to run " + jsfile + ", did you install Pydoc-static using npm?\n")
 
     shutil.rmtree(baseout)

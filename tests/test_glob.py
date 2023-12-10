@@ -1,6 +1,6 @@
 import unittest
 
-from cldoc.files.provider_source import ProviderSource
+from Pydoc.files.provider_source import ProviderSource
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -13,7 +13,7 @@
 
 from Clang.kinds.cursor_kind import CursorKind
 from Nodes.node import Node
-from cldoc.util.cmp import cmp
+from Pydoc.util.cmp import cmp
 
 
 class EnumValue(Node):

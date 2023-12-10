@@ -64,7 +64,7 @@ class cldoc_generate(Command):
     def run_coffee(self):
         print('running {0}'.format(self.coffee))
 
-        for d in ('html/javascript', 'cldoc/data/javascript'):
+        for d in ('html/javascript', 'Pydoc/data/javascript'):
             try:
                 os.makedirs(d)
             except:
@@ -84,34 +84,34 @@ class cldoc_generate(Command):
 
         sp.stdin.close()
 
-        with open('html/javascript/cldoc.js', 'w') as out:
+        with open('html/javascript/Pydoc.js', 'w') as out:
             out.write(sp.stdout.read())
 
         sp.wait()
 
         for js in glob.glob('html/javascript/*.js'):
-            shutil.copyfile(js, 'cldoc/data/javascript/' + os.path.basename(js))
+            shutil.copyfile(js, 'Pydoc/data/javascript/' + os.path.basename(js))
 
     def run_sass(self):
         print('running {0}'.format(self.sass))
 
-        for d in ('html/styles', 'cldoc/data/styles'):
+        for d in ('html/styles', 'Pydoc/data/styles'):
             try:
                 os.makedirs(d)
             except:
                 pass
 
         args = [self.sass, '--output-style', 'compressed']
-        files = ['html/sass/cldoc.scss', 'html/styles/cldoc.css']
+        files = ['html/sass/Pydoc.scss', 'html/styles/Pydoc.css']
 
         subprocess.call(args + files)
 
         for css in glob.glob('html/styles/*.css'):
-            shutil.copyfile(css, 'cldoc/data/styles/' + os.path.basename(css))
+            shutil.copyfile(css, 'Pydoc/data/styles/' + os.path.basename(css))
 
     def run_inline(self):
         if self.inline == '':
-            shutil.copyfile('html/index.html', 'cldoc/data/index.html')
+            shutil.copyfile('html/index.html', 'Packages/Pydoc/data/index.html')
             return
 
         print('running {0}'.format(self.inline))
@@ -119,11 +119,11 @@ class cldoc_generate(Command):
         args = [self.inline, 'html/index.html']
 
         try:
-            os.makedirs('cldoc/data')
+            os.makedirs('Packages/Pydoc/data')
         except:
             pass
 
-        fout = file('cldoc/data/index.html', 'w')
+        fout = file('Pydoc/data/index.html', 'w')
 
         proc = subprocess.Popen(args, stdout=fout)
         proc.wait()
@@ -138,12 +138,12 @@ cmdclass = {
 }
 
 datafiles = []
-dataprefix = 'cldoc'
+dataprefix = 'Pydoc'
 
 for dirpath, dirnames, filenames in os.walk(os.path.join(dataprefix, 'data')):
     datafiles += [os.path.join(dirpath[len(dataprefix)+1:], f) for f in filenames]
 
-setup(name='cldoc',
+setup(name='Pydoc',
       version='1.11',
       description='clang based documentation generator for C/C++',
       author='Jesse van den Kieboom',
@@ -151,13 +151,13 @@ setup(name='cldoc',
       url='http://jessevdk.github.com/cldoc',
       license='GPLv2',
       keywords=['clang', 'c++', 'documentation'],
-      packages=['cldoc', 'cldoc.clang', 'cldoc.nodes', 'cldoc.generators'],
+      packages=['Pydoc', 'Pydoc.clang', 'Pydoc.nodes', 'Pydoc.generators'],
       entry_points = {
           'console_scripts': [
-              'cldoc = cldoc:run'
+              'Pydoc = Pydoc:run'
           ]
       },
-      package_data={'cldoc': datafiles},
+      package_data={'Pydoc': datafiles},
       cmdclass=cmdclass,
       install_requires=['pyparsing == 2.2.0'])
 

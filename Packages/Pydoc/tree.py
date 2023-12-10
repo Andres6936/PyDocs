@@ -1,4 +1,4 @@
-# This file is part of cldoc.  cldoc is free software: you can
+# This file is part of Pydoc.  Pydoc is free software: you can
 # redistribute it and/or modify it under the terms of the GNU General Public
 # License as published by the Free Software Foundation, version 2.
 #
@@ -20,8 +20,8 @@ from tempfile import NamedTemporaryFile
 from typing import List, Callable, Optional, Tuple
 
 import example
-from cldoc.documentmerger import DocumentMerger
-from cldoc.files import includepaths
+from Pydoc.documentmerger import DocumentMerger
+from Pydoc.files import includepaths
 import Nodes
 
 from Clang.config import Config
@@ -31,10 +31,10 @@ from Clang.objects.index import Index
 from Clang.utility.diagnostic import Diagnostic
 from Clang.objects.translation_unit import TranslationUnit
 from Clang.utility.token_kind import TokenKind
-from cldoc.util.defdict import Defdict
-from cldoc.comments.comment import Comment
-from cldoc.comments.comments_database import CommentsDatabase
-from cldoc.files.provider_source import ProviderSource
+from Pydoc.util.defdict import Defdict
+from Pydoc.comments.comment import Comment
+from Pydoc.comments.comments_database import CommentsDatabase
+from Pydoc.files.provider_source import ProviderSource
 from Nodes import Root
 
 if platform.system() == 'Darwin':
@@ -77,7 +77,7 @@ try:
     testconf.get_cindex_library()
 except LibclangError as e:
     sys.stderr.write(
-        "\nFatal: Failed to locate libclang library. cldoc depends on libclang for parsing sources, please make sure you have libclang installed.\n" + str(
+        "\nFatal: Failed to locate libclang library. Pydoc depends on libclang for parsing sources, please make sure you have libclang installed.\n" + str(
             e) + "\n\n")
     sys.exit(1)
 

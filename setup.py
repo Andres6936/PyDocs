@@ -56,7 +56,7 @@ class cldoc_generate(Command):
     def initialize_options(self):
         self.coffee = 'coffee'
         self.sass = 'sass'
-        self.inline = 'scripts/inline'
+        self.inline = 'Scripts/inline'
 
     def finalize_options(self):
         pass

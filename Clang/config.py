@@ -60,7 +60,7 @@ class Config:
         Config.loaded = True
         return lib
 
-    def get_filename(self):
+    def get_filename(self) -> str:
         if Config.library_file:
             return Config.library_file
 

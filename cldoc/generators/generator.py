@@ -11,15 +11,16 @@
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-from logger.ilogger import ILogger
-from logger.consolelogger import ConsoleLogger
+from cldoc.logger.ilogger import ILogger
+from cldoc.logger.consolelogger import ConsoleLogger
+from cldoc.tree import Tree
 
 
 class Generator(object):
     def __init__(self, tree=None, opts=None):
-        self.tree = tree
+        self.tree: Tree = tree
         self.options = opts
-        self.logger: ILogger = ConsoleLogger()
+        self._logger: ILogger = ConsoleLogger()
 
     def generate(self, outdir):
         self.outdir = outdir

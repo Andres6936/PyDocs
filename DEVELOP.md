@@ -38,3 +38,9 @@ called `dev` is provided to run coffee and sass, without running `inline`.
 	# Run local cldoc
 	scripts/cldoc-dev [command] [OPTIONS] [FILES...]
 ```
+
+### Developing with Pycharm
+
+```shell
+    generate -I/home/PyDocs/example -- --report --merge docs --output html --files example/**/*
+```

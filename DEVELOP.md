@@ -42,5 +42,5 @@ called `dev` is provided to run coffee and sass, without running `inline`.
 ### Developing with Pycharm
 
 ```shell
-    generate -I/home/PyDocs/example -- --report --merge docs --output html --files example/**/*
+    generate -I/home/PyDocs/Example -- --report --merge docs --output html --files Example/**/*
 ```

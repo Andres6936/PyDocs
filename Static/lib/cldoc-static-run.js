@@ -14,4 +14,4 @@ if (process.argv.length < 4) {
   process.exit(1);
 }
 
-require(lib + '/cldoc-static').run(process.argv[2], process.argv[3]);
+require(lib + '/Static').run(process.argv[2], process.argv[3]);

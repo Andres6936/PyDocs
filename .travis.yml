@@ -10,7 +10,7 @@ before_install:
   - sudo apt-get install -y libclang1-4.0
 
 install:
-  - (cd cldoc-static && npm install)
+  - (cd Static && npm install)
   - pip install .
 
 script:

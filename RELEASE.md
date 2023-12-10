@@ -6,7 +6,7 @@
 1. Commit and tag:
 
   ```bash
-  git add setup.py cldoc-static/package.json
+  git add setup.py Static/package.json
   git commit -m "Release version <version>"
   git tag -a -m "Release version <version>" v<version>
   ```
@@ -18,7 +18,7 @@ python setup.py sdist upload
 
 ## Release static site generator to npm
 ```bash
-cd cldoc-static
+cd Static
 npm publish
 ```
 

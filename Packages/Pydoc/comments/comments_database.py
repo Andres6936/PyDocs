@@ -10,7 +10,7 @@ from Pydoc.comments.sorted import Sorted
 
 
 class CommentsDatabase:
-    cldoc_instrre = re.compile('^cldoc:([a-zA-Z_-]+)(\(([^\)]*)\))?')
+    cldoc_instrre = re.compile('^Pydoc:([a-zA-Z_-]+)(\(([^\)]*)\))?')
 
     def __init__(self, filename: str, tu: TranslationUnit):
         self.filename: str = filename

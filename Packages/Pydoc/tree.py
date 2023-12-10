@@ -19,7 +19,7 @@ from ctypes.util import find_library
 from tempfile import NamedTemporaryFile
 from typing import List, Callable, Optional, Tuple
 
-import example
+from Pydoc import example
 from Pydoc.documentmerger import DocumentMerger
 from Pydoc.files import includepaths
 import Nodes

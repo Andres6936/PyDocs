@@ -15,7 +15,7 @@ from __future__ import absolute_import
 import bisect
 
 from Clang.kinds.access_specifier import AccessSpecifier
-from util.Struct import Struct
+from Pydoc.util.Struct import Struct
 
 
 class Search:

@@ -10,9 +10,10 @@
 # You should have received a copy of the GNU General Public License along with
 # this program; if not, write to the Free Software Foundation, Inc., 51
 # Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-from generators.xml import Xml
-from generators.html import Html
-from generators.search import Search
-from generators.report import Report
+
+from Pydoc.generators.xml import Xml
+from Pydoc.generators.html import Html
+from Pydoc.generators.search import Search
+from Pydoc.generators.report import Report
 
 # vi:ts=4:et

@@ -28,19 +28,20 @@ class Xml(Generator):
     def __init__(self, tree=None, opts=None):
         super().__init__(tree, opts)
         self.index: Element = ElementTree.Element('index')
-        self.written = {}
+        # Used for determine which files has been written in the filesystem
+        self.written: dict[str, bool] = {}
         self.index_map = {self.tree.root: self.index}
 
     def generate(self, out_directory: str):
         if not out_directory:
             out_directory = 'xml'
-            self.logger.informational("Output directory empty, set to {}".format(out_directory))
+            self._logger.informational("Output directory empty, set to {}".format(out_directory))
 
         try:
-            self.logger.informational("Creating the directory '{}'".format(out_directory))
+            self._logger.informational("Creating the directory '{}'".format(out_directory))
             os.mkdir(out_directory)
         except FileExistsError:
-            self.logger.informational("The directory already exist")
+            self._logger.informational("The directory already exist")
 
         ElementTree.register_namespace('gobject', 'http://jessevdk.github.com/cldoc/gobject/1.0')
         ElementTree.register_namespace('cldoc', 'http://jessevdk.github.com/cldoc/1.0')
@@ -62,7 +63,7 @@ class Xml(Generator):
         self.write_xml(self.index, 'index.xml')
 
     def add_report(self):
-        from generators.report import Report
+        from cldoc.generators.report import Report
 
         reportname = 'report'
 
@@ -100,9 +101,9 @@ class Xml(Generator):
             if level and (not elem.tail or not elem.tail.strip()):
                 elem.tail = i
 
-    def write_xml(self, elem, filename_out: str):
+    def write_xml(self, elem: Element, filename_out: str):
         self.written[filename_out] = True
-        self.logger.informational("Generating XML: {}".format(filename_out))
+        self._logger.informational("Generating XML: {}".format(filename_out))
 
         elem.attrib['xmlns'] = 'http://jessevdk.github.com/cldoc/1.0'
 

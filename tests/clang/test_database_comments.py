@@ -1,7 +1,7 @@
 import unittest
 
-from Clang.objects.index import Index
-from Clang.objects.translation_unit import TranslationUnit
+from Clang.objects import Index
+from Clang.objects import TranslationUnit
 from cldoc.comments.comments_database import CommentsDatabase
 
 

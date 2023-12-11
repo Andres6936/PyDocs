@@ -52,3 +52,6 @@ class Token(Structure):
         conf.lib.clang_annotateTokens(self._tu, byref(self), 1, byref(cursor))
 
         return cursor
+
+    def __repr__(self):
+        return f"{self.location} >> {self.kind} >> Token::{self.spelling}"
